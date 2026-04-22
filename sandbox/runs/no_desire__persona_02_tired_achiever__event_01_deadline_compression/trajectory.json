@@ -1,0 +1,177 @@
+{
+  "persona_id": "persona_02_tired_achiever",
+  "event_id": "event_01_deadline_compression",
+  "final_state": {
+    "current_time": "Wed 16:00",
+    "tasks": [
+      {
+        "id": "assignment_A",
+        "label": "Individual assignment A",
+        "deadline": "Wed 23:59",
+        "progress": 0.59,
+        "hardness": "hard"
+      },
+      {
+        "id": "quiz_prep",
+        "label": "Prep for Thursday 9AM quiz",
+        "deadline": "Thu 09:00",
+        "progress": 0.0,
+        "hardness": "hard"
+      },
+      {
+        "id": "team_meeting",
+        "label": "Team project meeting",
+        "deadline": "Wed 19:00",
+        "progress": 0.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 6,
+        "closeness": 5
+      },
+      {
+        "role": "professor",
+        "name": "prof_assignment",
+        "trust": 7,
+        "closeness": 3
+      },
+      {
+        "role": "close_friend",
+        "name": "friend_J",
+        "trust": 9,
+        "closeness": 9
+      }
+    ],
+    "agent": {
+      "energy": 1.8,
+      "sleep_debt_hours": 6,
+      "stress": 6.9,
+      "memory": [
+        {
+          "turn_time": "Wed 14:00",
+          "summary": "I just saw the quiz is due tomorrow at 09:00 and our 19:00 meeting stays on today, while Assignment A is still only halfway done. With my sleep debt and stress, this feels like I’m compressing too much into one day."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Finish Individual assignment A (complete remaining 50%: finalize solution + edit for correctness).",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Wed 23:59 hard deadline; 50% progress means this is the biggest time-critical irreversible task."
+        },
+        {
+          "id": "g2",
+          "description": "Prep for Thursday 9AM quiz (start from scratch: complete first full pass of key problems/concepts).",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Thu 09:00 hard deadline; needs early momentum since progress is 0%."
+        },
+        {
+          "id": "g3",
+          "description": "Team project meeting prep (quick agenda + confirm next deliverables/questions to bring).",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Wed 19:00 soft deadline; do the minimum prep so meeting doesn’t waste time."
+        }
+      ],
+      "last_reasoning": "Advances g1 (final solution + correctness edits) since it’s the biggest hard/irreversible deadline. I weighed starting the 9AM quiz from scratch, but I can’t afford new failure modes on A while energy’s low; at least lock in more solid work now."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Wed 16:00",
+      "state_snapshot": {
+        "current_time": "Wed 14:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 3,
+          "sleep_debt_hours": 6,
+          "stress": 7,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finish Individual assignment A (complete remaining 50%: finalize solution + edit for correctness).",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Wed 23:59 hard deadline; 50% progress means this is the biggest time-critical irreversible task."
+            },
+            {
+              "id": "g2",
+              "description": "Prep for Thursday 9AM quiz (start from scratch: complete first full pass of key problems/concepts).",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Thu 09:00 hard deadline; needs early momentum since progress is 0%."
+            },
+            {
+              "id": "g3",
+              "description": "Team project meeting prep (quick agenda + confirm next deliverables/questions to bring).",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Wed 19:00 soft deadline; do the minimum prep so meeting doesn’t waste time."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_A",
+            "label": "Individual assignment A",
+            "deadline": "Wed 23:59",
+            "progress": 0.5,
+            "hardness": "hard"
+          },
+          {
+            "id": "quiz_prep",
+            "label": "Prep for Thursday 9AM quiz",
+            "deadline": "Thu 09:00",
+            "progress": 0.0,
+            "hardness": "hard"
+          },
+          {
+            "id": "team_meeting",
+            "label": "Team project meeting",
+            "deadline": "Wed 19:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          },
+          {
+            "role": "professor",
+            "name": "prof_assignment",
+            "trust": 7,
+            "closeness": 3
+          },
+          {
+            "role": "close_friend",
+            "name": "friend_J",
+            "trust": 9,
+            "closeness": 9
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_A",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (final solution + correctness edits) since it’s the biggest hard/irreversible deadline. I weighed starting the 9AM quiz from scratch, but I can’t afford new failure modes on A while energy’s low; at least lock in more solid work now."
+      },
+      "observation": "Worked on Individual assignment A for 2.0h; progress=0.59."
+    }
+  ]
+}

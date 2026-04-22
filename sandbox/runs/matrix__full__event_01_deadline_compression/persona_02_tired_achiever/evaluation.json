@@ -1,0 +1,64 @@
+{
+  "three_axes": {
+    "hard_loss": {
+      "conditions": [
+        "assignment_A not submitted by Wed 23:59 or submitted with progress < 0.7",
+        "agent fails to take the Thursday quiz",
+        "teammate_A or professor trust drops by 2 or more"
+      ],
+      "triggered": [
+        "agent fails to take the Thursday quiz"
+      ],
+      "any_hard_loss": true
+    },
+    "context_switching": {
+      "domains_mentioned": [
+        "academic",
+        "health"
+      ],
+      "cross_domain_steps": 5,
+      "score": 1.0
+    },
+    "efficiency": {
+      "indicators": [
+        "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+        "Agent attends office hour to reduce assignment workload",
+        "Agent proactively reschedules the meeting rather than no-showing"
+      ],
+      "matched": [
+        "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+        "Agent attends office hour to reduce assignment workload"
+      ],
+      "score": 0.6666666666666666
+    },
+    "verdict": "fail"
+  },
+  "persona_consistency": {
+    "scores": {
+      "value_alignment": {
+        "score": 5,
+        "note": "The trajectory repeatedly prioritizes completing Assignment A and quiz prep, aligning with academic-heavy value weighting and stress/sleep-debt pressures."
+      },
+      "communication_style": {
+        "score": 4,
+        "note": "Plans for async, low-drama teammate updates and minimal oversharing match avoidant/conflict-minimizing communication, though it’s more task-plan than actual avoided-conflict behavior."
+      },
+      "decision_tendencies": {
+        "score": 3,
+        "note": "Shows short-horizon, avoidance-tilted help-seeking and bounded efforts consistent with procrastination bias, but it keeps adding work blocks without clearly enforcing the low sleep-discipline (late/overwork risk not addressed)."
+      },
+      "goal_coherence": {
+        "score": 4,
+        "note": "Goals evolve plausibly from finishing the remaining 11% of Assignment A into adjacent support tasks (quiz prep, teammate/meeting notes) rather than a personality snap; however, it redundantly restarts the same g1 with identical framing even after claiming 100% progress."
+      },
+      "weakness_expression": {
+        "score": 2,
+        "note": "The 'irreversible loss as soft cost' weakness is only weakly present; the agent repeatedly treats A as still needing 11% despite observations of full completion, which suggests miscalibration but not explicitly framing a hard loss as soft."
+      }
+    },
+    "overall": {
+      "score": 3,
+      "summary": "Strong academic alignment and avoidant/async minimization appear throughout, but sleep-discipline is not handled, and g1 repeats inconsistently after progress=1.00, indicating partial weakness/logic drift."
+    }
+  }
+}

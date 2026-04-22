@@ -15,7 +15,7 @@ from typing import Callable, Dict, Optional
 # Default models per provider — tuned for cheap-but-capable.
 DEFAULT_MODELS: Dict[str, str] = {
     "anthropic": "claude-sonnet-4-5",
-    "openai": "gpt-4o-mini",
+    "openai": "gpt-5.4-nano",
 }
 
 

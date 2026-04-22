@@ -1,0 +1,64 @@
+{
+  "three_axes": {
+    "hard_loss": {
+      "conditions": [
+        "assignment_A not submitted by Wed 23:59 or submitted with progress < 0.7",
+        "agent fails to take the Thursday quiz",
+        "teammate_A or professor trust drops by 2 or more"
+      ],
+      "triggered": [
+        "assignment_A not submitted by Wed 23:59 or submitted with progress < 0.7",
+        "agent fails to take the Thursday quiz"
+      ],
+      "any_hard_loss": true
+    },
+    "context_switching": {
+      "domains_mentioned": [
+        "academic",
+        "health"
+      ],
+      "cross_domain_steps": 1,
+      "score": 1.0
+    },
+    "efficiency": {
+      "indicators": [
+        "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+        "Agent attends office hour to reduce assignment workload",
+        "Agent proactively reschedules the meeting rather than no-showing"
+      ],
+      "matched": [
+        "Agent attends office hour to reduce assignment workload"
+      ],
+      "score": 0.3333333333333333
+    },
+    "verdict": "fail"
+  },
+  "persona_consistency": {
+    "scores": {
+      "value_alignment": {
+        "score": 5,
+        "note": "Focuses on time-critical academic deliverables (assignment A) and prioritizes correctness under hard deadlines, matching high academic weighting."
+      },
+      "communication_style": {
+        "score": 2,
+        "note": "No meaningful communication or conflict-avoidant behavior shown; interaction/medium details are absent in the trajectory."
+      },
+      "decision_tendencies": {
+        "score": 3,
+        "note": "Shows short-horizon, deadline-driven choice, but doesn’t reflect the tired/high-procrastination/sleep-disorder tendencies (no caffeine/late-sleep or procrastination behavior)."
+      },
+      "goal_coherence": {
+        "score": 4,
+        "note": "Decision at turn 0 plausibly advances the highest-priority irreversible task (g1) without switching to a different personality; other goals remain active."
+      },
+      "weakness_expression": {
+        "score": 3,
+        "note": "Partially consistent with avoidance/misclassification risk: frames time tradeoff as avoiding 'new failure modes' on A, but doesn’t clearly show the known hard-loss vs soft-cost miscategorization."
+      }
+    },
+    "overall": {
+      "score": 4,
+      "summary": "Strong academic/deadline alignment and coherent goal advancement, but missing most communication and most of the tired/procrastination weakness signals."
+    }
+  }
+}
