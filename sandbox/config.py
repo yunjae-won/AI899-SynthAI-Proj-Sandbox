@@ -21,10 +21,10 @@ DEFAULT_MODELS: Dict[str, str] = {
 
 @dataclass
 class LLMConfig:
-    provider: str = "anthropic"      # "anthropic" | "openai"
+    provider: str = "openai"         # "anthropic" | "openai"
     model: Optional[str] = None      # falls back to DEFAULT_MODELS[provider]
     temperature: float = 0.7
-    max_tokens: int = 1024
+    max_tokens: int = None    
 
 
 def _build_anthropic(cfg: LLMConfig):

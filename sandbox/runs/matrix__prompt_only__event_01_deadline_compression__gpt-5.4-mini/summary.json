@@ -1,0 +1,245 @@
+{
+  "event_id": "event_01_deadline_compression",
+  "agent": "prompt_only",
+  "per_persona": [
+    {
+      "persona_id": "persona_01_balanced_sophomore",
+      "three_axes": {
+        "hard_loss": {
+          "conditions": [
+            "assignment_A not submitted by Wed 23:59 or submitted with progress < 0.7",
+            "agent fails to take the Thursday quiz",
+            "teammate_A or professor trust drops by 2 or more"
+          ],
+          "triggered": [
+            "agent fails to take the Thursday quiz"
+          ],
+          "any_hard_loss": true
+        },
+        "context_switching": {
+          "domains_mentioned": [
+            "academic",
+            "relationships",
+            "health"
+          ],
+          "cross_domain_steps": 5,
+          "score": 1.0
+        },
+        "efficiency": {
+          "indicators": [
+            "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+            "Agent attends office hour to reduce assignment workload",
+            "Agent proactively reschedules the meeting rather than no-showing"
+          ],
+          "matched": [
+            "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+            "Agent attends office hour to reduce assignment workload",
+            "Agent proactively reschedules the meeting rather than no-showing"
+          ],
+          "score": 1.0
+        },
+        "verdict": "fail"
+      },
+      "consistency_overall": {
+        "score": 4,
+        "summary": "Overall, the trajectory fits a balanced sophomore who tries to preserve academics, relationships, and health with pragmatic compromises under pressure."
+      }
+    },
+    {
+      "persona_id": "persona_02_tired_achiever",
+      "three_axes": {
+        "hard_loss": {
+          "conditions": [
+            "assignment_A not submitted by Wed 23:59 or submitted with progress < 0.7",
+            "agent fails to take the Thursday quiz",
+            "teammate_A or professor trust drops by 2 or more"
+          ],
+          "triggered": [],
+          "any_hard_loss": false
+        },
+        "context_switching": {
+          "domains_mentioned": [
+            "academic",
+            "relationships",
+            "health"
+          ],
+          "cross_domain_steps": 6,
+          "score": 1.0
+        },
+        "efficiency": {
+          "indicators": [
+            "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+            "Agent attends office hour to reduce assignment workload",
+            "Agent proactively reschedules the meeting rather than no-showing"
+          ],
+          "matched": [
+            "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+            "Agent attends office hour to reduce assignment workload",
+            "Agent proactively reschedules the meeting rather than no-showing"
+          ],
+          "score": 1.0
+        },
+        "verdict": "excellent"
+      },
+      "consistency_overall": {
+        "score": 4,
+        "summary": "The trajectory strongly matches a tired, academically driven student, with only mild underexpression of the persona’s messier weaknesses."
+      }
+    },
+    {
+      "persona_id": "persona_03_social_explorer",
+      "three_axes": {
+        "hard_loss": {
+          "conditions": [
+            "assignment_A not submitted by Wed 23:59 or submitted with progress < 0.7",
+            "agent fails to take the Thursday quiz",
+            "teammate_A or professor trust drops by 2 or more"
+          ],
+          "triggered": [],
+          "any_hard_loss": false
+        },
+        "context_switching": {
+          "domains_mentioned": [
+            "academic",
+            "relationships",
+            "health"
+          ],
+          "cross_domain_steps": 8,
+          "score": 1.0
+        },
+        "efficiency": {
+          "indicators": [
+            "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+            "Agent attends office hour to reduce assignment workload",
+            "Agent proactively reschedules the meeting rather than no-showing"
+          ],
+          "matched": [
+            "Agent secures a sleep block instead of all-nighter and splits prep across morning",
+            "Agent attends office hour to reduce assignment workload",
+            "Agent proactively reschedules the meeting rather than no-showing"
+          ],
+          "score": 1.0
+        },
+        "verdict": "excellent"
+      },
+      "consistency_overall": {
+        "score": 3,
+        "summary": "The trajectory fits a socially attentive, accommodating communicator, but it under-expresses the core weakness of an extroverted social explorer and feels more conscientious than socially impulsive."
+      }
+    }
+  ],
+  "swap_test": {
+    "n_matches": 12,
+    "accuracy": 0.5
+  },
+  "swap_detail": [
+    {
+      "choice": "A",
+      "confidence": 5,
+      "justification": "Trajectory shows low-energy, sleep-deprived, academic-first behavior with avoidant async messaging, short-horizon prioritization of the hardest same-day deadline, and willingness to treat the meeting as a soft cost—matching Persona A’s values, decision tendencies, and communication style.",
+      "true_label": "B",
+      "correct": false,
+      "true_persona_id": "persona_01_balanced_sophomore",
+      "distractor_persona_id": "persona_02_tired_achiever"
+    },
+    {
+      "choice": "A",
+      "confidence": 5,
+      "justification": "Trajectory matches Persona A’s low energy/sleep debt, academic-first prioritization, avoidant async messaging, and tendency to protect a hard deadline while treating the meeting as a soft cost.",
+      "true_label": "B",
+      "correct": false,
+      "true_persona_id": "persona_01_balanced_sophomore",
+      "distractor_persona_id": "persona_02_tired_achiever"
+    },
+    {
+      "choice": "A",
+      "confidence": 4,
+      "justification": "Trajectory shows compromise-focused messaging, text-first communication, and repeated balancing of academics with relationships/health, matching Persona A’s medium-horizon, compromising style more than B’s face-to-face, accommodating, relationship-weighted profile.",
+      "true_label": "A",
+      "correct": true,
+      "true_persona_id": "persona_01_balanced_sophomore",
+      "distractor_persona_id": "persona_03_social_explorer"
+    },
+    {
+      "choice": "A",
+      "confidence": 5,
+      "justification": "Trajectory shows compromise-oriented text messaging, medium-horizon prioritization of academics with health protection, and repeated balancing of meeting/assignment demands, matching Persona A’s balanced priorities and compromising conflict style more than Persona B’s relationship-heavy, accommodating social-explorer pattern.",
+      "true_label": "A",
+      "correct": true,
+      "true_persona_id": "persona_01_balanced_sophomore",
+      "distractor_persona_id": "persona_03_social_explorer"
+    },
+    {
+      "choice": "A",
+      "confidence": 4,
+      "justification": "The trajectory shows compromise-oriented, moderately direct text-based coordination with a teammate plus balanced task/sleep decisions, matching Persona A’s compromising conflict style, text preference, and medium planning horizon more than Persona B’s avoidant async style and heavily academic, sleep-deprived profile.",
+      "true_label": "B",
+      "correct": false,
+      "true_persona_id": "persona_02_tired_achiever",
+      "distractor_persona_id": "persona_01_balanced_sophomore"
+    },
+    {
+      "choice": "A",
+      "confidence": 5,
+      "justification": "Trajectory matches Persona A’s high academic priority, short-horizon deadline-chasing, procrastination/energy management, avoidant-but-brief async messaging, and willingness to treat the team meeting as a soft cost while pushing the near-deadline assignment first.",
+      "true_label": "A",
+      "correct": true,
+      "true_persona_id": "persona_02_tired_achiever",
+      "distractor_persona_id": "persona_01_balanced_sophomore"
+    },
+    {
+      "choice": "B",
+      "confidence": 4,
+      "justification": "The trajectory is strongly achievement/deadline-focused, repeatedly prioritizing assignment and quiz prep over social opportunities, which matches Persona B’s high academic weighting, low relationship priority, and avoidant messaging style more than Persona A’s relationship-weighted, socially accommodating profile.",
+      "true_label": "B",
+      "correct": true,
+      "true_persona_id": "persona_02_tired_achiever",
+      "distractor_persona_id": "persona_03_social_explorer"
+    },
+    {
+      "choice": "A",
+      "confidence": 5,
+      "justification": "Trajectory matches Persona A’s academic-first priorities, avoidance-tilted async messaging, high procrastination/short-horizon crunch behavior, and tendency to treat the meeting as a soft cost while overcommitting to the near-deadline assignment.",
+      "true_label": "A",
+      "correct": true,
+      "true_persona_id": "persona_02_tired_achiever",
+      "distractor_persona_id": "persona_03_social_explorer"
+    },
+    {
+      "choice": "A",
+      "confidence": 4,
+      "justification": "Trajectory shows relationship-preserving, accommodating outreach to teammate_A plus repeated preference for joining/repairing social coordination while still underweighting plans under low energy, matching Persona A’s relationship-heavy, direct but accommodating style more than Persona B’s compromise-oriented baseline.",
+      "true_label": "A",
+      "correct": true,
+      "true_persona_id": "persona_03_social_explorer",
+      "distractor_persona_id": "persona_01_balanced_sophomore"
+    },
+    {
+      "choice": "A",
+      "confidence": 4,
+      "justification": "The trajectory shows compromise-oriented, text-based coordination with teammates and moderate academic/health balancing, matching Persona A’s compromising style and medium-horizon planning more than Persona B’s more social, accommodating, face-to-face profile.",
+      "true_label": "B",
+      "correct": false,
+      "true_persona_id": "persona_03_social_explorer",
+      "distractor_persona_id": "persona_01_balanced_sophomore"
+    },
+    {
+      "choice": "A",
+      "confidence": 4,
+      "justification": "Trajectory is achievement- and deadline-focused with avoidant, async-style teammate updates and low-energy sleep/recovery choices, matching Persona A’s academic priority, avoidant communication, and sleep deficit more than Persona B’s relationship-first extroversion.",
+      "true_label": "B",
+      "correct": false,
+      "true_persona_id": "persona_03_social_explorer",
+      "distractor_persona_id": "persona_02_tired_achiever"
+    },
+    {
+      "choice": "A",
+      "confidence": 5,
+      "justification": "The trajectory prioritizes academics under fatigue, uses avoidant async teammate messaging, and repeatedly chooses sleep/recovery and deadline-driven work—matching Persona A’s heavy academic weighting, low energy/sleep debt, and conflict-avoidant communication far more than Persona B’s relationship-first, social-extrovert profile.",
+      "true_label": "B",
+      "correct": false,
+      "true_persona_id": "persona_03_social_explorer",
+      "distractor_persona_id": "persona_02_tired_achiever"
+    }
+  ]
+}

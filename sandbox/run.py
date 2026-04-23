@@ -61,7 +61,7 @@ def cmd_single(args) -> int:
     cfg = _build_llm_config(args)
     agent_step = AGENT_REGISTRY[args.agent](cfg)
 
-    out_dir = RUNS_DIR / f"{args.agent}__{persona['id']}__{event['id']}"
+    out_dir = RUNS_DIR / f"{args.agent}__{persona['id']}__{event['id']}__{cfg.model}"
     log_path = out_dir / "trajectory.json"
     print(f"[run] {args.agent} × {persona['id']} × {event['id']}  →  {log_path}")
 
@@ -107,7 +107,7 @@ def cmd_matrix(args) -> int:
     for pid in persona_ids:
         persona = load_persona(pid)
         agent_step = agent_step_factory(cfg)
-        out_dir = RUNS_DIR / f"matrix__{args.agent}__{event['id']}" / pid
+        out_dir = RUNS_DIR / f"matrix__{args.agent}__{event['id']}__{cfg.model}" / pid
         log_path = out_dir / "trajectory.json"
         print(f"[matrix] {args.agent} × {pid} × {event['id']}  →  {log_path}")
         final = run_simulation(
@@ -141,7 +141,7 @@ def cmd_matrix(args) -> int:
     # Swap test across all persona pairs.
     swap = run_swap_test(swap_input, cfg, trials_per_pair=args.swap_trials)
 
-    summary_path = RUNS_DIR / f"matrix__{args.agent}__{event['id']}" / "summary.json"
+    summary_path = RUNS_DIR / f"matrix__{args.agent}__{event['id']}__{cfg.model}" / "summary.json"
     summary_path.parent.mkdir(parents=True, exist_ok=True)
     summary = {
         "event_id": event["id"],
