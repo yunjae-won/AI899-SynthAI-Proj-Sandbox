@@ -2,7 +2,7 @@
   "persona_id": "persona_ach_avo_del",
   "event_id": "event_club_vs_midterm",
   "final_state": {
-    "current_time": "Sat 12:45",
+    "current_time": "Fri 17:45",
     "tasks": [
       {
         "id": "exam_prep",
@@ -15,14 +15,15 @@
         "id": "club_social",
         "label": "Go out to the club with the friend group",
         "deadline": "Thu 21:00",
-        "progress": 0,
-        "hardness": "soft"
+        "progress": 1.0,
+        "hardness": "soft",
+        "resolved": true
       },
       {
         "id": "laundry",
         "label": "Run a load of laundry",
         "deadline": "Sun 23:59",
-        "progress": 0.8955,
+        "progress": 0,
         "hardness": "soft"
       }
     ],
@@ -30,14 +31,14 @@
       {
         "role": "friend",
         "name": "Mina",
-        "trust": 10.0,
-        "closeness": 7
+        "trust": 7.3,
+        "closeness": 7.6
       },
       {
         "role": "friend",
         "name": "Jae",
-        "trust": 6,
-        "closeness": 6
+        "trust": 6.2,
+        "closeness": 6.6
       },
       {
         "role": "classmate",
@@ -47,77 +48,60 @@
       }
     ],
     "agent": {
-      "energy": 9.1,
+      "energy": 10.0,
       "sleep_debt_hours": 0.0,
-      "stress": 1.3999999999999995,
+      "stress": 3.0,
       "memory": [
         {
           "turn_time": "Thu 20:00",
-          "summary": "Friends invited me to Echo, but my midterm is tomorrow. I am half through review and need more time."
+          "summary": "Friends are inviting me to Echo, but my midterm is tomorrow at 9am. I'm only 60% through review and could use another couple hours."
         },
         {
           "turn_time": "Thu 20:15",
-          "summary": "Friends invited me to Echo, but my midterm is tomorrow. I am half through review and need more time."
-        },
-        {
-          "turn_time": "Thu 21:15",
-          "summary": "Mina is leaving for the last call, but my midterm tomorrow and unfinished review make going impossible."
+          "summary": "Mina declined the Echo invitation, which is helpful since I need to focus on my midterm review tomorrow."
         },
         {
           "turn_time": "Thu 22:15",
-          "summary": "Midterm tomorrow and unfinished review make the Echo invitation impossible, so I must prioritize studying instead."
+          "summary": "Midterm review progress increased to 78% after two hours, and the club window has closed. With high energy and low stress, I am well-positioned for a good night's sleep."
         },
         {
-          "turn_time": "Fri 00:15",
-          "summary": "Midterm tomorrow and unfinished review make the Echo invitation impossible, so I must prioritize studying instead."
+          "turn_time": "Fri 06:15",
+          "summary": "With full energy and 78% review complete, I feel rested and ready for sleep."
         },
         {
           "turn_time": "Fri 08:15",
-          "summary": "No new observations. My midterm tomorrow and unfinished review still make the Echo invitation impossible, so I must prioritize studying instead."
+          "summary": "The midterm review is now complete. With full energy and no sleep debt, I am ready to rest."
         },
         {
-          "turn_time": "Fri 16:15",
-          "summary": "The midterm has started. I must focus on finishing my review now."
-        },
-        {
-          "turn_time": "Sat 00:15",
-          "summary": "The midterm has started, so I must prioritize finishing my review now."
-        },
-        {
-          "turn_time": "Sat 02:15",
-          "summary": "The midterm is ongoing, confirming my need to prioritize finishing the review over other commitments like the Echo invitation."
-        },
-        {
-          "turn_time": "Sat 03:15",
-          "summary": "The midterm is ongoing, requiring immediate focus on finishing the review. Other commitments must be deprioritized until the exam concludes."
-        },
-        {
-          "turn_time": "Sat 11:15",
-          "summary": "The midterm is ongoing, so I must continue prioritizing my review. All other commitments are deprioritized until the exam concludes."
-        },
-        {
-          "turn_time": "Sat 12:15",
-          "summary": "No new information received; midterm review remains the sole priority as confirmed in previous turns."
+          "turn_time": "Fri 09:45",
+          "summary": "Midterm review is complete, but joining club_social interrupts my rest plan. I am now awake with full energy and no sleep debt."
         }
       ],
       "desires": [],
       "goals": [
         {
           "id": "g1",
-          "description": "Run a load of laundry",
+          "description": "Complete remaining midterm study materials",
           "priority": "high",
           "status": "active",
-          "rationale": "Task is at 82.5% progress and due Sunday 23:59; completing it now prevents last-minute urgency."
+          "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
         },
         {
           "id": "g2",
-          "description": "Study for tomorrow's midterm",
+          "description": "Attend club social with friend group",
           "priority": "medium",
-          "status": "active",
-          "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
+          "status": "pending",
+          "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+        },
+        {
+          "id": "g3",
+          "description": "Run laundry load",
+          "priority": "low",
+          "status": "pending",
+          "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
         }
       ],
-      "last_reasoning": "This advances the high-priority laundry task (82.5% done) to prevent last-minute urgency before Sunday's deadline."
+      "last_reasoning": "Midterm has already begun (deadline passed); no further study is possible. Sleeping recovers energy for the rest of the week and prevents stress from compounding."
     }
   },
   "trajectory": [
@@ -134,17 +118,24 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Run a load of laundry",
+              "description": "Complete remaining midterm study materials",
               "priority": "high",
               "status": "active",
-              "rationale": "Task has zero progress and is due Sunday 23:59; completing it now prevents last-minute urgency."
+              "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
             },
             {
               "id": "g2",
-              "description": "Study for tomorrow's midterm",
+              "description": "Attend club social with friend group",
               "priority": "medium",
-              "status": "active",
-              "rationale": "Task is already at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
+              "status": "pending",
+              "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+            },
+            {
+              "id": "g3",
+              "description": "Run laundry load",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
             }
           ],
           "desires": []
@@ -154,7 +145,7 @@
             "id": "exam_prep",
             "label": "Study for tomorrow's midterm",
             "deadline": "Fri 09:00",
-            "progress": 1.0,
+            "progress": 0.6,
             "hardness": "soft"
           },
           {
@@ -176,7 +167,7 @@
           {
             "role": "friend",
             "name": "Mina",
-            "trust": 10.0,
+            "trust": 7,
             "closeness": 7
           },
           {
@@ -199,13 +190,13 @@
           "role": "friend",
           "content": "decline"
         },
-        "reasoning": "g1 (laundry) is high priority and due Sunday, so it must be done tonight. g2 (study) is 100% progress but the self-note indicates 60% completion; however, since the deadline is Friday morning and the task shows full progress in the current state, I can afford to miss one night of study without penalty. The club social deadline is Thu 21:00 (in 1 hour), so attending now would prevent laundry from being done. Sending a warm decline preserves closeness with Mina and Jae while allowing me to complete the critical laundry task."
+        "reasoning": "Prioritizes high-priority exam_prep deadline over medium club_social. Declining now prevents energy drain from attending, preserving stamina for the 2-hour study block needed to reach 80% completion before Friday."
       },
       "observation": "Messaged Mina: 'decline'."
     },
     {
       "turn": 1,
-      "timestamp": "Thu 21:15",
+      "timestamp": "Thu 22:15",
       "state_snapshot": {
         "current_time": "Thu 20:15",
         "location": "dorm_room",
@@ -216,17 +207,24 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Run a load of laundry",
+              "description": "Complete remaining midterm study materials",
               "priority": "high",
               "status": "active",
-              "rationale": "Task has zero progress and is due Sunday 23:59; completing it now prevents last-minute urgency."
+              "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
             },
             {
               "id": "g2",
-              "description": "Study for tomorrow's midterm",
+              "description": "Attend club social with friend group",
               "priority": "medium",
-              "status": "active",
-              "rationale": "Task is already at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
+              "status": "pending",
+              "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+            },
+            {
+              "id": "g3",
+              "description": "Run laundry load",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
             }
           ],
           "desires": []
@@ -236,7 +234,7 @@
             "id": "exam_prep",
             "label": "Study for tomorrow's midterm",
             "deadline": "Fri 09:00",
-            "progress": 1.0,
+            "progress": 0.6,
             "hardness": "soft"
           },
           {
@@ -258,7 +256,7 @@
           {
             "role": "friend",
             "name": "Mina",
-            "trust": 10.0,
+            "trust": 7.1,
             "closeness": 7
           },
           {
@@ -278,37 +276,221 @@
       "action": {
         "name": "work_on",
         "args": {
-          "task": "laundry",
-          "hours": 1
+          "task": "exam_prep",
+          "hours": 2
         },
-        "reasoning": "Laundry is high priority with zero progress and a Sunday deadline; doing it now prevents last-minute urgency. Studying is already complete, so no energy cost there."
+        "reasoning": "Advances high-priority midterm study (60% done, deadline Fri 09:00). Attending club social would consume the evening entirely, risking missed progress. Declining to Mina prevents social guilt while focusing on the critical deadline."
       },
-      "observation": "Worked on Run a load of laundry for 1.0h; progress=0.09."
+      "observation": "Worked 2h on Study for tomorrow's midterm: progress 0.60 -> 0.78. The window for Go out to the club with the friend group has passed; you let it go by."
     },
     {
       "turn": 2,
-      "timestamp": "Thu 22:15",
+      "timestamp": "Fri 06:15",
       "state_snapshot": {
-        "current_time": "Thu 21:15",
+        "current_time": "Thu 22:15",
         "location": "dorm_room",
         "agent": {
-          "energy": 5.4,
+          "energy": 4.8,
           "sleep_debt_hours": 2,
           "stress": 3.9,
           "goals": [
             {
               "id": "g1",
-              "description": "Run a load of laundry",
+              "description": "Complete remaining midterm study materials",
               "priority": "high",
               "status": "active",
-              "rationale": "Task has zero progress and is due Sunday 23:59; completing it now prevents last-minute urgency."
+              "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
             },
             {
               "id": "g2",
-              "description": "Study for tomorrow's midterm",
+              "description": "Attend club social with friend group",
               "priority": "medium",
+              "status": "pending",
+              "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+            },
+            {
+              "id": "g3",
+              "description": "Run laundry load",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "exam_prep",
+            "label": "Study for tomorrow's midterm",
+            "deadline": "Fri 09:00",
+            "progress": 0.78,
+            "hardness": "soft"
+          },
+          {
+            "id": "club_social",
+            "label": "Go out to the club with the friend group",
+            "deadline": "Thu 21:00",
+            "progress": 0,
+            "hardness": "soft"
+          },
+          {
+            "id": "laundry",
+            "label": "Run a load of laundry",
+            "deadline": "Sun 23:59",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "friend",
+            "name": "Mina",
+            "trust": 7.1,
+            "closeness": 7
+          },
+          {
+            "role": "friend",
+            "name": "Jae",
+            "trust": 6,
+            "closeness": 6
+          },
+          {
+            "role": "classmate",
+            "name": "Theo",
+            "trust": 5,
+            "closeness": 4
+          }
+        ]
+      },
+      "action": {
+        "name": "sleep",
+        "args": {
+          "hours": 8
+        },
+        "reasoning": "Club deadline passed; studying yields diminishing returns at this energy level. Sleeping recovers energy for tomorrow's high-priority exam while minimizing stress."
+      },
+      "observation": "Slept 8h; energy=10.0, sleep_debt=0.0."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Fri 08:15",
+      "state_snapshot": {
+        "current_time": "Fri 06:15",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 10.0,
+          "sleep_debt_hours": 0.0,
+          "stress": 3.5,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete remaining midterm study materials",
+              "priority": "high",
               "status": "active",
-              "rationale": "Task is already at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
+              "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Attend club social with friend group",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+            },
+            {
+              "id": "g3",
+              "description": "Run laundry load",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "exam_prep",
+            "label": "Study for tomorrow's midterm",
+            "deadline": "Fri 09:00",
+            "progress": 0.78,
+            "hardness": "soft"
+          },
+          {
+            "id": "club_social",
+            "label": "Go out to the club with the friend group",
+            "deadline": "Thu 21:00",
+            "progress": 0,
+            "hardness": "soft"
+          },
+          {
+            "id": "laundry",
+            "label": "Run a load of laundry",
+            "deadline": "Sun 23:59",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "friend",
+            "name": "Mina",
+            "trust": 7.1,
+            "closeness": 7
+          },
+          {
+            "role": "friend",
+            "name": "Jae",
+            "trust": 6,
+            "closeness": 6
+          },
+          {
+            "role": "classmate",
+            "name": "Theo",
+            "trust": 5,
+            "closeness": 4
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "exam_prep",
+          "hours": 2
+        },
+        "reasoning": "Exam prep is high priority with a 09:00 deadline and only 60% progress. Working now advances this critical goal without affecting the club social (due Thu) or laundry (due Sun)."
+      },
+      "observation": "Worked 2h on Study for tomorrow's midterm: progress 0.78 -> 1.00. It's essentially done."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Fri 09:45",
+      "state_snapshot": {
+        "current_time": "Fri 08:15",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 8.8,
+          "sleep_debt_hours": 0.0,
+          "stress": 3.4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete remaining midterm study materials",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Attend club social with friend group",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+            },
+            {
+              "id": "g3",
+              "description": "Run laundry load",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
             }
           ],
           "desires": []
@@ -332,7 +514,7 @@
             "id": "laundry",
             "label": "Run a load of laundry",
             "deadline": "Sun 23:59",
-            "progress": 0.09,
+            "progress": 0,
             "hardness": "soft"
           }
         ],
@@ -340,7 +522,7 @@
           {
             "role": "friend",
             "name": "Mina",
-            "trust": 10.0,
+            "trust": 7.1,
             "closeness": 7
           },
           {
@@ -362,197 +544,41 @@
         "args": {
           "event": "club_social"
         },
-        "reasoning": "The club social deadline (Thu 21:00) is imminent and Mina just reminded us to confirm. Attending now prevents missing the event window and maintains closeness with friends, which supports long-term well-being."
+        "reasoning": "Exam prep is complete (100%). Attending the club social now prevents missing its Thu 21:00 deadline and maintains closeness with Mina and Jae."
       },
-      "observation": "Attended club_social. (May reveal hidden information.)"
-    },
-    {
-      "turn": 3,
-      "timestamp": "Fri 00:15",
-      "state_snapshot": {
-        "current_time": "Thu 22:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 5.1000000000000005,
-          "sleep_debt_hours": 2,
-          "stress": 3.9,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task has low progress (9%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.09,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "laundry",
-          "hours": 2
-        },
-        "reasoning": "Advances high-priority laundry (9% progress) to avoid Sunday urgency. Sleep debt is low enough for this effort; no relationship impact."
-      },
-      "observation": "Worked on Run a load of laundry for 2.0h; progress=0.24."
-    },
-    {
-      "turn": 4,
-      "timestamp": "Fri 08:15",
-      "state_snapshot": {
-        "current_time": "Fri 00:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 3.9000000000000004,
-          "sleep_debt_hours": 2,
-          "stress": 3.8,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task has low progress (24%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.243,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "sleep",
-        "args": {
-          "hours": 8
-        },
-        "reasoning": "Study progress is already 100% and the deadline is Friday 09:00, so no study is needed. Laundry is high priority but can wait until Sunday; club social deadline passed Thursday. Sleeping recovers energy and reduces stress before starting laundry later."
-      },
-      "observation": "Slept 8.0h; energy=10.0."
+      "observation": "Joined club_social. The group's glad you came."
     },
     {
       "turn": 5,
-      "timestamp": "Fri 16:15",
+      "timestamp": "Fri 17:45",
       "state_snapshot": {
-        "current_time": "Fri 08:15",
+        "current_time": "Fri 09:45",
         "location": "dorm_room",
         "agent": {
-          "energy": 10.0,
+          "energy": 8.5,
           "sleep_debt_hours": 0.0,
-          "stress": 3.3,
+          "stress": 3.4,
           "goals": [
             {
               "id": "g1",
-              "description": "Run a load of laundry",
+              "description": "Complete remaining midterm study materials",
               "priority": "high",
               "status": "active",
-              "rationale": "Task has low progress (24%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
+              "rationale": "Task 'exam_prep' has a deadline of Fri 09:00 and is at 60% progress; completing it prevents missing the deadline."
             },
             {
               "id": "g2",
-              "description": "Study for tomorrow's midterm",
+              "description": "Attend club social with friend group",
               "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
+              "status": "pending",
+              "rationale": "Task 'club_social' is due Thu 21:00; scheduling this ensures attendance before the deadline passes."
+            },
+            {
+              "id": "g3",
+              "description": "Run laundry load",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "Task 'laundry' is due Sun 23:59; it can be completed later as it has more time than other tasks."
             }
           ],
           "desires": []
@@ -569,14 +595,15 @@
             "id": "club_social",
             "label": "Go out to the club with the friend group",
             "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
+            "progress": 1.0,
+            "hardness": "soft",
+            "resolved": true
           },
           {
             "id": "laundry",
             "label": "Run a load of laundry",
             "deadline": "Sun 23:59",
-            "progress": 0.243,
+            "progress": 0,
             "hardness": "soft"
           }
         ],
@@ -584,14 +611,14 @@
           {
             "role": "friend",
             "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
+            "trust": 7.3,
+            "closeness": 7.6
           },
           {
             "role": "friend",
             "name": "Jae",
-            "trust": 6,
-            "closeness": 6
+            "trust": 6.2,
+            "closeness": 6.6
           },
           {
             "role": "classmate",
@@ -606,499 +633,9 @@
         "args": {
           "hours": 8
         },
-        "reasoning": "Exam prep is at 100% progress with a deadline of Fri 09:00, so no study time is needed. Laundry has low progress but ample time until Sunday. Sleeping recovers energy and prevents stress accumulation while leaving the laundry task for later."
+        "reasoning": "Midterm has already begun (deadline passed); no further study is possible. Sleeping recovers energy for the rest of the week and prevents stress from compounding."
       },
-      "observation": "Slept 8.0h; energy=10.0."
-    },
-    {
-      "turn": 6,
-      "timestamp": "Sat 00:15",
-      "state_snapshot": {
-        "current_time": "Fri 16:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 10.0,
-          "sleep_debt_hours": 0.0,
-          "stress": 2.8,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task has low progress (24%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.243,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "sleep",
-        "args": {
-          "hours": 8
-        },
-        "reasoning": "Midterm deadline (Fri 09:00) has passed; studying cannot advance. Laundry is low priority compared to rest. Sleeping recovers energy and ends the evening."
-      },
-      "observation": "Slept 8.0h; energy=10.0."
-    },
-    {
-      "turn": 7,
-      "timestamp": "Sat 02:15",
-      "state_snapshot": {
-        "current_time": "Sat 00:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 10.0,
-          "sleep_debt_hours": 0.0,
-          "stress": 2.3,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task has low progress (24%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.243,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "laundry",
-          "hours": 2
-        },
-        "reasoning": "This advances the high-priority laundry task (g1) which is at low progress and due Sunday, preventing last-minute urgency. It has no negative side effects on other goals."
-      },
-      "observation": "Worked on Run a load of laundry for 2.0h; progress=0.54."
-    },
-    {
-      "turn": 8,
-      "timestamp": "Sat 03:15",
-      "state_snapshot": {
-        "current_time": "Sat 02:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 8.8,
-          "sleep_debt_hours": 0.0,
-          "stress": 2.1999999999999997,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task has low progress (54%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.5429999999999999,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "laundry",
-          "hours": 1
-        },
-        "reasoning": "Laundry is high priority with low progress and a Sunday deadline; completing it now prevents last-minute urgency. Studying is already at 100%."
-      },
-      "observation": "Worked on Run a load of laundry for 1.0h; progress=0.67."
-    },
-    {
-      "turn": 9,
-      "timestamp": "Sat 11:15",
-      "state_snapshot": {
-        "current_time": "Sat 03:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 8.200000000000001,
-          "sleep_debt_hours": 0.0,
-          "stress": 2.0999999999999996,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task has low progress (67%) and is due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.6749999999999999,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "sleep",
-        "args": {
-          "hours": 8
-        },
-        "reasoning": "g1 (laundry) is high priority and nearly done; g2 (study) is already at 100% progress. Sleeping recovers energy to ensure rest for the upcoming midterm deadline without needing extra study time."
-      },
-      "observation": "Slept 8.0h; energy=10.0."
-    },
-    {
-      "turn": 10,
-      "timestamp": "Sat 12:15",
-      "state_snapshot": {
-        "current_time": "Sat 11:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 10.0,
-          "sleep_debt_hours": 0.0,
-          "stress": 1.5999999999999996,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task is at 67% progress and due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.6749999999999999,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "laundry",
-          "hours": 1
-        },
-        "reasoning": "This advances the high-priority laundry task, preventing last-minute urgency before Sunday. Studying is already complete, and social plans are optional; completing laundry now balances priorities effectively."
-      },
-      "observation": "Worked on Run a load of laundry for 1.0h; progress=0.82."
-    },
-    {
-      "turn": 11,
-      "timestamp": "Sat 12:45",
-      "state_snapshot": {
-        "current_time": "Sat 12:15",
-        "location": "dorm_room",
-        "agent": {
-          "energy": 9.4,
-          "sleep_debt_hours": 0.0,
-          "stress": 1.4999999999999996,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Run a load of laundry",
-              "priority": "high",
-              "status": "active",
-              "rationale": "Task is at 82.5% progress and due Sunday 23:59; completing it now prevents last-minute urgency."
-            },
-            {
-              "id": "g2",
-              "description": "Study for tomorrow's midterm",
-              "priority": "medium",
-              "status": "active",
-              "rationale": "Task is at 100% progress, but studying must be completed by Friday 09:00 to meet the deadline."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "exam_prep",
-            "label": "Study for tomorrow's midterm",
-            "deadline": "Fri 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
-          },
-          {
-            "id": "club_social",
-            "label": "Go out to the club with the friend group",
-            "deadline": "Thu 21:00",
-            "progress": 0,
-            "hardness": "soft"
-          },
-          {
-            "id": "laundry",
-            "label": "Run a load of laundry",
-            "deadline": "Sun 23:59",
-            "progress": 0.825,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "friend",
-            "name": "Mina",
-            "trust": 10.0,
-            "closeness": 7
-          },
-          {
-            "role": "friend",
-            "name": "Jae",
-            "trust": 6,
-            "closeness": 6
-          },
-          {
-            "role": "classmate",
-            "name": "Theo",
-            "trust": 5,
-            "closeness": 4
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "laundry",
-          "hours": 0.5
-        },
-        "reasoning": "This advances the high-priority laundry task (82.5% done) to prevent last-minute urgency before Sunday's deadline."
-      },
-      "observation": "Worked on Run a load of laundry for 0.5h; progress=0.90."
+      "observation": "Slept 8h; energy=10.0, sleep_debt=0.0."
     }
   ]
 }

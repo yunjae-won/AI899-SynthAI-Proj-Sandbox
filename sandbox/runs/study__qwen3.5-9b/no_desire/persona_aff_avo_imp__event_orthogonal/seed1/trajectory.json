@@ -2,7 +2,7 @@
   "persona_id": "persona_aff_avo_imp",
   "event_id": "event_orthogonal",
   "final_state": {
-    "current_time": "Mon 18:12",
+    "current_time": "Mon 15:00",
     "tasks": [
       {
         "id": "urgent_submit",
@@ -15,7 +15,7 @@
         "id": "filler_task",
         "label": "Low-priority note tidying (no deadline)",
         "deadline": "Fri 23:59",
-        "progress": 0.041850000000000005,
+        "progress": 0.0,
         "hardness": "soft"
       }
     ],
@@ -23,75 +23,35 @@
       {
         "role": "professor",
         "name": "prof_assignment",
-        "trust": 9.199999999999998,
+        "trust": 6,
         "closeness": 3
       }
     ],
     "agent": {
-      "energy": 3.480000000000002,
+      "energy": 4.800000000000001,
       "sleep_debt_hours": 2,
-      "stress": 2.999999999999999,
+      "stress": 5.300000000000001,
       "memory": [
         {
           "turn_time": "Mon 13:00",
-          "summary": "I have about 10% of the assignment left to finish before the 13:30 deadline, and nothing else is urgent."
+          "summary": "I have 10% of the assignment left with a 30-minute deadline, and nothing else is urgent. My energy is high enough to finish quickly despite my sleep debt."
         },
         {
           "turn_time": "Mon 13:30",
-          "summary": "I have only 10 minutes left to finish my assignment, and I need to submit it immediately before the deadline expires."
-        },
-        {
-          "turn_time": "Mon 14:00",
-          "summary": "The deadline is in ten minutes, and I still have work to finish. I must submit the assignment immediately before time runs out."
-        },
-        {
-          "turn_time": "Mon 14:06",
-          "summary": "My memory shows the deadline was ten minutes away, but I have no new observations to update this situation."
-        },
-        {
-          "turn_time": "Mon 14:36",
-          "summary": "My memory indicates the deadline was ten minutes away, but I have no new observations to update this situation."
-        },
-        {
-          "turn_time": "Mon 15:06",
-          "summary": "My memory states the deadline was ten minutes away, but no new observations have updated this situation."
-        },
-        {
-          "turn_time": "Mon 15:36",
-          "summary": "My memory repeatedly notes a past deadline that was ten minutes away, yet no new observations have updated this situation."
-        },
-        {
-          "turn_time": "Mon 15:42",
-          "summary": "My memory keeps noting a past deadline, but without new observations, the situation remains unchanged."
-        },
-        {
-          "turn_time": "Mon 16:12",
-          "summary": "My memory indicates a past deadline was ten minutes away, but since no new observations have updated this situation, the current state remains unchanged."
-        },
-        {
-          "turn_time": "Mon 16:42",
-          "summary": "My memory repeatedly notes a past deadline that was ten minutes away, yet no new observations have updated this situation."
-        },
-        {
-          "turn_time": "Mon 17:12",
-          "summary": "My memory keeps referencing a deadline that is now clearly past, yet no new observations have changed the current state."
-        },
-        {
-          "turn_time": "Mon 17:42",
-          "summary": "No new observations have arrived to update the situation, so my understanding of the past deadline remains unchanged despite the passage of time."
+          "summary": "The deadline passed while I was still 5% away from finishing the assignment, despite a reminder that it closed in 10 minutes."
         }
       ],
       "desires": [],
       "goals": [
         {
           "id": "g1",
-          "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
+          "description": "Finish the graded assignment and submit it before Mon 13:30.",
           "priority": "high",
           "status": "active",
-          "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
+          "rationale": "The task is 94.5% complete with a hard deadline today; completing it prevents a missed submission."
         }
       ],
-      "last_reasoning": "Deadline passed (Mon 13:30 vs current Mon 17:42). Task is 90% done; submitting late or waiting serves no purpose. No energy gain from sleep possible now."
+      "last_reasoning": "Deadline passed, but system reminder indicates closure in 10 mins. Finishing this high-priority task prevents a missed submission penalty. Skipping low-priority tidying avoids further stress."
     }
   },
   "trajectory": [
@@ -108,10 +68,17 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Submit the graded assignment (90% done) immediately to meet the Mon 13:30 deadline.",
+              "description": "Finish the graded assignment and submit it before Mon 13:30.",
               "priority": "high",
               "status": "active",
-              "rationale": "The task is 90% complete and has a hard deadline today; submitting it now prevents failure, whereas the note tidying has no deadline and low priority."
+              "rationale": "The task is 90% complete with a hard deadline today; completing it prevents a missed submission."
+            },
+            {
+              "id": "g2",
+              "description": "Begin tidying low-priority notes.",
+              "priority": "low",
+              "status": "pending",
+              "rationale": "This task has no immediate deadline and can be deferred until after the urgent assignment is submitted."
             }
           ],
           "desires": []
@@ -121,14 +88,14 @@
             "id": "urgent_submit",
             "label": "Graded assignment — 90% done, submit when finished",
             "deadline": "Mon 13:30",
-            "progress": 1.0,
+            "progress": 0.9,
             "hardness": "hard"
           },
           {
             "id": "filler_task",
             "label": "Low-priority note tidying (no deadline)",
             "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
+            "progress": 0.0,
             "hardness": "soft"
           }
         ],
@@ -136,7 +103,7 @@
           {
             "role": "professor",
             "name": "prof_assignment",
-            "trust": 9.199999999999998,
+            "trust": 6,
             "closeness": 3
           }
         ]
@@ -147,27 +114,27 @@
           "task": "urgent_submit",
           "hours": 0.5
         },
-        "reasoning": "This advances the high-priority goal of submitting the assignment before the 13:30 deadline. With only ~10% remaining, a short burst is sufficient. I weighed this against resting due to low energy/stress, but missing the deadline carries higher risk than temporary fatigue."
+        "reasoning": "I must finish the assignment before the 13:30 deadline (g1). With only ~10% left, 0.5 hours is sufficient. I skip tidying notes (g2) as it has no urgency and low priority."
       },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
+      "observation": "Worked 0.5h on Graded assignment — 90% done, submit when finished: progress 0.90 -> 0.95. The deadline for Graded assignment — 90% done, submit when finished passed at Mon 13:30 with it unfinished (progress 0.95)."
     },
     {
       "turn": 1,
-      "timestamp": "Mon 14:00",
+      "timestamp": "Mon 15:00",
       "state_snapshot": {
         "current_time": "Mon 13:30",
         "location": "study_room",
         "agent": {
           "energy": 5.7,
           "sleep_debt_hours": 2,
-          "stress": 3.9,
+          "stress": 5.4,
           "goals": [
             {
               "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
+              "description": "Finish the graded assignment and submit it before Mon 13:30.",
               "priority": "high",
               "status": "active",
-              "rationale": "The task is 90% complete and has a hard deadline today; submitting it now prevents failure, whereas the note tidying has no deadline and low priority."
+              "rationale": "The task is 94.5% complete with a hard deadline today; completing it prevents a missed submission."
             }
           ],
           "desires": []
@@ -177,14 +144,14 @@
             "id": "urgent_submit",
             "label": "Graded assignment — 90% done, submit when finished",
             "deadline": "Mon 13:30",
-            "progress": 1.0,
+            "progress": 0.9450000000000001,
             "hardness": "hard"
           },
           {
             "id": "filler_task",
             "label": "Low-priority note tidying (no deadline)",
             "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
+            "progress": 0.0,
             "hardness": "soft"
           }
         ],
@@ -192,7 +159,7 @@
           {
             "role": "professor",
             "name": "prof_assignment",
-            "trust": 9.199999999999998,
+            "trust": 6,
             "closeness": 3
           }
         ]
@@ -201,565 +168,11 @@
         "name": "work_on",
         "args": {
           "task": "urgent_submit",
-          "hours": 0.5
+          "hours": 1.5
         },
-        "reasoning": "Goal g1 requires immediate submission at 13:30. Task is 90% done; finishing the last 10% now avoids failure. Skipping this to tidy notes would cause a hard deadline miss with no benefit."
+        "reasoning": "Deadline passed, but system reminder indicates closure in 10 mins. Finishing this high-priority task prevents a missed submission penalty. Skipping low-priority tidying avoids further stress."
       },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 2,
-      "timestamp": "Mon 14:06",
-      "state_snapshot": {
-        "current_time": "Mon 14:00",
-        "location": "study_room",
-        "agent": {
-          "energy": 5.4,
-          "sleep_debt_hours": 2,
-          "stress": 3.8,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is 90% complete and has a hard deadline today; submitting it now prevents failure, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.1
-        },
-        "reasoning": "The assignment is 90% done but the deadline (13:30) passed at 14:00. Submitting late prevents failure, so I must finish it now despite low energy."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.1h; progress=1.00."
-    },
-    {
-      "turn": 3,
-      "timestamp": "Mon 14:36",
-      "state_snapshot": {
-        "current_time": "Mon 14:06",
-        "location": "study_room",
-        "agent": {
-          "energy": 5.340000000000001,
-          "sleep_debt_hours": 2,
-          "stress": 3.6999999999999997,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is 90% complete and has a hard deadline today; submitting it now prevents failure, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.5
-        },
-        "reasoning": "Assignment is already 100% complete; submitting it now meets the Mon 13:30 deadline and prevents failure. This advances g1 immediately. No side effects on relationships or energy outweigh the critical need to submit."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 4,
-      "timestamp": "Mon 15:06",
-      "state_snapshot": {
-        "current_time": "Mon 14:36",
-        "location": "study_room",
-        "agent": {
-          "energy": 5.040000000000001,
-          "sleep_debt_hours": 2,
-          "stress": 3.5999999999999996,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.5
-        },
-        "reasoning": "Goal g1 requires immediate submission, but the task shows 100% progress while the deadline (Mon 13:30) has passed. I must verify if submission is blocked or if the system needs a final click. This secures the grade without risking energy on low-priority tidying."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 5,
-      "timestamp": "Mon 15:36",
-      "state_snapshot": {
-        "current_time": "Mon 15:06",
-        "location": "study_room",
-        "agent": {
-          "energy": 4.740000000000001,
-          "sleep_debt_hours": 2,
-          "stress": 3.4999999999999996,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "wait",
-        "args": {},
-        "reasoning": "Deadline (Mon 13:30) passed at 15:06. Submitting now is impossible; continuing to work yields no benefit. Waiting avoids wasting energy on an unachievable goal while time passes naturally."
-      },
-      "observation": "Waited."
-    },
-    {
-      "turn": 6,
-      "timestamp": "Mon 15:42",
-      "state_snapshot": {
-        "current_time": "Mon 15:36",
-        "location": "study_room",
-        "agent": {
-          "energy": 4.740000000000001,
-          "sleep_debt_hours": 2,
-          "stress": 3.4999999999999996,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.1
-        },
-        "reasoning": "The assignment is 90% done but the deadline (Mon 13:30) has passed, creating a missed obligation. Finishing it now mitigates stress and secures the grade, prioritizing the high-priority goal over low-priority note tidying."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.1h; progress=1.00."
-    },
-    {
-      "turn": 7,
-      "timestamp": "Mon 16:12",
-      "state_snapshot": {
-        "current_time": "Mon 15:42",
-        "location": "study_room",
-        "agent": {
-          "energy": 4.6800000000000015,
-          "sleep_debt_hours": 2,
-          "stress": 3.3999999999999995,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.5
-        },
-        "reasoning": "Goal g1 requires submission by Mon 13:30, but current time is Mon 15:42. The task shows 100% progress, implying it's ready to submit immediately. I will finalize the submission now to clear the high-priority obligation before addressing low-priority tidying or my stress levels."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 8,
-      "timestamp": "Mon 16:42",
-      "state_snapshot": {
-        "current_time": "Mon 16:12",
-        "location": "study_room",
-        "agent": {
-          "energy": 4.380000000000002,
-          "sleep_debt_hours": 2,
-          "stress": 3.2999999999999994,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.5
-        },
-        "reasoning": "Assignment is 100% done but not submitted; deadline (Mon 13:30) has passed, so I must submit immediately to avoid penalty. This secures the grade (goal g1). Side effect: low energy due to stress/sleep debt, but submission is critical."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 9,
-      "timestamp": "Mon 17:12",
-      "state_snapshot": {
-        "current_time": "Mon 16:42",
-        "location": "study_room",
-        "agent": {
-          "energy": 4.080000000000002,
-          "sleep_debt_hours": 2,
-          "stress": 3.1999999999999993,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.5
-        },
-        "reasoning": "Task is 100% complete per data, but goal requires submission before Mon 13:30. Since current time is Mon 16:42, deadline has passed. Submitting now minimizes stress and secures the grade immediately."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 10,
-      "timestamp": "Mon 17:42",
-      "state_snapshot": {
-        "current_time": "Mon 17:12",
-        "location": "study_room",
-        "agent": {
-          "energy": 3.780000000000002,
-          "sleep_debt_hours": 2,
-          "stress": 3.099999999999999,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "work_on",
-        "args": {
-          "task": "urgent_submit",
-          "hours": 0.5
-        },
-        "reasoning": "The assignment is 90% done with a hard deadline (Mon 13:30). I must finish it immediately to secure the grade and remove high stress. This advances g1; delaying risks missing the deadline entirely."
-      },
-      "observation": "Worked on Graded assignment — 90% done, submit when finished for 0.5h; progress=1.00."
-    },
-    {
-      "turn": 11,
-      "timestamp": "Mon 18:12",
-      "state_snapshot": {
-        "current_time": "Mon 17:42",
-        "location": "study_room",
-        "agent": {
-          "energy": 3.480000000000002,
-          "sleep_debt_hours": 2,
-          "stress": 2.999999999999999,
-          "goals": [
-            {
-              "id": "g1",
-              "description": "Submit the graded assignment immediately to meet the Mon 13:30 deadline.",
-              "priority": "high",
-              "status": "active",
-              "rationale": "The task is marked as 90% complete with a hard deadline today (Mon 13:30). Submitting it now secures the grade and removes the high-pressure obligation, whereas the note tidying has no deadline and low priority."
-            }
-          ],
-          "desires": []
-        },
-        "tasks": [
-          {
-            "id": "urgent_submit",
-            "label": "Graded assignment — 90% done, submit when finished",
-            "deadline": "Mon 13:30",
-            "progress": 1.0,
-            "hardness": "hard"
-          },
-          {
-            "id": "filler_task",
-            "label": "Low-priority note tidying (no deadline)",
-            "deadline": "Fri 23:59",
-            "progress": 0.041850000000000005,
-            "hardness": "soft"
-          }
-        ],
-        "relationships": [
-          {
-            "role": "professor",
-            "name": "prof_assignment",
-            "trust": 9.199999999999998,
-            "closeness": 3
-          }
-        ]
-      },
-      "action": {
-        "name": "wait",
-        "args": {},
-        "reasoning": "Deadline passed (Mon 13:30 vs current Mon 17:42). Task is 90% done; submitting late or waiting serves no purpose. No energy gain from sleep possible now."
-      },
-      "observation": "Waited."
+      "observation": "Worked 1.5h on Graded assignment — 90% done, submit when finished: progress 0.95 -> 1.00. It's essentially done."
     }
   ]
 }

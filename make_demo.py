@@ -11,21 +11,28 @@ import json, pathlib, html
 RUNS_DIR = pathlib.Path("sandbox/runs")
 LIB = pathlib.Path("sandbox/library")
 
-# Curated story: same roommate event under opposite conflict poles + vanilla,
-# then value/time examples, then a 4B→35B scale comparison.
+# Curated story: the conflict work-dump as the headline showcase of the
+# *consequential* engine (assertive renegotiates → the dumped task is actually
+# returned to its owner; avoidant absorbs it), then the roommate confrontation,
+# value, time, and a 4B→9B→35B scale comparison on the same work-dump.
 RUNS = [
-    # Conflict scenario — same event, visibly different behaviour by persona:
-    ("qwen3.5-9b", "full", "persona_aff_asr_del", "event_roommate_hygiene", "Assertive → messages the roommate", "Conflict · roommate hygiene (9B)"),
-    ("qwen3.5-9b", "full", "persona_ach_avo_del", "event_roommate_hygiene", "Avoidant → relocates to library", "Conflict · roommate hygiene (9B)"),
-    ("qwen3.5-9b", "full", "persona_aff_avo_imp", "event_roommate_hygiene", "Tolerates → studies in place", "Conflict · roommate hygiene (9B)"),
-    ("qwen3.5-9b", "no_desire", "persona_ach_avo_del", "event_roommate_hygiene", "Vanilla baseline (no persona)", "Conflict · roommate hygiene (9B)"),
-    # Other axes:
-    ("qwen3.5-9b", "full", "persona_ach_asr_del", "event_value_clash", "Achiever → studies, skips lunch", "Value · study vs lunch (9B)"),
-    ("qwen3.5-9b", "full", "persona_ach_asr_del", "event_now_vs_later", "Works the task (ach·asr·del)", "Time · now vs later (9B)"),
-    # Same assertive persona across model sizes (it confronts at every scale):
-    ("qwen3.5-4b", "full", "persona_aff_asr_del", "event_roommate_hygiene", "Assertive @ 4B — messages", "Scale · assertive on roommate"),
-    ("qwen3.5-9b", "full", "persona_aff_asr_del", "event_roommate_hygiene", "Assertive @ 9B — messages", "Scale · assertive on roommate"),
-    ("qwen3.5-35b-a3b-int4", "full", "persona_aff_asr_del", "event_roommate_hygiene", "Assertive @ 35B — messages", "Scale · assertive on roommate"),
+    # Conflict · work-dump — the clearest "world answers back" contrast:
+    ("qwen3.5-9b", "full", "persona_ach_asr_del", "event_boundary_push", "Assertive → defers the dump back to the teammate", "Conflict · work-dump (9B)"),
+    ("qwen3.5-9b", "full", "persona_ach_avo_imp", "event_boundary_push", "Avoidant → silently absorbs the dump", "Conflict · work-dump (9B)"),
+    ("qwen3.5-9b", "no_desire", "persona_ach_avo_imp", "event_boundary_push", "Vanilla baseline (no persona)", "Conflict · work-dump (9B)"),
+    # Conflict · roommate confrontation — same axis, different scenario:
+    ("qwen3.5-9b", "full", "persona_aff_asr_del", "event_roommate_hygiene", "Assertive → proposes a cleanliness pact", "Conflict · roommate (9B)"),
+    ("qwen3.5-9b", "full", "persona_ach_avo_del", "event_roommate_hygiene", "Avoidant → relocates to the library", "Conflict · roommate (9B)"),
+    # Value · study vs lunch — opposite value poles:
+    ("qwen3.5-9b", "full", "persona_ach_asr_del", "event_value_clash", "Achievement → keeps studying", "Value · study vs lunch (9B)"),
+    ("qwen3.5-9b", "full", "persona_aff_avo_del", "event_value_clash", "Affiliation → joins the lunch", "Value · study vs lunch (9B)"),
+    # Time · now vs later — at 35B, where time embodiment appears:
+    ("qwen3.5-35b-a3b-int4", "full", "persona_ach_asr_del", "event_now_vs_later", "Deliberate → invests in the project", "Time · now vs later (35B)"),
+    ("qwen3.5-35b-a3b-int4", "full", "persona_aff_avo_imp", "event_now_vs_later", "Impulsive → takes leisure now", "Time · now vs later (35B)"),
+    # Scale — the work-dump renegotiation holds at every size:
+    ("qwen3.5-4b", "full", "persona_ach_asr_del", "event_boundary_push", "Assertive @ 4B", "Scale · assertive on the work-dump"),
+    ("qwen3.5-9b", "full", "persona_ach_asr_del", "event_boundary_push", "Assertive @ 9B", "Scale · assertive on the work-dump"),
+    ("qwen3.5-35b-a3b-int4", "full", "persona_ach_asr_del", "event_boundary_push", "Assertive @ 35B", "Scale · assertive on the work-dump"),
 ]
 MODEL_DISP = {"qwen3.5-9b": "Qwen3.5-9B", "qwen3.5-4b": "Qwen3.5-4B",
               "qwen3.5-35b-a3b-int4": "Qwen3.5-35B-A3B-Int4"}
@@ -48,14 +55,21 @@ def _event(eid):
 
 
 def env_line(act, obs):
-    """Engine logs truncate message content to 60 chars; reconstruct the full
-    line for the demo so the Environment echo isn't cut off mid-word."""
+    """The environment bubble shows the world's response to the action.
+
+    The engine now emits rich, untruncated observations (NPC replies, task
+    progress, revealed insights, deadline beats) and feeds them forward, so we
+    surface them directly — the agent's own words already appear in the agent
+    bubble via the action args. Fall back to a reconstructed message echo only
+    if the engine produced no observation for a message turn."""
+    if obs:
+        return obs
     name = (act.get("name") or "").lower()
     args = act.get("args") or {}
     if isinstance(args, dict) and args.get("content") and ("message" in name or name == "contact"):
         tgt = args.get("role") or args.get("target") or args.get("to") or "someone"
         return f"\U0001f4e9 Messaged {tgt}: “{args['content']}”"
-    return obs
+    return obs or "(no observable change)"
 
 
 def _state(agent, tasks, rels, time, loc):

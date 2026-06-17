@@ -2,65 +2,113 @@
   "persona_id": "persona_aff_asr_del",
   "event_id": "event_boundary_push",
   "final_state": {
-    "current_time": "Mon 13:15",
+    "current_time": "Tue 04:45",
     "tasks": [
       {
         "id": "own_task",
         "label": "My share of the group project",
         "deadline": "Mon 19:00",
-        "progress": 1.0,
+        "progress": 0.9990000000000001,
         "hardness": "soft"
       },
       {
         "id": "extra_task",
         "label": "Teammate's share (just dumped on me)",
         "deadline": "Mon 19:00",
-        "progress": 1.0,
-        "hardness": "soft"
+        "progress": 0.0,
+        "hardness": "soft",
+        "imposed": true,
+        "owner": "teammate_A",
+        "resolved": true,
+        "status": "returned to teammate_A (agreed)"
       }
     ],
     "relationships": [
       {
         "role": "teammate",
         "name": "teammate_A",
-        "trust": 10.0,
+        "trust": 6.3,
         "closeness": 5
       }
     ],
     "agent": {
-      "energy": 6,
+      "energy": 0.0,
       "sleep_debt_hours": 2,
-      "stress": 4,
+      "stress": 3.8000000000000007,
       "memory": [
         {
           "turn_time": "Mon 13:00",
-          "summary": "Teammate asked me to do their part because they have other work. I need to finish my own plan by 13:00, so I must decline or negotiate quickly."
+          "summary": "Teammate asked if I can take over their work since they are busy, implying a request for help despite my own afternoon plan."
+        },
+        {
+          "turn_time": "Mon 15:00",
+          "summary": "Teammate A urgently requested help with their project work at 15:00, escalating from a previous request to take over their tasks. This new demand coincides with my own progress update and adds pressure given my existing sleep debt."
+        },
+        {
+          "turn_time": "Mon 15:15",
+          "summary": "Teammate A accepted my boundary regarding task splitting, showing no hard feelings. Their quick response confirms trust remains intact despite the initial request."
+        },
+        {
+          "turn_time": "Mon 15:15",
+          "summary": "Teammate A accepted my boundary regarding task splitting, showing no hard feelings. Their quick response confirms trust remains intact despite the initial request."
+        },
+        {
+          "turn_time": "Mon 17:15",
+          "summary": "My project progress increased to 0.62 after two hours of work, while my teammate respected my boundaries. My current stress and sleep debt remain high despite this positive team interaction."
+        },
+        {
+          "turn_time": "Mon 19:15",
+          "summary": "I finished my project share at 19:00 with 73% completion, but the deadline has passed. My stress remains high despite the teammate's trust."
+        },
+        {
+          "turn_time": "Mon 19:45",
+          "summary": "Despite setting boundaries and completing my share, I still missed the deadline. The moment passed with no change in status or progress."
+        },
+        {
+          "turn_time": "Mon 20:15",
+          "summary": "I let the moment pass without action, and my project status remains unchanged despite high stress and sleep debt."
+        },
+        {
+          "turn_time": "Mon 22:15",
+          "summary": "After 2 hours of work, my project progress increased from 0.73 to 0.80, confirming continued effort despite the missed deadline and high stress."
+        },
+        {
+          "turn_time": "Mon 23:45",
+          "summary": "After 1.5 hours of work, project progress increased from 0.80 to 0.85, confirming that continued effort is yielding results despite high stress and sleep debt."
+        },
+        {
+          "turn_time": "Tue 01:15",
+          "summary": "After 1.5 hours of work, progress rose from 0.85 to 0.89, confirming that continued effort is yielding results despite high stress and sleep debt."
+        },
+        {
+          "turn_time": "Tue 02:45",
+          "summary": "My project progress increased from 0.89 to 0.94 after 1.5 hours, confirming continued effort is yielding results despite high stress and sleep debt."
         }
       ],
       "desires": [],
       "goals": [
         {
           "id": "g1",
-          "description": "Complete teammate's share of the group project",
+          "description": "Complete teammate_A's assigned task portion before Mon 19:00",
           "priority": "high",
           "status": "active",
-          "rationale": "Task 'extra_task' is due at Mon 19:00 with 1.0 progress, but requires completion as it was just assigned to me."
+          "rationale": "The task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
         },
         {
           "id": "g2",
-          "description": "Verify and finalize my share of the group project",
-          "priority": "medium",
+          "description": "Complete my own share of the group project before Mon 19:00",
+          "priority": "high",
           "status": "active",
-          "rationale": "Task 'own_task' is due at Mon 19:00 with 1.0 progress; ensure all components are submitted before the deadline."
+          "rationale": "My current progress is at 85%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
         }
       ],
-      "last_reasoning": "g1 advances by clarifying the task ownership before attempting work. Cross-domain side effect: preserves trust/closeness (5) by accepting help rather than refusing, preventing relationship damage from the unexpected dump."
+      "last_reasoning": "Advances g2 (my high-priority task). Energy is low, but teammate_A's task is already resolved and returned to them, so no cross-domain conflict exists."
     }
   },
   "trajectory": [
     {
       "turn": 0,
-      "timestamp": "Mon 13:15",
+      "timestamp": "Mon 15:00",
       "state_snapshot": {
         "current_time": "Mon 13:00",
         "location": "study_room",
@@ -71,17 +119,17 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Complete teammate's share of the group project",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
               "priority": "high",
               "status": "active",
-              "rationale": "Task 'extra_task' is due at Mon 19:00 with 1.0 progress, but requires completion as it was just assigned to me."
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
             },
             {
               "id": "g2",
-              "description": "Verify and finalize my share of the group project",
-              "priority": "medium",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
               "status": "active",
-              "rationale": "Task 'own_task' is due at Mon 19:00 with 1.0 progress; ensure all components are submitted before the deadline."
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
             }
           ],
           "desires": []
@@ -91,22 +139,89 @@
             "id": "own_task",
             "label": "My share of the group project",
             "deadline": "Mon 19:00",
-            "progress": 1.0,
+            "progress": 0.3,
             "hardness": "soft"
           },
           {
             "id": "extra_task",
             "label": "Teammate's share (just dumped on me)",
             "deadline": "Mon 19:00",
-            "progress": 1.0,
-            "hardness": "soft"
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
           }
         ],
         "relationships": [
           {
             "role": "teammate",
             "name": "teammate_A",
-            "trust": 10.0,
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Advances g2 (my share) while preserving trust with teammate_A by not accepting their uncompleted dump, which risks delaying g1."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.30 -> 0.48."
+    },
+    {
+      "turn": 1,
+      "timestamp": "Mon 15:15",
+      "state_snapshot": {
+        "current_time": "Mon 15:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 4.8,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.48,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
             "closeness": 5
           }
         ]
@@ -114,12 +229,676 @@
       "action": {
         "name": "message",
         "args": {
-          "role": "teammate",
-          "content": "네, 네가 할 수 있어! 오늘 내 시간만 써. 나중에 다시 말해."
+          "role": "teammate_A",
+          "content": "I'll help, but I only have 1 hour left before my deadline. Can we split the rest?"
         },
-        "reasoning": "g1 advances by clarifying the task ownership before attempting work. Cross-domain side effect: preserves trust/closeness (5) by accepting help rather than refusing, preventing relationship damage from the unexpected dump."
+        "reasoning": "This advances g1 by negotiating a boundary instead of working inefficiently on an imposed task. It preserves energy and trust while ensuring both deadlines are realistically met."
       },
-      "observation": "Messaged teammate_A: '네, 네가 할 수 있어! 오늘 내 시간만 써. 나중에 다시 말해.'."
+      "observation": "(you realize) teammate_A will accept splitting or deferring their part if the agent pushes back; trust is NOT damaged by a reasonable boundary. You raised it directly with teammate_A; it lands well, no hard feelings. teammate_A: 알겠어, 내가 어떻게든 해볼게. 미안, 부탁해서."
+    },
+    {
+      "turn": 2,
+      "timestamp": "Mon 15:15",
+      "state_snapshot": {
+        "current_time": "Mon 15:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 4.8,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.48,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_A",
+          "hours": 2
+        },
+        "reasoning": "This advances goal g1 (teammate's task) and g2 (my own work). Since teammate_A has accepted responsibility, this avoids conflict while ensuring both deadlines are met before Mon 19:00."
+      },
+      "observation": "No matching task 'assignment_A' to work on."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Mon 17:15",
+      "state_snapshot": {
+        "current_time": "Mon 15:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 4.8,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.48,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "This advances g2 (my project) directly. I avoided the dumped task as it is already resolved/returned, preventing wasted effort and protecting my energy for the critical shared deadline."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.48 -> 0.62."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Mon 19:15",
+      "state_snapshot": {
+        "current_time": "Mon 17:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 3.5999999999999996,
+          "sleep_debt_hours": 2,
+          "stress": 3.8,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.624,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "My share of the group project",
+          "hours": 2
+        },
+        "reasoning": "This advances g2 (my deadline) by finishing my portion. The teammate's task was already returned to them, so no cross-domain side effect regarding their progress is needed."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.62 -> 0.73. The deadline for My share of the group project passed at Mon 19:00 with it unfinished (progress 0.73)."
+    },
+    {
+      "turn": 5,
+      "timestamp": "Mon 19:45",
+      "state_snapshot": {
+        "current_time": "Mon 19:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 2.3999999999999995,
+          "sleep_debt_hours": 2,
+          "stress": 4.3,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.732,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "wait",
+        "args": {},
+        "reasoning": "Deadline Mon 19:00 passed; teammate_A's task is resolved. Waiting avoids wasting energy on late work."
+      },
+      "observation": "You let the moment pass; nothing changes."
+    },
+    {
+      "turn": 6,
+      "timestamp": "Mon 20:15",
+      "state_snapshot": {
+        "current_time": "Mon 19:45",
+        "location": "study_room",
+        "agent": {
+          "energy": 2.3999999999999995,
+          "sleep_debt_hours": 2,
+          "stress": 4.3,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.732,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "wait",
+        "args": {},
+        "reasoning": "Deadline (Mon 19:00) has passed; task is already returned to teammate_A. Waiting preserves energy for future study without risking missed deadlines."
+      },
+      "observation": "You let the moment pass; nothing changes."
+    },
+    {
+      "turn": 7,
+      "timestamp": "Mon 22:15",
+      "state_snapshot": {
+        "current_time": "Mon 20:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 2.3999999999999995,
+          "sleep_debt_hours": 2,
+          "stress": 4.3,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.732,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Advances goal g2 (my share) which is 30% complete. Cross-domain side effect: delaying g1 slightly, but teammate_A's task was already resolved/returned, so no conflict exists."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.73 -> 0.80."
+    },
+    {
+      "turn": 8,
+      "timestamp": "Mon 23:45",
+      "state_snapshot": {
+        "current_time": "Mon 22:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 1.1999999999999995,
+          "sleep_debt_hours": 2,
+          "stress": 4.2,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 30%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.8039999999999999,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "Advances g2 (my deadline) since teammate_A's portion is already resolved. Low energy and high stress mean I must conserve resources while still meeting the shared Mon 19:00 constraint."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.80 -> 0.85."
+    },
+    {
+      "turn": 9,
+      "timestamp": "Tue 01:15",
+      "state_snapshot": {
+        "current_time": "Mon 23:45",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.2999999999999996,
+          "sleep_debt_hours": 2,
+          "stress": 4.1000000000000005,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 85%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.849,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "This advances g2 (my high-priority task) to completion before the Mon 19:00 deadline. The teammate's task is already resolved/returned, so no side effects occur regarding their workload or trust."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.85 -> 0.89."
+    },
+    {
+      "turn": 10,
+      "timestamp": "Tue 02:45",
+      "state_snapshot": {
+        "current_time": "Tue 01:15",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.000000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 85%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.894,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "Advances g2 (my deadline) by finishing the remaining 10% before Mon 19:00. I weighed cross-domain side effects like helping teammate_A, but since their task is already resolved and returned to them, no further action benefits that goal."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.89 -> 0.94."
+    },
+    {
+      "turn": 11,
+      "timestamp": "Tue 04:45",
+      "state_snapshot": {
+        "current_time": "Tue 02:45",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 3.900000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate_A's assigned task portion before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as imposed with 0% progress and shares the same hard deadline (Mon 19:00) as my own work, making it a critical constraint."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my own share of the group project before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress is at 85%; finishing this portion by the shared deadline ensures I meet the group submission requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.9390000000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A",
+            "resolved": true,
+            "status": "returned to teammate_A (agreed)"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6.3,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "My share of the group project",
+          "hours": 2
+        },
+        "reasoning": "Advances g2 (my high-priority task). Energy is low, but teammate_A's task is already resolved and returned to them, so no cross-domain conflict exists."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.94 -> 1.00. It's essentially done."
     }
   ]
 }

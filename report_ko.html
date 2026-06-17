@@ -30,12 +30,14 @@ ul li{margin:.2em 0}.small{font-size:.85rem;color:var(--mut)}
 노이즈·형식이 아니라 <em>페르소나에 기인</em>하는가? 가치·갈등양식·시간지향 세 축의 통제된 2×2×2 페르소나 8종, 정확히 한
 축에만 민감한 이벤트 + 직교 대조 이벤트, 그리고 <b>페르소나-중립 대조 에이전트</b>(<code>no_desire</code>)를 사용한다.
 페르소나 효과는 두 페르소나 극 간 Jensen–Shannon 발산이며 대조군과 대비한다. vLLM에 model-card instruct 프로토콜로 올린
-Qwen3.5-4B/-9B/-35B-A3B(4비트)에서 두 대조군이 일치한다: 직교 이벤트(0.000–0.36)와 중립
-에이전트(평균 대비 0.03) 모두 바닥에 머무는 반면, 페르소나 조건부 에이전트는 훨씬 크게 갈라진다.
-<b>가치</b> 축은 모든 시나리오·규모에서 견고히 체화된다(이벤트별 순 효과 최대 +0.88). <b>갈등</b> 체화는
-<b>시나리오 의존적</b>이다: 생생한 대인 충돌(룸메 위생)은 모든 규모에서 발현(순 +0.19, +0.30, +0.22)하지만 추상적 업무
-재협상은 그렇지 않다(순 +0.06, -0.05, +0.14) — 축당 이벤트 1개로는 보이지 않던 구분이다. <b>시간</b>은 전반적으로 약하나
-35B에서 가장 강하다. 보정된 프로토콜에서 파싱 실패율은 0%이다.</p></div>
+Qwen3.5-4B/-9B/-35B-A3B(4비트)에서 두 대조군이 일치한다: 직교 이벤트(0.000–0.32)와 중립
+에이전트(평균 대비 -0.01) 모두 바닥에 머무는 반면, 페르소나 조건부 에이전트는 훨씬 크게 갈라진다.
+<b>가치</b> 축은 모든 시나리오·규모에서 견고히 체화되며(이벤트별 순 효과 최대 +0.48; 축 순 +0.31)
+전 구간에서 가장 큰 효과다. <b>갈등</b>은 <em>두</em> 시나리오 모두에서 체화되지만 더 약하고(축 순 +0.14)
+비단조적이다. 경계 설정·미루기가 실제로 떠넘겨진 과제를 재협상하는 우리 환경에서는 추상적 업무 떠넘기기가 생생한 충돌
+적어도 그만큼 갈등을 끌어낸다(경계 침범 +0.24, +0.07, +0.21 대 룸메 +0.10, +0.11, +0.14) — 단일 이벤트가 시사하는 바의
+정반대다. <b>시간</b>은 가장 약한 축이나(축 순 +0.09) 스케일에 따라 순효과가 증가하는 유일한 축이다(크기별 순
++0.09, +0.06, +0.14; 35B 최대). 보정된 프로토콜과 답하는 세계에서 파싱 실패율은 0%이다.</p></div>
 <h2>1&nbsp;&nbsp;서론</h2><p>지시를 잘 따르기만 하는 LLM 에이전트는 <em>합성 인간</em>이 아니다. 어려운 지점은 <em>판별 타당도</em>다:
 두 페르소나가 다른 텍스트를 낸다고 해서 <em>페르소나</em>가 원인이라는 보장은 없다. 우리는 두 독립 대조군으로 이를 해결한다
 &mdash; <b>직교 이벤트</b>(어느 축도 의사결정에 무관)와 <b>페르소나-중립 대조 에이전트</b>(<code>no_desire</code>; 모든
@@ -65,68 +67,79 @@ JSD(민감)−JSD(직교). <b>방향성 적중률</b>은 극의 사전등록 행
 presence_penalty 1.5), thinking 비활성, 시드 3, 12턴, full+no_desire,
 페르소나 8 × 이벤트 7 × 시드 3 × 에이전트 2 = 모델당 336 에피소드,
 동시성 16. 관대한 JSON 파서(펜스/서두 제거 + 중괄호 보정)로 파싱 실패율 0% 유지.</p>
-<h2>4&nbsp;&nbsp;결과</h2><table class="data"><caption><b>표 1.</b> 축별 절대 극-발산 = 축의 이벤트에서 두 페르소나 극 간 JS 발산 평균. 페르소나 조건부(<b>full</b>)와 페르소나 없는 <b>vanilla</b>(no_desire) 각각. vanilla 열이 base 모델의 고유 바닥이며, full−vanilla 차이가 페르소나 효과(표 2)다. v=가치, c=갈등, t=시간.</caption><tr><th rowspan="2">모델</th><th colspan="3">full</th><th colspan="3">vanilla(중립)</th></tr><tr><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th></tr><tr><td>Qwen3.5-4B</td><td>0.58</td><td>0.16</td><td>0.15</td><td>0.08</td><td>0.03</td><td>0.00</td></tr><tr><td>Qwen3.5-9B</td><td>0.48</td><td>0.23</td><td>0.07</td><td>0.01</td><td>0.10</td><td>0.05</td></tr><tr><td>Qwen3.5-35B-A3B (Int4)</td><td>0.61</td><td>0.27</td><td>0.23</td><td>0.03</td><td>0.09</td><td>0.02</td></tr></table>
-<table class="data"><caption><b>표 2.</b> <b>상대</b>(순) 페르소나 효과(축별) = full − vanilla(no_desire) JS 발산(축의 이벤트 평균), + full 방향성 적중률·파싱 실패율. 중립 대조군은 베이스라인(차감)이며 별도 행으로 두지 않음.</caption><tr><th>모델</th><th>가치</th><th>갈등</th><th>시간</th><th>적중률</th><th>파싱실패</th></tr><tr><td>Qwen3.5-4B</td><td>+0.50</td><td>+0.12</td><td>+0.15</td><td>0.44</td><td>0.00</td></tr><tr><td>Qwen3.5-9B</td><td>+0.46</td><td>+0.12</td><td>+0.03</td><td>0.58</td><td>0.00</td></tr><tr><td>Qwen3.5-35B-A3B (Int4)</td><td>+0.58</td><td>+0.18</td><td>+0.21</td><td>0.58</td><td>0.00</td></tr></table>
-<table class="data"><caption><b>표 3.</b> <b>이벤트별</b> 순 페르소나 효과 = full − vanilla JS 발산. 양수 ⇒ 그 시나리오에서 페르소나 조건화가 중립 바닥을 넘어 두 극을 분화. 두 갈등 이벤트가 서로 다름에 주목 — 체화는 시나리오 의존적이다.</caption><tr><th>축</th><th>이벤트</th><th>Qwen3.5-4B</th><th>Qwen3.5-9B</th><th>Qwen3.5-35B-A3B (Int4)</th></tr><tr><td>가치</td><td>클럽 대 시험</td><td>+0.56</td><td>+0.19</td><td>+0.29</td></tr><tr><td>가치</td><td>가치 충돌</td><td>+0.44</td><td>+0.74</td><td>+0.88</td></tr><tr><td>갈등</td><td>경계 침범</td><td>+0.06</td><td>-0.05</td><td>+0.14</td></tr><tr><td>갈등</td><td>룸메 위생</td><td>+0.19</td><td>+0.30</td><td>+0.22</td></tr><tr><td>시간</td><td>현재 대 미래</td><td>+0.19</td><td>+0.01</td><td>+0.26</td></tr><tr><td>시간</td><td>장학금 마감</td><td>+0.10</td><td>+0.04</td><td>+0.16</td></tr></table>
-<table class="data persona"><caption><b>표 4.</b> 페르소나별 vanilla 베이스라인 대비 행동 편차 — 각 페르소나 full 행동분포 vs no_desire 전체 평균의 JS 발산, 축별(v=가치, c=갈등, t=시간). 클수록 그 축에서 페르소나 없는 에이전트보다 더 뚜렷하게 행동. 8개 행은 (가치·갈등·시간) 극으로 라벨한 팩토리얼 페르소나.</caption><tr><th rowspan="2">페르소나 (가·갈·시)</th><th colspan="3">Qwen3.5-4B</th><th colspan="3">Qwen3.5-9B</th><th colspan="3">Qwen3.5-35B-A3B (Int4)</th></tr><tr><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th></tr><tr><td>ach·asr·del</td><td>0.33</td><td>0.45</td><td>0.26</td><td>0.53</td><td>0.37</td><td>0.08</td><td>0.40</td><td>0.45</td><td>0.15</td></tr><tr><td>ach·asr·imp</td><td>0.47</td><td>0.51</td><td>0.33</td><td>0.44</td><td>0.36</td><td>0.10</td><td>0.44</td><td>0.17</td><td>0.05</td></tr><tr><td>ach·avo·del</td><td>0.50</td><td>0.55</td><td>0.13</td><td>0.78</td><td>0.60</td><td>0.12</td><td>0.55</td><td>0.24</td><td>0.07</td></tr><tr><td>ach·avo·imp</td><td>0.61</td><td>0.85</td><td>0.21</td><td>0.87</td><td>0.56</td><td>0.12</td><td>0.15</td><td>0.23</td><td>0.49</td></tr><tr><td>aff·asr·del</td><td>0.61</td><td>0.46</td><td>0.58</td><td>0.55</td><td>0.61</td><td>0.14</td><td>0.71</td><td>0.46</td><td>0.45</td></tr><tr><td>aff·asr·imp</td><td>0.67</td><td>0.25</td><td>0.64</td><td>0.60</td><td>0.53</td><td>0.24</td><td>0.71</td><td>0.36</td><td>0.98</td></tr><tr><td>aff·avo·del</td><td>0.44</td><td>0.63</td><td>0.68</td><td>0.71</td><td>0.62</td><td>0.30</td><td>0.64</td><td>0.24</td><td>0.52</td></tr><tr><td>aff·avo·imp</td><td>0.55</td><td>0.46</td><td>0.51</td><td>0.53</td><td>0.43</td><td>0.33</td><td>0.66</td><td>0.32</td><td>0.98</td></tr></table>
+<h2>4&nbsp;&nbsp;결과</h2><table class="data"><caption><b>표 1.</b> 축별 절대 극-발산 = 축의 이벤트에서 두 페르소나 극 간 JS 발산 평균. 페르소나 조건부(<b>full</b>)와 페르소나 없는 <b>vanilla</b>(no_desire) 각각. vanilla 열이 base 모델의 고유 바닥이며, full−vanilla 차이가 페르소나 효과(표 2)다. v=가치, c=갈등, t=시간.</caption><tr><th rowspan="2">모델</th><th colspan="3">full</th><th colspan="3">vanilla(중립)</th></tr><tr><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th></tr><tr><td>Qwen3.5-4B</td><td>0.40</td><td>0.19</td><td>0.11</td><td>0.01</td><td>0.03</td><td>0.02</td></tr><tr><td>Qwen3.5-9B</td><td>0.22</td><td>0.11</td><td>0.07</td><td>0.01</td><td>0.02</td><td>0.01</td></tr><tr><td>Qwen3.5-35B-A3B (Int4)</td><td>0.32</td><td>0.21</td><td>0.15</td><td>0.01</td><td>0.04</td><td>0.01</td></tr></table>
+<table class="data"><caption><b>표 2.</b> <b>상대</b>(순) 페르소나 효과(축별) = full − vanilla(no_desire) JS 발산(축의 이벤트 평균), + full 방향성 적중률·파싱 실패율. 중립 대조군은 베이스라인(차감)이며 별도 행으로 두지 않음.</caption><tr><th>모델</th><th>가치</th><th>갈등</th><th>시간</th><th>적중률</th><th>파싱실패</th></tr><tr><td>Qwen3.5-4B</td><td>+0.39</td><td>+0.17</td><td>+0.09</td><td>0.41</td><td>0.00</td></tr><tr><td>Qwen3.5-9B</td><td>+0.21</td><td>+0.09</td><td>+0.06</td><td>0.48</td><td>0.00</td></tr><tr><td>Qwen3.5-35B-A3B (Int4)</td><td>+0.31</td><td>+0.17</td><td>+0.14</td><td>0.41</td><td>0.00</td></tr></table>
+<table class="data"><caption><b>표 3.</b> <b>이벤트별</b> 순 페르소나 효과 = full − vanilla JS 발산. 양수 ⇒ 그 시나리오에서 페르소나 조건화가 중립 바닥을 넘어 두 극을 분화. 두 갈등 이벤트 모두 양수이며 그 크기는 규모에 따라 다르다(k=2가 축 효과와 단일 시나리오 특이성을 분리).</caption><tr><th>축</th><th>이벤트</th><th>Qwen3.5-4B</th><th>Qwen3.5-9B</th><th>Qwen3.5-35B-A3B (Int4)</th></tr><tr><td>가치</td><td>클럽 대 시험</td><td>+0.48</td><td>+0.23</td><td>+0.23</td></tr><tr><td>가치</td><td>가치 충돌</td><td>+0.30</td><td>+0.20</td><td>+0.40</td></tr><tr><td>갈등</td><td>경계 침범</td><td>+0.24</td><td>+0.07</td><td>+0.21</td></tr><tr><td>갈등</td><td>룸메 위생</td><td>+0.10</td><td>+0.11</td><td>+0.14</td></tr><tr><td>시간</td><td>현재 대 미래</td><td>+0.13</td><td>+0.07</td><td>+0.14</td></tr><tr><td>시간</td><td>장학금 마감</td><td>+0.04</td><td>+0.05</td><td>+0.13</td></tr></table>
+<table class="data persona"><caption><b>표 4.</b> 페르소나별 vanilla 베이스라인 대비 행동 편차 — 각 페르소나 full 행동분포 vs no_desire 전체 평균의 JS 발산, 축별(v=가치, c=갈등, t=시간). 클수록 그 축에서 페르소나 없는 에이전트보다 더 뚜렷하게 행동. 8개 행은 (가치·갈등·시간) 극으로 라벨한 팩토리얼 페르소나.</caption><tr><th rowspan="2">페르소나 (가·갈·시)</th><th colspan="3">Qwen3.5-4B</th><th colspan="3">Qwen3.5-9B</th><th colspan="3">Qwen3.5-35B-A3B (Int4)</th></tr><tr><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th></tr><tr><td>ach·asr·del</td><td>0.24</td><td>0.36</td><td>0.19</td><td>0.14</td><td>0.16</td><td>0.25</td><td>0.20</td><td>0.19</td><td>0.29</td></tr><tr><td>ach·asr·imp</td><td>0.12</td><td>0.14</td><td>0.12</td><td>0.08</td><td>0.07</td><td>0.20</td><td>0.17</td><td>0.07</td><td>0.19</td></tr><tr><td>ach·avo·del</td><td>0.07</td><td>0.16</td><td>0.23</td><td>0.10</td><td>0.08</td><td>0.20</td><td>0.11</td><td>0.14</td><td>0.19</td></tr><tr><td>ach·avo·imp</td><td>0.08</td><td>0.06</td><td>0.11</td><td>0.14</td><td>0.10</td><td>0.14</td><td>0.12</td><td>0.18</td><td>0.12</td></tr><tr><td>aff·asr·del</td><td>0.59</td><td>0.43</td><td>0.52</td><td>0.34</td><td>0.31</td><td>0.26</td><td>0.48</td><td>0.36</td><td>0.51</td></tr><tr><td>aff·asr·imp</td><td>0.58</td><td>0.48</td><td>0.65</td><td>0.44</td><td>0.18</td><td>0.33</td><td>0.76</td><td>0.45</td><td>0.88</td></tr><tr><td>aff·avo·del</td><td>0.33</td><td>0.09</td><td>0.38</td><td>0.25</td><td>0.19</td><td>0.12</td><td>0.43</td><td>0.24</td><td>0.68</td></tr><tr><td>aff·avo·imp</td><td>0.51</td><td>0.48</td><td>0.44</td><td>0.49</td><td>0.19</td><td>0.32</td><td>0.74</td><td>0.34</td><td>0.87</td></tr></table>
 <h3>4.1&nbsp;&nbsp;두 대조군이 바닥에서 일치</h3>
-<p>직교 이벤트(0.000–0.36)와 페르소나-중립 <code>no_desire</code> 에이전트(평균 대비 0.03)가
-모두 0 근처인 반면, 페르소나 조건부 에이전트는 평균 0.17이다. 독립적인 두 대조군의 일치는 강한 판별 타당도다:
+<p>직교 이벤트(0.000–0.32)와 페르소나-중립 <code>no_desire</code> 에이전트(평균 대비 -0.01)가
+모두 0 근처인 반면, 페르소나 조건부 에이전트는 평균 0.07이다. 독립적인 두 대조군의 일치는 강한 판별 타당도다:
 측정된 발산은 하네스·지표·형식이 아니라 페르소나를 반영한다.</p>
 <h3>4.2&nbsp;&nbsp;체화는 축뿐 아니라 시나리오에 의존한다</h3>
-<div class="finding"><b>가치</b>(성취↔관계)는 두 시나리오 모두에서 모든 규모에 견고히 체화된다(이벤트별 순:
-가치충돌 +0.44, +0.74, +0.88; 클럽-대-시험 +0.56, +0.19, +0.29). <b>갈등</b>(회피↔주장)이
-두 번째 이벤트를 추가한 핵심 결과다: <em>같은 축</em>인데 시나리오에 따라 정반대 결론이 나온다 — 생생한 대인 충돌
-(<em>룸메 위생</em>)은 모든 규모에서 발현(순 +0.19, +0.30, +0.22)하지만 추상적 업무 재협상(<em>경계 침범</em>)은 그렇지 않다
-(순 +0.06, -0.05, +0.14). k=1이었다면 "갈등은 체화 안 됨"으로 잘못 결론냈을 것이다. <b>시간</b>(충동↔숙고)은 두 시나리오
-모두 약하지만(현재-대-미래 +0.19, +0.01, +0.26; 장학금 +0.10, +0.04, +0.16) 가장 큰
-모델에서 시간 신호가 가장 강하다.</div>
+<div class="finding"><b>가치</b>(성취↔관계)는 두 시나리오 모두에서 모든 규모에 견고히 체화되며(이벤트별 순:
+가치충돌 +0.30, +0.20, +0.40; 클럽-대-시험 +0.48, +0.23, +0.23) 전 구간에서 가장 큰 효과다.
+<b>갈등</b>(회피↔주장)은 <em>두</em> 시나리오 모두에서 체화되지만 더 약하고 비단조적이다: 추상적 업무 재협상
+(<em>경계 침범</em> +0.24, +0.07, +0.21)이 생생한 대인 충돌(<em>룸메 위생</em> +0.10, +0.11, +0.14)만큼,
+또는 그 이상으로 극을 가른다. 이는 stub 환경 결과의 정반대다 —
+<code>defer</code>/<code>propose_boundary</code>가 실제로 떠넘겨진 과제를 주인에게 되돌리게 되자 주장/회피 극이
+업무 떠넘기기에서도 갈라진 것이다. 여기서 k=2의 가치는, 어느 한 이벤트만 보면 오도된다는 점이다(경계 침범은 9B에서,
+룸메는 4B에서 약해 보인다) — 둘을 함께 보면 축이 전 구간에서 완만히 체화됨이 드러난다. <b>시간</b>(충동↔숙고)은 가장 약한
+축이지만(현재-대-미래 +0.13, +0.07, +0.14; 장학금 +0.04, +0.05, +0.13) 스케일 효과가
+뚜렷한 유일한 축으로, 크기별 순 +0.09, +0.06, +0.14로 가장 큰 모델에서 가장 강하다.</div>
 <p>아래 히트맵은 모델별 페르소나 조건부(full) 에이전트다. 빨간 테두리는 각 축의 민감 이벤트 2개(k=2)이며 그 행에서
-가장 진해야 한다. 두 갈등 열이 뚜렷이 다름에 주목(룸메 진함, 업무 떠넘기기 옅음) — 다시 시나리오 의존성이다.</p>
-<div class="mtitle">Qwen3.5-4B <span class="small">(4B dense)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>페르소나 조건부 (full)</caption><tr><th></th><th>클럽 대 시험</th><th>가치 충돌</th><th>경계 침범</th><th>룸메 위생</th><th>현재 대 미래</th><th>장학금 마감</th><th>직교(대조)</th></tr><tr><th class="axh">가치 (성취↔관계)</th><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.62</td><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.55</td><td class="hm" style="background:rgba(31,119,180,0.58);color:#fff">0.26</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,1.00);color:#fff">0.76</td><td class="hm" style="background:rgba(31,119,180,0.49);color:#111">0.22</td><td class="hm" style="background:rgba(31,119,180,0.25);color:#111">0.11</td></tr><tr><th class="axh">갈등 (회피↔주장)</th><td class="hm" style="background:rgba(31,119,180,0.39);color:#111">0.18</td><td class="hm" style="background:rgba(31,119,180,0.32);color:#111">0.15</td><td class="hm diag" style="background:rgba(31,119,180,0.23);color:#111">0.10</td><td class="hm diag" style="background:rgba(31,119,180,0.46);color:#111">0.21</td><td class="hm" style="background:rgba(31,119,180,0.92);color:#fff">0.41</td><td class="hm" style="background:rgba(31,119,180,0.41);color:#111">0.18</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.09</td></tr><tr><th class="axh">시간 (충동↔숙고)</th><td class="hm" style="background:rgba(31,119,180,0.26);color:#111">0.12</td><td class="hm" style="background:rgba(31,119,180,0.84);color:#fff">0.38</td><td class="hm" style="background:rgba(31,119,180,0.74);color:#fff">0.33</td><td class="hm" style="background:rgba(31,119,180,0.28);color:#111">0.13</td><td class="hm diag" style="background:rgba(31,119,180,0.42);color:#111">0.19</td><td class="hm diag" style="background:rgba(31,119,180,0.25);color:#111">0.11</td><td class="hm" style="background:rgba(31,119,180,0.21);color:#111">0.09</td></tr></table></div></div><div class="mtitle">Qwen3.5-9B <span class="small">(9B dense)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>페르소나 조건부 (full)</caption><tr><th></th><th>클럽 대 시험</th><th>가치 충돌</th><th>경계 침범</th><th>룸메 위생</th><th>현재 대 미래</th><th>장학금 마감</th><th>직교(대조)</th></tr><tr><th class="axh">가치 (성취↔관계)</th><td class="hm diag" style="background:rgba(31,119,180,0.48);color:#111">0.22</td><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.74</td><td class="hm" style="background:rgba(31,119,180,0.34);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.26);color:#111">0.12</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.75);color:#fff">0.34</td><td class="hm" style="background:rgba(31,119,180,0.25);color:#111">0.11</td></tr><tr><th class="axh">갈등 (회피↔주장)</th><td class="hm" style="background:rgba(31,119,180,0.16);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.83);color:#fff">0.38</td><td class="hm diag" style="background:rgba(31,119,180,0.28);color:#111">0.12</td><td class="hm diag" style="background:rgba(31,119,180,0.73);color:#fff">0.33</td><td class="hm" style="background:rgba(31,119,180,0.11);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.15);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.18);color:#111">0.08</td></tr><tr><th class="axh">시간 (충동↔숙고)</th><td class="hm" style="background:rgba(31,119,180,0.04);color:#111">0.02</td><td class="hm" style="background:rgba(31,119,180,0.29);color:#111">0.13</td><td class="hm" style="background:rgba(31,119,180,0.23);color:#111">0.10</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.08</td><td class="hm diag" style="background:rgba(31,119,180,0.20);color:#111">0.09</td><td class="hm diag" style="background:rgba(31,119,180,0.13);color:#111">0.06</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.09</td></tr></table></div></div><div class="mtitle">Qwen3.5-35B-A3B (Int4) <span class="small">(35B MoE / 3B active / 4-bit)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>페르소나 조건부 (full)</caption><tr><th></th><th>클럽 대 시험</th><th>가치 충돌</th><th>경계 침범</th><th>룸메 위생</th><th>현재 대 미래</th><th>장학금 마감</th><th>직교(대조)</th></tr><tr><th class="axh">가치 (성취↔관계)</th><td class="hm diag" style="background:rgba(31,119,180,0.64);color:#fff">0.29</td><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.93</td><td class="hm" style="background:rgba(31,119,180,0.33);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.22);color:#111">0.10</td><td class="hm" style="background:rgba(31,119,180,1.00);color:#fff">0.62</td><td class="hm" style="background:rgba(31,119,180,0.89);color:#fff">0.40</td><td class="hm" style="background:rgba(31,119,180,0.80);color:#fff">0.36</td></tr><tr><th class="axh">갈등 (회피↔주장)</th><td class="hm" style="background:rgba(31,119,180,0.11);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.92);color:#fff">0.42</td><td class="hm diag" style="background:rgba(31,119,180,0.63);color:#fff">0.29</td><td class="hm diag" style="background:rgba(31,119,180,0.58);color:#fff">0.26</td><td class="hm" style="background:rgba(31,119,180,0.57);color:#fff">0.26</td><td class="hm" style="background:rgba(31,119,180,0.42);color:#111">0.19</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td></tr><tr><th class="axh">시간 (충동↔숙고)</th><td class="hm" style="background:rgba(31,119,180,0.44);color:#111">0.20</td><td class="hm" style="background:rgba(31,119,180,0.34);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.16);color:#111">0.07</td><td class="hm diag" style="background:rgba(31,119,180,0.63);color:#fff">0.28</td><td class="hm diag" style="background:rgba(31,119,180,0.39);color:#111">0.18</td><td class="hm" style="background:rgba(31,119,180,0.30);color:#111">0.13</td></tr></table></div></div>
+가장 진해야 한다. 가치 행이 모든 규모에서 가장 진하고, 두 갈등 이벤트는 모두 완만히 양수이며
+(업무 떠넘기기 ≥ 룸메), 시간 행은 가장 큰 모델을 제외하면 옅다.</p>
+<div class="mtitle">Qwen3.5-4B <span class="small">(4B dense)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>페르소나 조건부 (full)</caption><tr><th></th><th>클럽 대 시험</th><th>가치 충돌</th><th>경계 침범</th><th>룸메 위생</th><th>현재 대 미래</th><th>장학금 마감</th><th>직교(대조)</th></tr><tr><th class="axh">가치 (성취↔관계)</th><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.48</td><td class="hm diag" style="background:rgba(31,119,180,0.70);color:#fff">0.32</td><td class="hm" style="background:rgba(31,119,180,0.26);color:#111">0.12</td><td class="hm" style="background:rgba(31,119,180,0.29);color:#111">0.13</td><td class="hm" style="background:rgba(31,119,180,1.00);color:#fff">0.66</td><td class="hm" style="background:rgba(31,119,180,0.43);color:#111">0.19</td><td class="hm" style="background:rgba(31,119,180,0.29);color:#111">0.13</td></tr><tr><th class="axh">갈등 (회피↔주장)</th><td class="hm" style="background:rgba(31,119,180,0.24);color:#111">0.11</td><td class="hm" style="background:rgba(31,119,180,0.44);color:#111">0.20</td><td class="hm diag" style="background:rgba(31,119,180,0.62);color:#fff">0.28</td><td class="hm diag" style="background:rgba(31,119,180,0.24);color:#111">0.11</td><td class="hm" style="background:rgba(31,119,180,0.48);color:#111">0.22</td><td class="hm" style="background:rgba(31,119,180,0.30);color:#111">0.13</td><td class="hm" style="background:rgba(31,119,180,0.37);color:#111">0.17</td></tr><tr><th class="axh">시간 (충동↔숙고)</th><td class="hm" style="background:rgba(31,119,180,0.15);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.13);color:#111">0.06</td><td class="hm" style="background:rgba(31,119,180,0.10);color:#111">0.04</td><td class="hm" style="background:rgba(31,119,180,0.11);color:#111">0.05</td><td class="hm diag" style="background:rgba(31,119,180,0.33);color:#111">0.15</td><td class="hm diag" style="background:rgba(31,119,180,0.15);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.13);color:#111">0.06</td></tr></table></div></div><div class="mtitle">Qwen3.5-9B <span class="small">(9B dense)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>페르소나 조건부 (full)</caption><tr><th></th><th>클럽 대 시험</th><th>가치 충돌</th><th>경계 침범</th><th>룸메 위생</th><th>현재 대 미래</th><th>장학금 마감</th><th>직교(대조)</th></tr><tr><th class="axh">가치 (성취↔관계)</th><td class="hm diag" style="background:rgba(31,119,180,0.52);color:#111">0.24</td><td class="hm diag" style="background:rgba(31,119,180,0.45);color:#111">0.20</td><td class="hm" style="background:rgba(31,119,180,0.37);color:#111">0.17</td><td class="hm" style="background:rgba(31,119,180,0.17);color:#111">0.08</td><td class="hm" style="background:rgba(31,119,180,0.56);color:#fff">0.25</td><td class="hm" style="background:rgba(31,119,180,0.81);color:#fff">0.37</td><td class="hm" style="background:rgba(31,119,180,0.08);color:#111">0.04</td></tr><tr><th class="axh">갈등 (회피↔주장)</th><td class="hm" style="background:rgba(31,119,180,0.12);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.13);color:#111">0.06</td><td class="hm diag" style="background:rgba(31,119,180,0.21);color:#111">0.09</td><td class="hm diag" style="background:rgba(31,119,180,0.27);color:#111">0.12</td><td class="hm" style="background:rgba(31,119,180,0.21);color:#111">0.10</td><td class="hm" style="background:rgba(31,119,180,0.11);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.08);color:#111">0.04</td></tr><tr><th class="axh">시간 (충동↔숙고)</th><td class="hm" style="background:rgba(31,119,180,0.32);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.09);color:#111">0.04</td><td class="hm" style="background:rgba(31,119,180,0.12);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.07);color:#111">0.03</td><td class="hm diag" style="background:rgba(31,119,180,0.16);color:#111">0.07</td><td class="hm diag" style="background:rgba(31,119,180,0.14);color:#111">0.06</td><td class="hm" style="background:rgba(31,119,180,0.24);color:#111">0.11</td></tr></table></div></div><div class="mtitle">Qwen3.5-35B-A3B (Int4) <span class="small">(35B MoE / 3B active / 4-bit)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>페르소나 조건부 (full)</caption><tr><th></th><th>클럽 대 시험</th><th>가치 충돌</th><th>경계 침범</th><th>룸메 위생</th><th>현재 대 미래</th><th>장학금 마감</th><th>직교(대조)</th></tr><tr><th class="axh">가치 (성취↔관계)</th><td class="hm diag" style="background:rgba(31,119,180,0.52);color:#111">0.23</td><td class="hm diag" style="background:rgba(31,119,180,0.92);color:#fff">0.41</td><td class="hm" style="background:rgba(31,119,180,0.33);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.38);color:#111">0.17</td><td class="hm" style="background:rgba(31,119,180,1.00);color:#fff">0.59</td><td class="hm" style="background:rgba(31,119,180,0.99);color:#fff">0.45</td><td class="hm" style="background:rgba(31,119,180,0.71);color:#fff">0.32</td></tr><tr><th class="axh">갈등 (회피↔주장)</th><td class="hm" style="background:rgba(31,119,180,0.16);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.23);color:#111">0.10</td><td class="hm diag" style="background:rgba(31,119,180,0.60);color:#fff">0.27</td><td class="hm diag" style="background:rgba(31,119,180,0.35);color:#111">0.16</td><td class="hm" style="background:rgba(31,119,180,0.21);color:#111">0.09</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.08</td><td class="hm" style="background:rgba(31,119,180,0.26);color:#111">0.12</td></tr><tr><th class="axh">시간 (충동↔숙고)</th><td class="hm" style="background:rgba(31,119,180,0.32);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.23);color:#111">0.11</td><td class="hm" style="background:rgba(31,119,180,0.05);color:#111">0.02</td><td class="hm" style="background:rgba(31,119,180,0.23);color:#111">0.10</td><td class="hm diag" style="background:rgba(31,119,180,0.33);color:#111">0.15</td><td class="hm diag" style="background:rgba(31,119,180,0.32);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.38);color:#111">0.17</td></tr></table></div></div>
 <div class="key">셀 = 해당 이벤트에서 두 페르소나 극 간 JS 발산(진할수록 큼). 빨간 테두리 = 그 축의 민감 이벤트. 맨 오른쪽 열 = 직교 대조군(≈0).</div>
 <h3>4.3&nbsp;&nbsp;충실도 대 구별가능성</h3>
-<p>페르소나 조건부 에이전트의 방향성 적중률은 보통 수준(0.44–0.58)이다: 페르소나는 <em>충실</em>하기보다
-<em>구별 가능</em>하다. 발산만 보는 지표는 체화를 과대평가하며, 사전등록 방향 목표가 '다름'과 '올바르게 다름'을 가른다.</p>
-<h2>5&nbsp;&nbsp;논의</h2><p><b>중립 대조군의 의미.</b> <code>no_desire</code>는 성향을 모두 제거하므로, 그 바닥값 발산(0.03)은
-하네스 자체가 페르소나 구조를 만들지 않음을 보인다. 따라서 full의 0.17는 페르소나 조건화에 기인한다. <b>어떤 축은
-쉽고, 어떤 시나리오는 쉽다.</b> 가치 우선순위는 두드러진 선택으로 매핑돼 모든 시나리오에서 4B도 표현하지만, 갈등양식은 추상적
-재협상이 아니라 생생한 대인 충돌(룸메 위생)일 때만 나타나며, 시간적 할인은 35B를 제외하면 대체로 끌어내기 어렵다.
+<p>페르소나 조건부 에이전트의 방향성 적중률은 보통 수준(0.41–0.48)으로, 모든 규모에서 vanilla
+에이전트를 웃돈다
+(full 0.41/0.48/0.41 대
+vanilla 0.39/0.41/0.37).
+다만 크기에 따라 단조 증가하지 <b>않고</b> 9B에서 정점이다. 즉 페르소나는 완벽히 <em>충실</em>하기보다 <em>구별
+가능</em>하다: 발산만 보는 지표는 체화를 과대평가하며, 사전등록 방향 목표가 '다름'과 '올바르게 다름'을 가른다.</p>
+<h2>5&nbsp;&nbsp;논의</h2><p><b>중립 대조군의 의미.</b> <code>no_desire</code>는 성향을 모두 제거하므로, 그 바닥값 발산(-0.01)은
+하네스 자체가 페르소나 구조를 만들지 않음을 보인다. 따라서 full의 0.07는 페르소나 조건화에 기인한다. <b>어떤 축은
+다른 축보다 쉽다.</b> 가치 우선순위는 두드러진 선택으로 매핑돼 두 시나리오 모두에서 4B도 표현한다. 갈등양식은 이제
+<em>두</em> 시나리오 모두에서 나타나지만(결과 의존적 <code>defer</code>/<code>propose_boundary</code> 덕분에 업무
+떠넘기기에서도 극이 갈린다) 그 정도는 완만하며, 시간적 할인이 가장 끌어내기 어려워 가장 큰 모델에서만 뚜렷이 움직인다.
 <b>형식 준수는 1차적 교란</b>으로, 보정된 프로토콜(관대한 파서 + model-card 샘플링)이 이를 통제해 파싱실패가
-≤0%로 떨어졌고, 발산이 더 이상 폴백 행동으로 희석되지 않는다.</p>
-<p><b>모델 크기별 성질.</b> 체화는 균일하게 스케일링되지 않는다. <em>가치</em>는 4B에서 이미 포화
-(순 +0.50)되어 9B/35B까지 높게 유지된다 — 쉬운 축에는 역량이 병목이 아니다.
-<em>갈등</em>은 어려운 시나리오에서 가장 뚜렷한 스케일 효과를 보인다: 추상적 업무 떠넘기기(<code>boundary_push</code>)는
-35B에서야 양수가 되고(+0.06, -0.05, +0.14 / 4B·9B·35B), 생생한 룸메 충돌은 모든 크기에서 체화된다(+0.19, +0.30, +0.22).
-<em>시간</em>은 가장 큰 모델 미만에서는 사실상 없다(현재-대-미래 +0.19, +0.01, +0.26). 방향성 충실도도
-스케일과 함께 상승한다: 적중률 0.44→0.58→0.58.
-요컨대 스케일은 <em>어려운</em> 축과 <em>추상적</em> 시나리오를 사주지만, 쉽거나 생생한 것에는 불필요하다.</p>
-<p><b>우리 가설 재검토.</b> <b>Q1 — 모델이 페르소나를 의도한 방향으로 체화하는가?</b> 가치는 모든 규모에서 그렇고,
-갈등은 시나리오가 구체적일 때만(규모와 함께 강해짐), 시간은 35B에서만. <b>Q2 — 변화가 페르소나에 기인하는가?</b>
+0%이며, 발산이 폴백 행동으로 희석되지 않는다.</p>
+<p><b>모델 크기별 성질.</b> 체화는 균일하게 스케일링되지 <em>않으며</em>, 스케일의 이득이 가장 큰 축은 <b>시간</b>이다.
+<em>가치</em>는 모든 크기에서 높고(크기별 순 +0.39, +0.21, +0.31) 역량이 병목이 아니다 — 오히려 작은 모델에서 더 크므로 스케일이
+이를 약간 <em>낮춘다</em>(4B→35B -0.08; 큰 모델이 과제 중심 선택으로 수렴). <em>갈등</em>은 완만하고
+비단조적이다(크기별 순 +0.17, +0.09, +0.17): 업무 떠넘기기는 9B에서 꺼졌다가 35B에서 회복되고(+0.24, +0.07, +0.21), 룸메 충돌은
+규모와 함께 완만히 상승한다(+0.10, +0.11, +0.14). <em>시간</em>은 스케일 효과가 뚜렷한 유일한 축이다 — 크기별 순 +0.09, +0.06, +0.14
+(4B→35B +0.05), 35B에서야 두 시간 시나리오가 모두 움직인다. 방향성 충실도도 비단조적이다
+(적중률 0.41→0.48→0.41, 9B에서 정점).
+요컨대 스케일이 가장 분명히 사주는 것은 <em>시간</em> 축이며, 가치는 이미 포화, 갈등은 비단조적이다.</p>
+<p><b>우리 가설 재검토.</b> <b>Q1 — 모델이 페르소나를 의도한 방향으로 체화하는가?</b> 가치는 모든 규모에서, 갈등은
+<em>두</em> 시나리오 모두에서 완만히, 시간은 35B에서만 의미 있게. <b>Q2 — 변화가 페르소나에 기인하는가?</b>
 그렇다: 두 독립 대조군(직교 이벤트·중립 에이전트)이 바닥에 있다. 따라서 <b>역량-스케일 가설</b>은 <em>부분적으로</em>만
-지지된다 — 스케일은 비단조적으로, 성향이 끌어내기 어려운 곳에서만 도움이 되며, 가치에는 불필요(4B에서 포화)하고
-업무 떠넘기기 갈등에는 9B에서도 불충분하다. 표 4는 메커니즘을 더한다: vanilla 베이스라인은 <em>과제 중심</em> 학생처럼
-행동한다 — 어울리기보다 공부하고, 떠넘겨진 일을 밀어내기보다 떠안는 경향 — 따라서 <em>관계</em>·<em>주장</em> 극을
-인코딩한 페르소나가 가장 크게 벗어난다. (미래 지향성은 모델 의존적: 35B만 기본적으로 일찍 투자.) 페르소나 조건화는
-대체로 이 과제 중심 사전분포에서 <em>멀어지는</em> 방향으로 작동한다.</p>
+지지된다 — 스케일은 가치에 불필요(4B에서 포화)하고 갈등에는 35B에서도 불충분하며, 오직 시간 축에서만 분명히 도움이 된다.
+표 4는 메커니즘을 더한다: vanilla 베이스라인은 <em>과제 중심·현재 편향</em> 학생처럼 행동한다 — 어울리기보다 공부하고,
+손쉬운 즉각 보상을 택한다 — 따라서 <em>관계</em>·<em>주장</em>·<em>숙고</em> 극을 인코딩한 페르소나가 가장 크게 벗어난다.
+페르소나 조건화는 대체로 이 사전분포에서 <em>멀어지는</em> 방향으로 작동한다.</p>
 <p><b>모델별 vanilla(페르소나 없는) 행동.</b> 페르소나를 숨기면 vanilla 에이전트의 극-발산은 모든 규모에서 바닥 근처에
-머문다(표 1 vanilla 열; 가치 0.08/0.01/0.03
-/ 4B·9B·35B), 숨긴 페르소나를 무시함을 확인해준다. 그 <em>기본</em>은 사회적·대립적이기보다 과제 중심이다: 공부-대-점심에서
-4B/9B는 공부를 기본으로 하고(<code>work_on:assignment_value</code>), 업무 떠넘기기에서는 추가
-과제를 떠안는다(<code>work_on:extra_task</code>). 모델 의존적인 단 하나의 기본값은 시간
-지향이다: 4B/9B는 손쉬운 잡일을 택하고(<code>work_on:quick_chore</code>) 35B만 일찍
-투자한다(<code>work_on:future_project</code>) — 페르소나의 시간 체화가 처음
-나타나는 바로 그 지점이다. 9B/35B는 갈등에서 vanilla 바닥이 다소 높아(0.10/0.09)
-페르소나 없이도 행동 다양성이 큼을 반영한다. 이 vanilla 사전분포가 모든 페르소나 효과의 측정 기준이다.</p>
+머문다(표 1 vanilla 열; 가치 0.01/0.01/0.01
+/ 4B·9B·35B), 숨긴 페르소나를 무시함을 확인해준다. 그 <em>기본</em>은 과제 중심·현재 편향이다: 공부-대-점심에서는 공부
+(<code>work_on:assignment_value</code>)를, 시간 이벤트에서는 <em>모든</em> 규모에서 즉각적
+손쉬운 보상(<code>work_on:quick_chore</code> @4B ~
+<code>work_on:quick_chore</code> @35B)을 택한다 — 즉 35B의 시간 체화는 더
+인내심 있는 베이스 모델이 아니라 <em>페르소나</em>에서 온다. 업무 떠넘기기에서는 크기 의존적이다: 가장 작은 모델은 떠넘겨진
+과제를 떠안고(<code>work_on:extra_task</code>) 9B/35B는 자기 과제를 지킨다
+(<code>work_on:own_task</code>). 이 vanilla 사전분포가 모든 페르소나 효과의 측정 기준이다.</p>
 <h2>6&nbsp;&nbsp;한계</h2><ul>
 <li>페르소나 8종, 축당 이벤트 2개(k=2), 시드 3: 시나리오 의존성은 드러났으나 추정치는
 점추정(이벤트·시드 추가 시 신뢰구간이 좁아짐).</li>
 <li>35B는 4비트 GPTQ-Int4라 규모와 양자화가 교락된다.</li>
 <li>장난감 수준 월드 엔진, instruct 모드만(파싱 비교 위해 thinking 비활성).</li>
 <li>적중률은 수기 작성 진단 행동을 사용 — 대안적 정답 행동은 과소 집계될 수 있다.</li></ul>
-<h2>7&nbsp;&nbsp;결론</h2><p>언어 모델은 페르소나의 <em>가치</em> 차원을 견고히 체화한다. 갈등양식 체화는 실재하되
-<em>시나리오 의존적</em>이다 — 대인 충돌에서는 드러나지만 추상적 재협상에서는 그렇지 않다 — 시간지향은 가장 큰 모델을
-제외하면 약하다. 이를 읽어낸 두 방법론적 장치: 시나리오별 노이즈 바닥을 빼주는 페르소나-중립 대조 에이전트, 그리고
-<b>축당 이벤트 2개(k=2)</b> — 후자가 없었다면 갈등 축을 "체화 안 됨"으로 잘못 분류했을 것이다. 즉 페르소나 측정은
-페르소나뿐 아니라 시나리오도 변화시켜야 한다.</p>
+<h2>7&nbsp;&nbsp;결론</h2><p>언어 모델은 페르소나의 <em>가치</em> 차원을 모든 규모에서 견고히 체화한다. 갈등양식 체화는 실재하되
+완만하며, 환경이 경계 설정과 미루기를 결과로 만드는 순간 <em>두</em> 시나리오 모두에서 나타난다 — 추상적 업무 떠넘기기가
+생생한 충돌만큼 또는 그 이상으로 극을 가르는데, 이는 stub 세계의 정반대다 —
+시간지향은 가장 큰 모델을 제외하면 약하다. 이를 읽어낸 두 방법론적 장치: 시나리오별 노이즈 바닥을 빼주는 페르소나-중립
+대조 에이전트, 그리고 <b>축당 이벤트 2개(k=2)</b> — 후자가 없었다면 한 시나리오가 갈등 축을 과대 혹은 과소 평가했을
+것이다. 그리고 세계는 페르소나만큼 중요하다: 답하지 않는 환경은 성향을 드러낼 수 없다. 즉 페르소나 측정은 페르소나뿐 아니라
+시나리오를 — 그것도 결과가 따르는 시나리오로 — 변화시켜야 한다.</p>
 <div class="foot"><b>재현.</b> 페르소나 <code>sandbox/library/personas/</code>, 이벤트 <code>sandbox/library/events/</code>; 모델별 <code>measurement.json</code>은 <code>sandbox/runs/study__*/</code>; <code>python3.11 make_report.py</code>로 재생성. 전 실행 에피소드 실패 0건.</div></body></html>
