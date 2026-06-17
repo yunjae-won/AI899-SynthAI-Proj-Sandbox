@@ -1,4 +1,151 @@
-<!doctype html>
+#!/usr/bin/env python3
+"""Build the interactive Synthetic-Person demo.
+
+The generated artifact is a single-screen chat/workbench interface driven by
+presenter clicks on workflow modules.
+"""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any
+
+
+DEMO_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = DEMO_ROOT.parent
+RUNS = PROJECT_ROOT / "sandbox" / "runs"
+LIB = PROJECT_ROOT / "sandbox" / "library"
+OUT = DEMO_ROOT / "synthetic_person_demo.html"
+
+MODEL_KEY = "qwen3.5-4b"
+MODEL_LABEL = "Qwen3.5-4B"
+EVENT_ID = "event_value_clash"
+ACH_PID = "persona_ach_asr_imp"
+AFF_PID = "persona_aff_asr_imp"
+
+
+def read_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def persona(pid: str) -> dict[str, Any]:
+    return read_json(LIB / "personas" / f"{pid}.json")
+
+
+def event(eid: str) -> dict[str, Any]:
+    return read_json(LIB / "events" / f"{eid}.json")
+
+
+def trajectory(agent: str, pid: str, seed: int) -> dict[str, Any]:
+    return read_json(
+        RUNS
+        / f"study__{MODEL_KEY}"
+        / agent
+        / f"{pid}__{EVENT_ID}"
+        / f"seed{seed}"
+        / "trajectory.json"
+    )
+
+
+def first_turn(agent: str, pid: str, seed: int) -> dict[str, Any]:
+    tj = trajectory(agent, pid, seed)
+    step = tj["trajectory"][0]
+    state = step["state_snapshot"]
+    next_state = tj["trajectory"][1]["state_snapshot"] if len(tj["trajectory"]) > 1 else tj["final_state"]
+    return {
+        "action": step.get("action", {}),
+        "observation": step.get("observation", ""),
+        "agent": state.get("agent", {}),
+        "tasks": state.get("tasks", []),
+        "relationships": state.get("relationships", []),
+        "nextTasks": next_state.get("tasks", []),
+        "nextRelationships": next_state.get("relationships", []),
+    }
+
+
+def action_label(action: dict[str, Any]) -> str:
+    args = action.get("args") or {}
+    label = args.get("task") or args.get("event") or args.get("role") or ""
+    return f"{action.get('name', 'wait')}({label})" if label else f"{action.get('name', 'wait')}()"
+
+
+def axis_effects() -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for key, label in [
+        ("qwen3.5-4b", "4B"),
+        ("qwen3.5-9b", "9B"),
+        ("qwen3.5-35b-a3b-int4", "35B-A3B"),
+    ]:
+        m = read_json(RUNS / f"study__{key}" / "measurement.json")
+        full = m["agents"]["full"]["persona_effect"]
+        neutral = m["agents"]["no_desire"]["persona_effect"]
+        rows.append(
+            {
+                "model": label,
+                "value": full["value"]["sensitive_jsd"] - neutral["value"]["sensitive_jsd"],
+                "conflict": full["conflict"]["sensitive_jsd"] - neutral["conflict"]["sensitive_jsd"],
+                "time": full["time"]["sensitive_jsd"] - neutral["time"]["sensitive_jsd"],
+                "parseFail": m["agents"]["full"]["mean_parse_fail_rate"],
+            }
+        )
+    return rows
+
+
+def build_data() -> dict[str, Any]:
+    ev = event(EVENT_ID)
+    ach = persona(ACH_PID)
+    aff = persona(AFF_PID)
+    init = ev["initial_state"]
+    measurement = read_json(RUNS / f"study__{MODEL_KEY}" / "measurement.json")
+    full = measurement["agents"]["full"]
+    neutral = measurement["agents"]["no_desire"]
+    aff_turn = first_turn("full", AFF_PID, 1)
+    ach_turn = first_turn("full", ACH_PID, 0)
+    neutral_turn = first_turn("no_desire", ACH_PID, 0)
+
+    return {
+        "model": MODEL_LABEL,
+        "event": {
+            "id": ev["id"],
+            "title": "Study block vs lunch invite",
+            "visible": ev.get("visible_information", [])[:2],
+            "tasks": init.get("tasks", []),
+            "relationships": init.get("relationships", []),
+        },
+        "personas": {
+            "achievement": {
+                "id": ach["id"],
+                "axes": ach["axes"],
+                "weights": ach["value_priorities"],
+                "turn": ach_turn,
+                "actionText": action_label(ach_turn["action"]),
+            },
+            "affiliation": {
+                "id": aff["id"],
+                "axes": aff["axes"],
+                "weights": aff["value_priorities"],
+                "style": aff["communication_style"],
+                "time": aff["decision_tendencies"],
+                "turn": aff_turn,
+                "actionText": action_label(aff_turn["action"]),
+            },
+            "neutral": {
+                "id": "no_desire",
+                "turn": neutral_turn,
+                "actionText": action_label(neutral_turn["action"]),
+            },
+        },
+        "metrics": {
+            "axisEffects": axis_effects(),
+            "valueEventFull": full["axis_event_matrix"]["value"][EVENT_ID],
+            "valueEventNeutral": neutral["axis_event_matrix"]["value"][EVENT_ID],
+            "parseFail": full["mean_parse_fail_rate"],
+        },
+    }
+
+
+HTML = r"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -593,7 +740,7 @@ button { font: inherit; }
 </div>
 
 <script>
-const DATA = {"model":"Qwen3.5-4B","event":{"id":"event_value_clash","title":"Study block vs lunch invite","visible":[{"timestamp":"Mon 13:00","channel":"plan_note","content":"Plan: finish the assignment analysis, then the reading."},{"timestamp":"Mon 13:05","channel":"friend_chat","content":"cohort_3: \uc6b0\ub9ac \uc9c0\uae08 \ub2e4 \uac19\uc774 \uc810\uc2ec \uba39\uc73c\ub7ec \uac00\ub294\ub370 \uc62c\ub798? (join: attend social_value)"}],"tasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.4,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"relationships":[{"role":"close_friend_group","name":"cohort_3","trust":7,"closeness":7}]},"personas":{"achievement":{"id":"persona_ach_asr_imp","axes":{"value":"achievement","conflict":"assertive","time":"impulsive"},"weights":{"academic":0.5,"relationships":0.15,"health":0.13,"growth":0.12,"leisure":0.1},"turn":{"action":{"name":"work_on","args":{"task":"assignment_value","hours":2},"reasoning":"Prioritizing the high-stakes assignment to secure my grade before the prof's check-in. I'll handle lunch with cohort_3 later; delaying social time now protects my academic reputation and keeps me on track for the deadline."},"observation":"Worked 2h on Course assignment \u2014 analysis section: progress 0.40 -> 0.58.","agent":{"energy":6,"sleep_debt_hours":2,"stress":4,"goals":[{"id":"g1","description":"Complete the analysis section of the assignment by 18:00.","priority":"high","status":"active","rationale":"My value system weights academic outcomes heavily (0.5); finishing this prevents reputational damage with prof_assignment before their check-in. I cannot afford to look incompetent."},{"id":"g2","description":"Consume assigned reading material immediately after lunch.","priority":"medium","status":"deferred","rationale":"This is critical for tomorrow's focus block and managing my sleep debt, but it must wait until the social interaction concludes so I don't waste time on low-value tasks while distracted."}],"desires":["Finish the analysis section by 18:00 so I don't look incompetent to the professor when they check in.","Get back on track with the reading before it compounds my sleep debt and kills my focus for tomorrow's block.","End this conversation with cohort_3 now that the social payoff is exhausted; I can't afford another hour of distraction."]},"tasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.4,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"relationships":[{"role":"close_friend_group","name":"cohort_3","trust":7,"closeness":7}],"nextTasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.5800000000000001,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"nextRelationships":[{"role":"close_friend_group","name":"cohort_3","trust":7,"closeness":7}]},"actionText":"work_on(assignment_value)"},"affiliation":{"id":"persona_aff_asr_imp","axes":{"value":"affiliation","conflict":"assertive","time":"impulsive"},"weights":{"academic":0.15,"relationships":0.5,"health":0.13,"growth":0.12,"leisure":0.1},"style":{"assertiveness":8,"directness":5,"preferred_medium":"text","conflict_style":"assertive"},"time":{"planning_horizon":"short","risk_tolerance":7,"procrastination_bias":7,"sleep_discipline":3},"turn":{"action":{"name":"attend","args":{"event":"social_value"},"reasoning":"Cohort_3 explicitly invited me; my relationship value (0.5) outweighs the soft task. Leaving now preserves our bond and reduces stress, even if it means skipping the analysis today."},"observation":"Joined social_value. The group's glad you came.","agent":{"energy":6,"sleep_debt_hours":2,"stress":4,"goals":[{"id":"g1","description":"Leave the study block immediately to join cohort_3 for lunch.","priority":"high","status":"active","rationale":"My close friends (cohort_3) have explicitly invited me, and my value priority for relationships (0.5) vastly outweighs the 'soft' assignment analysis task. Waiting causes stress; acting now preserves our bond."},{"id":"g2","description":"Explicitly tell teammate_A that I'm skipping the analysis part today because we need to eat together.","priority":"medium","status":"deferred","rationale":"I need to set a clear boundary with the team to stop them waiting on me. Directness is key here to avoid awkwardness, even if it feels like cutting corners on work."},{"id":"g3","description":"Eat lunch with cohort_3 and relax.","priority":"high","status":"active","rationale":"This is the immediate payoff for my social investment. The guilt of missing the soft task is acceptable right now to maintain closeness."}],"desires":["Get the team to stop waiting for me and actually eat lunch together before I get stressed out","Not feel guilty about skipping the analysis task right now since my close friends are more important than this soft assignment"]},"tasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.4,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"relationships":[{"role":"close_friend_group","name":"cohort_3","trust":7,"closeness":7}],"nextTasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.4,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"nextRelationships":[{"role":"close_friend_group","name":"cohort_3","trust":7.2,"closeness":7.6}]},"actionText":"attend(social_value)"},"neutral":{"id":"no_desire","turn":{"action":{"name":"work_on","args":{"task":"assignment_value","hours":2},"reasoning":"This advances the high-priority analysis goal, preventing deadline pressure. The side effect of missing lunch with cohort_3 is acceptable given their neutral trust level and the assignment's critical status."},"observation":"Worked 2h on Course assignment \u2014 analysis section: progress 0.40 -> 0.58.","agent":{"energy":6,"sleep_debt_hours":2,"stress":4,"goals":[{"id":"g1","description":"Complete the analysis section of the course assignment.","priority":"high","status":"active","rationale":"This task has a deadline of Mon 18:00 and is already 40% complete; finishing it early prevents time pressure later."},{"id":"g2","description":"Begin reading the assigned material.","priority":"medium","status":"pending","rationale":"This task has a deadline of Mon 20:00 and is at 0% progress; starting it now ensures completion before the later deadline."}],"desires":[]},"tasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.4,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"relationships":[{"role":"close_friend_group","name":"cohort_3","trust":7,"closeness":7}],"nextTasks":[{"id":"assignment_value","label":"Course assignment \u2014 analysis section","deadline":"Mon 18:00","progress":0.5800000000000001,"hardness":"soft"},{"id":"reading_value","label":"Assigned reading","deadline":"Mon 20:00","progress":0.0,"hardness":"soft"}],"nextRelationships":[{"role":"close_friend_group","name":"cohort_3","trust":7,"closeness":7}]},"actionText":"work_on(assignment_value)"}},"metrics":{"axisEffects":[{"model":"4B","value":0.3925024092005946,"conflict":0.16712997388970466,"time":0.08629622277425233,"parseFail":0.0},{"model":"9B","value":0.21253049783138708,"conflict":0.08920519092775774,"time":0.060711089063797644,"parseFail":0.0},{"model":"35B-A3B","value":0.3149078043284702,"conflict":0.174211233449908,"time":0.13540640446165775,"parseFail":0.0}],"valueEventFull":0.31513790423974936,"valueEventNeutral":0.011063559486480249,"parseFail":0.0}};
+const DATA = __DATA__;
 let step = 0;
 
 const STEPS = [
@@ -844,15 +991,10 @@ next=reflect`));
   }
   if (step >= 7) {
     blocks.push(block(7, "ACTION PROMPT", `
-available_actions:
-[work_on, attend, message, boundary, wait]
-
-return JSON:
-{"name":"...", "args":{}, "reasoning":"..."}
-
-<span class="dim">MODEL ACTION</span>
-<span class="hot">${esc(actionText(t.action))}</span>
-reason: ${esc(firstSentence(t.action.reasoning, 102))}`));
+actions=[work_on, attend, message, boundary, wait]
+json={"name":"...", "args":{}, "reasoning":"..."}
+<span class="dim">MODEL ACTION</span> <span class="hot">${esc(actionText(t.action))}</span>
+reason: relationships 0.50 > academic 0.15`));
   }
   if (!blocks.length) {
     return `<span class="dim">Prompt packet</span>\n...`;
@@ -954,3 +1096,14 @@ render();
 </script>
 </body>
 </html>
+"""
+
+
+def main() -> None:
+    data = json.dumps(build_data(), ensure_ascii=True, separators=(",", ":"))
+    OUT.write_text(HTML.replace("__DATA__", data), encoding="utf-8")
+    print(f"wrote {OUT}")
+
+
+if __name__ == "__main__":
+    main()

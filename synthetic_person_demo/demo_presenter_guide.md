@@ -2,7 +2,7 @@
 
 ## Setup
 
-Open `synthetic_person_demo.html` in a wide browser window or fullscreen mode. The demo advances only when the presenter clicks the active module card or the large `Execute ...` control. Space and Enter also advance; the small curved arrow in the top-right corner reverses one step if needed.
+Open `synthetic_person_demo/synthetic_person_demo.html` from the repository root, or open `synthetic_person_demo.html` directly from this directory, in a wide browser window or fullscreen mode. The demo advances only when the presenter clicks the active module card or the large `Execute ...` control. Space and Enter also advance; the small curved arrow in the top-right corner reverses one step if needed.
 
 Target runtime is 45-55 seconds. The presenter should explain the components verbally; the page is intentionally a visual stage with labels, prompt fragments, module highlights, task state, action buttons, and chat-style runtime output.
 

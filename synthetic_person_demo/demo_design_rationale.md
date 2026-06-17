@@ -65,4 +65,4 @@ The sequence is intentionally narrow:
 
 The UI uses large typography, short labels, active-module highlighting, and a full-window layout for low-resolution screen sharing. The presenter controls pacing by clicking the active module card or the `Execute ...` control, with no automatic playback.
 
-`make_live_demo.py` generates `synthetic_person_demo.html` directly from the selected study artifacts. The generated HTML is self-contained and does not execute live LLM calls.
+`synthetic_person_demo/make_live_demo.py` generates `synthetic_person_demo/synthetic_person_demo.html` directly from the selected study artifacts. The generated HTML is self-contained and does not execute live LLM calls.
