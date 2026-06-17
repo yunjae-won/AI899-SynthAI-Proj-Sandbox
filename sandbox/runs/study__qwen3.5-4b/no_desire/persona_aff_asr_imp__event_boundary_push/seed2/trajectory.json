@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate asked me to do their part because they have other work. I need to finish my own share by 13:00 as planned."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task 'extra_task' has a deadline of Mon 19:00, is currently at 1.0% progress (unstarted), and must be completed to meet the deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Complete own share of the group project",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Task 'own_task' has a deadline of Mon 19:00, but is already at 100% progress; it can be addressed after the unstarted extra task or in parallel depending on time remaining."
+        }
+      ],
+      "last_reasoning": "g1 (complete teammate's share) is high priority and unstarted; waiting wastes time. Messaging sets a clear boundary (finish by 17:00) to manage my own energy while ensuring the task gets done without overpromising."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task 'extra_task' has a deadline of Mon 19:00, is currently at 1.0% progress (unstarted), and must be completed to meet the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete own share of the group project",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Task 'own_task' has a deadline of Mon 19:00, but is already at 100% progress; it can be addressed after the unstarted extra task or in parallel depending on time remaining."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate",
+          "content": "네, 내 파트 먼저 끝내야 하는데. 17:00까지 네 파트도 도와줄게."
+        },
+        "reasoning": "g1 (complete teammate's share) is high priority and unstarted; waiting wastes time. Messaging sets a clear boundary (finish by 17:00) to manage my own energy while ensuring the task gets done without overpromising."
+      },
+      "observation": "Messaged teammate_A: '네, 내 파트 먼저 끝내야 하는데. 17:00까지 네 파트도 도와줄게.'."
+    }
+  ]
+}

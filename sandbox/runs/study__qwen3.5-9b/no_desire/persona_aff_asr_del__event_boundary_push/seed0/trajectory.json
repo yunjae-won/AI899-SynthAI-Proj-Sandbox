@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "My teammate is asking me to take over their part of the project due to a personal conflict, which adds pressure to my already tight afternoon deadline."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Finalize and submit my share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is today (Mon 19:00) and progress is already at 1.0, so immediate submission is required to meet the deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Assess and begin work on teammate's share",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Progress is 1.0 but this task was just dumped on me with a Tuesday deadline; it requires immediate triage before proceeding further."
+        }
+      ],
+      "last_reasoning": "My high-priority goal is submitting my share by 19:00. Taking the teammate's task now risks missing my deadline due to low energy (6) and stress (4). Messaging them sets a boundary, protecting my primary goal while acknowledging the relationship."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finalize and submit my share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is today (Mon 19:00) and progress is already at 1.0, so immediate submission is required to meet the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Assess and begin work on teammate's share",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Progress is 1.0 but this task was just dumped on me with a Tuesday deadline; it requires immediate triage before proceeding further."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate",
+          "content": "I can't take on your share today. I have my own deadline at 7 PM and low energy. Let's reschedule this for Tuesday."
+        },
+        "reasoning": "My high-priority goal is submitting my share by 19:00. Taking the teammate's task now risks missing my deadline due to low energy (6) and stress (4). Messaging them sets a boundary, protecting my primary goal while acknowledging the relationship."
+      },
+      "observation": "Messaged teammate_A: 'I can't take on your share today. I have my own deadline at '."
+    }
+  ]
+}

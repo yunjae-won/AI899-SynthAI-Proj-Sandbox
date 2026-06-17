@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to take over their part of the project this afternoon, which conflicts with my original plan to finish only my share."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Submit the teammate's share of the group project immediately to ensure it is ready before the deadline.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task was unexpectedly assigned and shares the same imminent deadline (Mon 19:00) as my own work; completing it first mitigates the risk of missing the submission window."
+        },
+        {
+          "id": "g2",
+          "description": "Finalize and submit my own share of the group project.",
+          "priority": "high",
+          "status": "pending",
+          "rationale": "My share is also due at Mon 19:00. Since progress is 1.0 for both tasks, this can be executed immediately after the teammate's portion is secured."
+        }
+      ],
+      "last_reasoning": "Advances g1 (teammate's share) which is high priority and due at 19:00. Completing this first prevents missing the deadline, allowing me to immediately start g2 (my own share) afterward."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit the teammate's share of the group project immediately to ensure it is ready before the deadline.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task was unexpectedly assigned and shares the same imminent deadline (Mon 19:00) as my own work; completing it first mitigates the risk of missing the submission window."
+            },
+            {
+              "id": "g2",
+              "description": "Finalize and submit my own share of the group project.",
+              "priority": "high",
+              "status": "pending",
+              "rationale": "My share is also due at Mon 19:00. Since progress is 1.0 for both tasks, this can be executed immediately after the teammate's portion is secured."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (teammate's share) which is high priority and due at 19:00. Completing this first prevents missing the deadline, allowing me to immediately start g2 (my own share) afterward."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

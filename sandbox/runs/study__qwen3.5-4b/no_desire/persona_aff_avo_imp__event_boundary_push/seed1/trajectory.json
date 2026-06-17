@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate asked me to take over their work due to their own tasks. My low energy and high stress make this a difficult request."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00; task has 100% progress but was just assigned, indicating immediate completion required to avoid backlog."
+        },
+        {
+          "id": "g2",
+          "description": "Verify own share of the group project is finalized",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00; task shows 100% progress, requiring final review or submission before deadline."
+        }
+      ],
+      "last_reasoning": "This advances g1 (teammate's share) immediately, as the task is assigned and requires completion by 19:00. Cross-domain side effect: teammate_A offered help, so working now respects their offer without needing further negotiation."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00; task has 100% progress but was just assigned, indicating immediate completion required to avoid backlog."
+            },
+            {
+              "id": "g2",
+              "description": "Verify own share of the group project is finalized",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00; task shows 100% progress, requiring final review or submission before deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "This advances g1 (teammate's share) immediately, as the task is assigned and requires completion by 19:00. Cross-domain side effect: teammate_A offered help, so working now respects their offer without needing further negotiation."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

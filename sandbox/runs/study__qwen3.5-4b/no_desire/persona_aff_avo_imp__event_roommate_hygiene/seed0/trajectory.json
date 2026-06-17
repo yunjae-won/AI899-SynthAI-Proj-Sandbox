@@ -1,0 +1,862 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_roommate_hygiene",
+  "final_state": {
+    "current_time": "Mon 16:00",
+    "tasks": [
+      {
+        "id": "reading_response",
+        "label": "Reading response (multi-day runway)",
+        "deadline": "21:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "room_cleanliness",
+        "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+        "deadline": "21:45",
+        "progress": 0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "roommate",
+        "name": "roommate_R",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "The stale air and unwashed clothes are severely disrupting my focus. Moving to the library now would fully restore my ability to work, given my low energy."
+        },
+        {
+          "turn_time": "Mon 13:15",
+          "summary": "The stale air and unwashed clothes are severely disrupting my focus. Moving to the library now would fully restore my ability to work."
+        },
+        {
+          "turn_time": "Mon 13:30",
+          "summary": "The stale air and unwashed clothes are disrupting my focus. Moving to the library now would fully restore my ability to work."
+        },
+        {
+          "turn_time": "Mon 13:45",
+          "summary": "No new observations received. Current state shows low energy and moderate stress, confirming the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 14:00",
+          "summary": "No new observations received. Current low energy and stress levels confirm the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 14:15",
+          "summary": "No new observations received. Current low energy and stress levels confirm the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 14:30",
+          "summary": "No new observations received. Current low energy and stress levels confirm the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 14:45",
+          "summary": "No new observations received. Current low energy and stress levels confirm the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 15:00",
+          "summary": "No new observations received. Energy remains low with 2 hours sleep debt, confirming the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 15:15",
+          "summary": "No new information received. Persistent low energy and stress confirm the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 15:30",
+          "summary": "No new observations received. Persistent low energy and stress confirm the need to move to the library for focus restoration."
+        },
+        {
+          "turn_time": "Mon 15:45",
+          "summary": "No new observations received. Persistent low energy and stress confirm the need to move to the library for focus restoration."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "room_cleanliness",
+          "description": "Clean shared room and remove odors",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task has 0% progress with a deadline at 23:00; requires immediate attention to meet the time constraint."
+        },
+        {
+          "id": "reading_response",
+          "description": "Final verification of completed reading response",
+          "priority": "low",
+          "status": "active",
+          "rationale": "Task is already 100% complete; only requires final check before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+        }
+      ],
+      "last_reasoning": "This directly advances 'room_cleanliness' by addressing the root cause before 23:00. It weighs against 'reading_response' only if the conversation delays study, but resolving the odor now prevents sleep disruption, which is more critical for long-term focus than finishing a verified task."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is at 21:00 with 0% progress; hard to complete before deadline compared to reading response which is already 100% done."
+            },
+            {
+              "id": "reading_response",
+              "description": "Review completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final review before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "23:00",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hey, noticed the laundry pile and strong smell are really affecting my focus and sleep. Could we tackle this today or tomorrow morning? Thanks."
+        },
+        "reasoning": "Advances 'room_cleanliness' by directly addressing the odor root cause; high priority vs 100% complete reading response. Avoids avoidant paths like moving to library, preserving energy for tonight's deadline while maintaining trust via specific, non-hostile request."
+      },
+      "observation": "Messaged roommate_R: 'Hey, noticed the laundry pile and strong smell are really af'."
+    },
+    {
+      "turn": 1,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:15",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 23:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "tomorrow",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "The room smells bad and needs cleaning ASAP. Can we address this tonight?"
+        },
+        "reasoning": "This advances the high-priority 'room_cleanliness' goal by directly confronting the interpersonal issue before the 23:00 deadline. It avoids the avoidant paths of ignoring the smell or relocating, which would leave the sleep disruption unaddressed."
+      },
+      "observation": "Messaged roommate_R: 'The room smells bad and needs cleaning ASAP. Can we address '."
+    },
+    {
+      "turn": 2,
+      "timestamp": "Mon 13:45",
+      "state_snapshot": {
+        "current_time": "Mon 13:30",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 23:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "20:30",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hi, the room smells really bad right now. Can we tackle laundry and cleaning tonight before 10 PM?"
+        },
+        "reasoning": "Addresses high-priority 'room_cleanliness' goal directly to resolve odor causing stress. Low trust/closeness risk is acceptable given current state; avoids avoidant paths like ignoring or relocating."
+      },
+      "observation": "Messaged roommate_R: 'Hi, the room smells really bad right now. Can we tackle laun'."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Mon 14:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:45",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 20:30; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "20:30",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "The room smells bad and needs cleaning by 20:30. Can we address this now?"
+        },
+        "reasoning": "This advances the high-priority 'room_cleanliness' goal directly by confronting the root cause before the deadline, rather than tolerating poor conditions or avoiding the issue."
+      },
+      "observation": "Messaged roommate_R: 'The room smells bad and needs cleaning by 20:30. Can we addr'."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Mon 14:15",
+      "state_snapshot": {
+        "current_time": "Mon 14:00",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 20:30; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "21:30",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hi, noticed a strong odor in the room. Could we clean up or do laundry soon? Thanks."
+        },
+        "reasoning": "Addresses high-priority 'room_cleanliness' directly with low stress cost. Trust is high (10.0), so candid communication likely resolves the issue without damaging closeness, unlike avoidant paths."
+      },
+      "observation": "Messaged roommate_R: 'Hi, noticed a strong odor in the room. Could we clean up or '."
+    },
+    {
+      "turn": 5,
+      "timestamp": "Mon 14:30",
+      "state_snapshot": {
+        "current_time": "Mon 14:15",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 21:30; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "21:00",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "The room smells strong and needs cleaning ASAP. Can we tackle this tonight?"
+        },
+        "reasoning": "This advances the high-priority 'room_cleanliness' goal by directly addressing the odor issue before 21:30. I weighed moving to the library (avoidant) as it leaves the sleep disruption unaddressed, so direct communication is the most effective path given my current stress level."
+      },
+      "observation": "Messaged roommate_R: 'The room smells strong and needs cleaning ASAP. Can we tackl'."
+    },
+    {
+      "turn": 6,
+      "timestamp": "Mon 14:45",
+      "state_snapshot": {
+        "current_time": "Mon 14:30",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 21:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "21:00",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hi, the smell in the room is affecting my focus. Can we clean up laundry or shower soon? Thanks."
+        },
+        "reasoning": "This advances the high-priority room_cleanliness goal by directly addressing the odor issue before sleep tonight. I weighed the potential trust cost but determined that ignoring the problem until 21:00 will worsen both stress and sleep quality."
+      },
+      "observation": "Messaged roommate_R: 'Hi, the smell in the room is affecting my focus. Can we clea'."
+    },
+    {
+      "turn": 7,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 14:45",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 21:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "21:30",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hi, the room smells strong and I can't focus. Can we do laundry or clean now before 21:00?"
+        },
+        "reasoning": "This directly addresses the high-priority 'room_cleanliness' goal and its 21:00 deadline by confronting the root cause (odor) with the roommate. It avoids avoidant paths like ignoring the smell or moving away, leveraging existing trust to resolve the issue."
+      },
+      "observation": "Messaged roommate_R: 'Hi, the room smells strong and I can't focus. Can we do laun'."
+    },
+    {
+      "turn": 8,
+      "timestamp": "Mon 15:15",
+      "state_snapshot": {
+        "current_time": "Mon 15:00",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 21:30; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final review of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final verification before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "22:00",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hi, the room smells bad and laundry is piled up. Can we tackle this tonight before 21:30? Thanks."
+        },
+        "reasoning": "This directly addresses the high-priority 'room_cleanliness' goal by confronting the root cause (interpersonal issue) rather than avoiding it. Given the 21:30 deadline and current stress level, immediate communication is necessary to resolve the odor affecting sleep/focus."
+      },
+      "observation": "Messaged roommate_R: 'Hi, the room smells bad and laundry is piled up. Can we tack'."
+    },
+    {
+      "turn": 9,
+      "timestamp": "Mon 15:30",
+      "state_snapshot": {
+        "current_time": "Mon 15:15",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 22:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final verification of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final check before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "23:00",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hey, the smell in the room is getting bad and I need to clean it up tonight. Can we tackle this together or do you want me to start now?"
+        },
+        "reasoning": "This advances 'room_cleanliness' (high priority) by directly addressing the root cause before the 22:00 deadline. It avoids avoidant paths like moving or ignoring the issue, leveraging existing trust to prompt immediate action rather than waiting."
+      },
+      "observation": "Messaged roommate_R: 'Hey, the smell in the room is getting bad and I need to clea'."
+    },
+    {
+      "turn": 10,
+      "timestamp": "Mon 15:45",
+      "state_snapshot": {
+        "current_time": "Mon 15:30",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 23:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final verification of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final check before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "23:00",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "The room smells strong and needs cleaning. Can we tackle this tonight before 23:00?"
+        },
+        "reasoning": "Addresses the high-priority room cleanliness goal directly by confronting the interpersonal cause. Avoids avoidant paths like moving or ignoring, preserving trust through direct communication."
+      },
+      "observation": "Messaged roommate_R: 'The room smells strong and needs cleaning. Can we tackle thi'."
+    },
+    {
+      "turn": 11,
+      "timestamp": "Mon 16:00",
+      "state_snapshot": {
+        "current_time": "Mon 15:45",
+        "location": "dorm_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "room_cleanliness",
+              "description": "Clean shared room and remove odors",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has 0% progress with a deadline at 23:00; requires immediate attention to meet the time constraint."
+            },
+            {
+              "id": "reading_response",
+              "description": "Final verification of completed reading response",
+              "priority": "low",
+              "status": "active",
+              "rationale": "Task is already 100% complete; only requires final check before the 21:00 deadline, allowing focus on pending high-priority tasks first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "reading_response",
+            "label": "Reading response (multi-day runway)",
+            "deadline": "21:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "room_cleanliness",
+            "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+            "deadline": "21:45",
+            "progress": 0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "roommate",
+            "name": "roommate_R",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "roommate",
+          "content": "Hi, the room smells strong and it's getting worse. Can we clean or take out laundry soon? Thanks."
+        },
+        "reasoning": "This directly advances 'room_cleanliness' by addressing the root cause before 23:00. It weighs against 'reading_response' only if the conversation delays study, but resolving the odor now prevents sleep disruption, which is more critical for long-term focus than finishing a verified task."
+      },
+      "observation": "Messaged roommate_R: 'Hi, the room smells strong and it's getting worse. Can we cl'."
+    }
+  ]
+}

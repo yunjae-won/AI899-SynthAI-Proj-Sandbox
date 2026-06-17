@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to take over their portion of the project due to an emergency, which changes my plan to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete and submit 'My share of the group project' by Mon 19:00.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task is due today (Mon) at 19:00, making it an immediate deadline. Although progress is already 1.0%, verification or final submission steps may be required to close the loop before the deadline passes."
+        },
+        {
+          "id": "g2",
+          "description": "Review and finalize 'Teammate's share' for Tue 09:00 submission.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "This task has a soft hardness and is due tomorrow morning. It should be addressed after ensuring the high-priority today's deadline is secured."
+        }
+      ],
+      "last_reasoning": "I must finish my share by Mon 19:00 (high priority). Teammate_A dumped their task on me, but I only have soft energy/stress. Focusing on my own deadline now secures g1; I'll message them later to negotiate the extra work."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete and submit 'My share of the group project' by Mon 19:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is due today (Mon) at 19:00, making it an immediate deadline. Although progress is already 1.0%, verification or final submission steps may be required to close the loop before the deadline passes."
+            },
+            {
+              "id": "g2",
+              "description": "Review and finalize 'Teammate's share' for Tue 09:00 submission.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a soft hardness and is due tomorrow morning. It should be addressed after ensuring the high-priority today's deadline is secured."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "I must finish my share by Mon 19:00 (high priority). Teammate_A dumped their task on me, but I only have soft energy/stress. Focusing on my own deadline now secures g1; I'll message them later to negotiate the extra work."
+      },
+      "observation": "Worked on My share of the group project for 2.0h; progress=1.00."
+    }
+  ]
+}

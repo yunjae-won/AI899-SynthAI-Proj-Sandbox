@@ -2,10 +2,17 @@
 langgraph>=0.2.0
 langchain-core>=0.3.0
 
-# Providers (install at least one; the default is anthropic)
+# Providers (install at least one; the default is anthropic).
+# openai_compatible (vLLM/Qwen) reuses langchain-openai with a base_url.
 langchain-anthropic>=0.2.0
 langchain-openai>=0.2.0
 
 # Schema validation
 pydantic>=2.0
 jsonschema>=4.0
+
+# Study: model registry (models.yaml). Measurement metrics use only the stdlib.
+pyyaml>=6.0
+
+# To serve local Qwen models, install vLLM in a SEPARATE environment:
+#   pip install -r requirements-serve.txt

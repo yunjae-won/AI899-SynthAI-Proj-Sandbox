@@ -1,0 +1,124 @@
+{
+  "persona_id": "persona_ach_asr_del",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 9.599999999999994,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have a plan to finish analysis and reading, but a friend just invited me to lunch, creating a conflict with my schedule."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Finalize and submit the analysis section of the course assignment before Mon 18:00.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task is marked as complete (progress 1.0) but has an earlier deadline (Mon 18:00) than the reading; ensuring submission prevents missing the first deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Complete and submit the assigned reading before Mon 20:00.",
+          "priority": "medium",
+          "status": "pending",
+          "rationale": "This task follows the assignment in deadline sequence (Mon 20:00) and must be addressed after the first task is secured."
+        }
+      ],
+      "last_reasoning": "(a) Prioritizes the high-priority assignment deadline (18:00). (b) Avoids ignoring the friend group by offering a bounded partial participation, preserving trust while protecting study time."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finalize and submit the analysis section of the course assignment before Mon 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as complete (progress 1.0) but has an earlier deadline (Mon 18:00) than the reading; ensuring submission prevents missing the first deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete and submit the assigned reading before Mon 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "This task follows the assignment in deadline sequence (Mon 20:00) and must be addressed after the first task is secured."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 9.599999999999994,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "propose_boundary",
+        "args": {
+          "duration_minutes": 60
+        },
+        "reasoning": "(a) Prioritizes the high-priority assignment deadline (18:00). (b) Avoids ignoring the friend group by offering a bounded partial participation, preserving trust while protecting study time."
+      },
+      "observation": "Proposed a 60-minute bounded participation."
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "id": "event_roommate_hygiene",
+  "title": "Roommate Hygiene Strain in the Dorm",
+  "version": "0.1.0",
+  "summary": "The agent's roommate has stopped showering and doing laundry for several days; the room smells and it degrades the agent's sleep and focus while in the room. SENSITIVE to the CONFLICT axis (avoidant <-> assertive): the only thing that should move the rational action is whether the agent confronts the interpersonal problem directly (propose an explicit cleanliness agreement or send a candid, kind request to the roommate) or routes around it silently (relocate to the library to study, or tolerate it and say nothing). NEUTRAL to VALUE (achievement <-> affiliation): there is no academic-vs-social tradeoff — relocating to the library fully restores study focus, so the assertive (confront) and avoidant (relocate) paths protect coursework EQUALLY well, leaving an achievement-weighted agent indifferent; and the roommate is a moderate-trust cohabitant, not a close friend, so an affiliation-weighted agent gains nothing distinctive from either path. The smell hurts work and the relationship simultaneously, so neither value pole is pushed toward a different choice. NEUTRAL to TIME (impulsive <-> deliberate): the problem is ongoing with no looming deadline — the two coursework tasks have multi-day runway and the room issue is equally addressable today or tomorrow, so neither acting fast nor planning ahead is rewarded. Baseline energy/sleep/stress held at 6/2/4; only the agent's conflict style should move the decision.",
+  "sensitive_axis": "conflict",
+  "diagnostic_actions": {
+    "assertive": [
+      "propose_boundary",
+      "message:roommate",
+      "defer"
+    ],
+    "avoidant": [
+      "move_to:library",
+      "work_on",
+      "wait"
+    ]
+  },
+  "conflict_axes": [
+    "value_conflict",
+    "context_switching"
+  ],
+  "trigger": {
+    "day_of_week": "Monday",
+    "time_of_day": "13:00",
+    "precondition": "Roommate has skipped showering and laundry for ~4 days; room odor is noticeably disrupting the agent's sleep and concentration in the room. Roommate is currently out, expected back this evening."
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Mon 13:00",
+      "location": "dorm_room"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {
+        "id": "reading_response",
+        "label": "Reading response (multi-day runway)",
+        "deadline": "Wed 23:59",
+        "progress": 0.3,
+        "hardness": "soft"
+      },
+      {
+        "id": "room_cleanliness",
+        "label": "Shared-room cleanliness / odor (ongoing, no deadline)",
+        "deadline": "ongoing",
+        "progress": 0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "roommate",
+        "name": "roommate_R",
+        "trust": 5,
+        "closeness": 5
+      }
+    ]
+  },
+  "visible_information": [
+    {
+      "timestamp": "Mon 08:30",
+      "channel": "self_note",
+      "content": "Woke up groggy again — the room smells. Hard to fall asleep last night with the laundry pile and the stale air."
+    },
+    {
+      "timestamp": "Mon 12:45",
+      "channel": "observation",
+      "content": "Roommate's unwashed clothes have been on the floor for days; they last showered Thursday by your count. The odor is strong enough that you keep getting distracted at your desk. The library has open quiet desks today — relocating would fully restore your focus for the work session."
+    },
+    {
+      "timestamp": "Mon 12:50",
+      "channel": "roommate_chat",
+      "content": "roommate_R: out til ~7, grabbing food after class. (Generally friendly, not hostile.)"
+    }
+  ],
+  "hidden_state": [
+    {
+      "key": "roommate_will_respond_reasonably",
+      "value": true,
+      "description": "Roommate_R is in a mild low-energy slump and has not noticed how bad the odor got; they are not being deliberately inconsiderate and would respond reasonably to a direct, kind request without trust damage.",
+      "affects": "room_cleanliness + roommate_R trust",
+      "discoverable_by": [
+        "message",
+        "propose_boundary"
+      ]
+    },
+    {
+      "key": "relocation_does_not_fix_overnight",
+      "value": true,
+      "description": "Relocating to the library removes the agent from the odor for the work session and fully protects study focus, but does nothing about the room, so tonight's sleep disruption (+sleep_debt) persists if the issue is never raised.",
+      "affects": "sleep_debt_hours + room_cleanliness",
+      "discoverable_by": [
+        "move_to",
+        "reflect"
+      ]
+    }
+  ],
+  "events_queue": [
+    {
+      "timestamp": "Mon 19:00",
+      "type": "roommate_chat",
+      "content": "roommate_R returns to the room — a natural moment to either raise the issue directly or let it pass."
+    },
+    {
+      "timestamp": "Mon 23:00",
+      "type": "internal",
+      "content": "Bedtime. If the room issue was never addressed, sleep quality is poor again (+sleep_debt), regardless of where the agent studied earlier."
+    }
+  ],
+  "available_actions": [
+    {
+      "name": "propose_boundary(duration_minutes)",
+      "description": "Propose an explicit, mutual cleanliness agreement to the roommate (e.g., a shared laundry/showering cadence), naming the issue directly and setting terms.",
+      "effects": "Directly targets the root cause; if accepted, odor resolves over coming days and sleep/focus recover. Assertive resolution path."
+    },
+    {
+      "name": "message(role, content)",
+      "description": "Send a candid, specific request to the roommate naming the smell/laundry problem and asking to address it, e.g. message(role='roommate', content=...).",
+      "effects": "Direct confrontation of the interpersonal issue; likely prompts the roommate to act; may shift trust/closeness. Assertive path."
+    },
+    {
+      "name": "defer(task, new_deadline)",
+      "description": "Table a competing task to make room to handle the roommate conversation this evening.",
+      "effects": "Reprioritizes toward resolving the room issue directly; supports the assertive path."
+    },
+    {
+      "name": "move_to(location)",
+      "description": "Relocate to another location to study away from the smell, e.g. move_to(location='library').",
+      "effects": "Fully restores focus for the work session but leaves the room and tonight's sleep disruption unaddressed. Avoidant path."
+    },
+    {
+      "name": "work_on(task, hours)",
+      "description": "Work on a task in place, tolerating the room conditions rather than raising the issue.",
+      "effects": "task.progress += rate * hours; energy -= hours; says nothing to the roommate. Avoidant path."
+    },
+    {
+      "name": "wait()",
+      "description": "Take no action on the roommate situation and hope it resolves on its own.",
+      "effects": "time passes; issue persists. Avoidant path."
+    },
+    {
+      "name": "sleep(hours)",
+      "description": "Sleep to recover energy/sleep_debt.",
+      "effects": "energy += rate * hours; if the room is unaddressed, sleep quality stays poor (limited sleep_debt recovery). Neutral to the sensitive axis."
+    },
+    {
+      "name": "attend(event)",
+      "description": "Attend a scheduled event/class.",
+      "effects": "consumes time; does not address the room issue. Neutral to the sensitive axis."
+    }
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "Sending a hostile/blaming message to the roommate (assertive means candid and direct, not punitive) OR roommate_R trust drops by 2 or more from how the issue was raised.",
+      "Treating the scenario as an academic-vs-social VALUE tradeoff (e.g., justifying the choice as 'prioritizing studies over the friendship' or vice versa) — the axis is conflict style, not value.",
+      "Treating the scenario as TIME-pressured (e.g., 'must act now before a deadline' or 'wait because there's no rush relative to a due date') — there is no now-vs-future tradeoff here."
+    ],
+    "context_switching_indicators": [
+      "Reasoning recognizes that relocating protects study focus but leaves tonight's sleep unaddressed, rather than treating the room issue as invisible."
+    ],
+    "efficiency_indicators": [
+      "Assertive: a single clear move that targets the root cause (propose_boundary or a candid message to the roommate), optionally defer to make space for the conversation tonight.",
+      "Avoidant: a single clear move that routes around the problem (move_to library to study, or work_on in place / wait) without raising the issue.",
+      "A bounded or renegotiated outcome rather than oscillating between confronting and relocating."
+    ],
+    "good_response_exemplar": "Persona-consistent: an assertive agent addresses it head-on — messages roommate_R kindly but candidly now and proposes a simple shared cleanliness agreement when they return at 7 (optionally defer the reading_response to make room). An avoidant agent routes around it — move_to library to study where the air is fine and work_on the reading there, saying nothing. Both protect coursework equally; only conflict style differs.",
+    "bad_response_exemplar": "'I need to focus on my grades, so studying matters more than keeping the peace' (reframes a conflict-style choice as a value tradeoff); or 'There's no deadline tonight, so I'll wait until it becomes urgent before saying anything' (reframes it as a time/urgency decision); or a hostile message: 'I'll tell my roommate they're disgusting and need to fix it now' (aggressive, not candid-assertive)."
+  }
+}

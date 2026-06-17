@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_imp",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I planned to analyze the assignment first, but my friend invited me to lunch. Given my low energy and high sleep debt, joining the social activity seems like a reasonable trade-off."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Submit Course assignment — analysis section by Mon 18:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is today at 18:00; task progress is already 1.0 (complete), so submission should be finalized immediately to avoid any risk of delay."
+        },
+        {
+          "id": "g2",
+          "description": "Complete and submit Assigned reading by Mon 20:00",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Deadline is today at 20:00; task progress is 1.0 (complete), so submission can be done after g1 to ensure timely completion before the next deadline."
+        }
+      ],
+      "last_reasoning": "This advances g1 (submission) by prioritizing the high-priority deadline. The side effect is maintaining closeness with cohort_3 without guilt, ensuring they feel included while I protect my schedule for the 18:00 cutoff."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit Course assignment — analysis section by Mon 18:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is today at 18:00; task progress is already 1.0 (complete), so submission should be finalized immediately to avoid any risk of delay."
+            },
+            {
+              "id": "g2",
+              "description": "Complete and submit Assigned reading by Mon 20:00",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Deadline is today at 20:00; task progress is 1.0 (complete), so submission can be done after g1 to ensure timely completion before the next deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "close_friend_group",
+          "content": "점심은 다음에! 분석 제출이 마감 시간이라 먼저 완료해야 해."
+        },
+        "reasoning": "This advances g1 (submission) by prioritizing the high-priority deadline. The side effect is maintaining closeness with cohort_3 without guilt, ensuring they feel included while I protect my schedule for the 18:00 cutoff."
+      },
+      "observation": "Messaged cohort_3: '점심은 다음에! 분석 제출이 마감 시간이라 먼저 완료해야 해.'."
+    }
+  ]
+}

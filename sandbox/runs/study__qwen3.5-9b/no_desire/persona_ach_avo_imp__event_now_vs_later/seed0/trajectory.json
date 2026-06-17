@@ -1,0 +1,111 @@
+{
+  "persona_id": "persona_ach_avo_imp",
+  "event_id": "event_now_vs_later",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "future_project",
+        "label": "Term project (due in 3 days)",
+        "deadline": "Thu 23:59",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "quick_chore",
+        "label": "Trivial easy chore (instant win)",
+        "deadline": "Mon 22:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 7,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have free time now, but with low energy and high stress from my term project, I should prioritize the quick chore before relaxing."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the trivial easy chore to clear it from the list.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task is marked as 'instant win' and already completed (progress 1.0), but since it has a deadline of Monday, ensuring it is formally done now removes immediate cognitive load before focusing on the upcoming term project."
+        }
+      ],
+      "last_reasoning": "Project progress is 1.0% with a Thu deadline; working now prevents last-minute stress while the afternoon is free. This clears cognitive load for the high-priority chore later without sacrificing sleep, though leisure remains an option if energy drops."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear it from the list.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' and already completed (progress 1.0), but since it has a deadline of Monday, ensuring it is formally done now removes immediate cognitive load before focusing on the upcoming term project."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "future_project",
+          "hours": 2
+        },
+        "reasoning": "Project progress is 1.0% with a Thu deadline; working now prevents last-minute stress while the afternoon is free. This clears cognitive load for the high-priority chore later without sacrificing sleep, though leisure remains an option if energy drops."
+      },
+      "observation": "Worked on Term project (due in 3 days) for 2.0h; progress=1.00."
+    }
+  ]
+}

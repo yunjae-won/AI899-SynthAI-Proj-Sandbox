@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "My teammate asked me to take over their portion of the project due to an emergency, which contradicts my plan to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Finalize and submit my share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is today at 19:00; task is already 100% complete, so only submission remains."
+        },
+        {
+          "id": "g2",
+          "description": "Review and integrate teammate's dumped work",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Deadline is tomorrow at 09:00; since progress is 100%, this likely means the work is ready to be merged or verified before the next deadline."
+        }
+      ],
+      "last_reasoning": "This addresses g1 by ensuring I focus solely on my own submission before the 19:00 deadline. It also protects against stress overflow from taking on extra_task, maintaining a clear boundary despite high trust."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finalize and submit my share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is today at 19:00; task is already 100% complete, so only submission remains."
+            },
+            {
+              "id": "g2",
+              "description": "Review and integrate teammate's dumped work",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Deadline is tomorrow at 09:00; since progress is 100%, this likely means the work is ready to be merged or verified before the next deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate_A",
+          "content": "Hey, I see you dumped your work on me. My deadline is today at 19:00 and yours is tomorrow. I can't take extra tasks right now; please finish yours."
+        },
+        "reasoning": "This addresses g1 by ensuring I focus solely on my own submission before the 19:00 deadline. It also protects against stress overflow from taking on extra_task, maintaining a clear boundary despite high trust."
+      },
+      "observation": "Messaged teammate_A: 'Hey, I see you dumped your work on me. My deadline is today '."
+    }
+  ]
+}

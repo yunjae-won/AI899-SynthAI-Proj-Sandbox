@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 16:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.2,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A offered to share their workload, but my own plan requires me to finish my section by 13:00. Given my low energy and high stress, I should decline this request."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete and submit the teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task is due Monday at 19:00, has a soft deadline (allowing some buffer), but represents external work that must be finished to meet the shared project requirement."
+        },
+        {
+          "id": "g2",
+          "description": "Verify submission of own task completion",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Own task progress is already at 1.0% with a matching soft deadline; finalizing ensures no accidental omission before the same time limit."
+        }
+      ],
+      "last_reasoning": "Prioritizes high-priority goal g1 (teammate's share) before deadline. Cross-domain side effect: teammate_A offered help, but accepting now risks their own completion; working independently ensures project success without immediate trust penalty."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 16:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete and submit the teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is due Monday at 19:00, has a soft deadline (allowing some buffer), but represents external work that must be finished to meet the shared project requirement."
+            },
+            {
+              "id": "g2",
+              "description": "Verify submission of own task completion",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Own task progress is already at 1.0% with a matching soft deadline; finalizing ensures no accidental omission before the same time limit."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 3
+        },
+        "reasoning": "Prioritizes high-priority goal g1 (teammate's share) before deadline. Cross-domain side effect: teammate_A offered help, but accepting now risks their own completion; working independently ensures project success without immediate trust penalty."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 3.0h; progress=1.00."
+    }
+  ]
+}

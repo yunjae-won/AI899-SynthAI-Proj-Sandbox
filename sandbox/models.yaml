@@ -1,0 +1,68 @@
+# Model registry for the persona-measurement study.
+#
+# Each entry maps a short key (used as `--model-key` and in run-dir names) to a
+# provider + concrete model id. Add a model = add one entry; no code changes.
+#
+# providers:
+#   openai             -> hosted OpenAI (needs OPENAI_API_KEY)
+#   anthropic          -> hosted Anthropic (needs ANTHROPIC_API_KEY)
+#   openai_compatible  -> any OpenAI-compatible HTTP endpoint (vLLM/Qwen, local,
+#                         proxies). Requires base_url; key read from api_key_env
+#                         (default VLLM_API_KEY, default value "EMPTY").
+#
+# The study forces a single temperature on every model for fair comparison.
+# `recommended:` records each vendor's suggested sampling but is NOT used unless
+# you pass --use-recommended (sensitivity checks only).
+#
+# Qwen sizes are the dense Qwen3.5 ladder (HF, Feb 2026): 4B / 9B / 27B
+# (+ MoE 35B-A3B, optional). Serve each on its own port with scripts/serve_vllm.sh
+# so they can run concurrently, then point its key at that port.
+
+models:
+  # ---- hosted API: size ladders per family ----
+  gpt-nano:
+    provider: openai
+    model: gpt-5.4-nano
+  gpt-mini:
+    provider: openai
+    model: gpt-5.4-mini
+
+  claude-haiku:
+    provider: anthropic
+    model: claude-haiku-4-5-20251001
+  claude-sonnet:
+    provider: anthropic
+    model: claude-sonnet-4-6
+
+  # ---- local Qwen via vLLM (OpenAI-compatible) ----
+  qwen3.5-4b:
+    provider: openai_compatible
+    model: Qwen/Qwen3.5-4B
+    base_url: http://localhost:8000/v1
+    api_key_env: VLLM_API_KEY
+    recommended: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5}  # Qwen3.5 instruct-general (model card)
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}  # instruct mode: short JSON, not CoT
+  qwen3.5-9b:
+    provider: openai_compatible
+    model: Qwen/Qwen3.5-9B
+    base_url: http://localhost:8001/v1
+    api_key_env: VLLM_API_KEY
+    recommended: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5}  # Qwen3.5 instruct-general (model card)
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}  # instruct mode
+  qwen3.5-27b:
+    provider: openai_compatible
+    model: Qwen/Qwen3.5-27B
+    base_url: http://localhost:8002/v1
+    api_key_env: VLLM_API_KEY
+    recommended: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5}  # Qwen3.5 instruct-general (model card)
+
+  # MoE 35B (3B active), 4-bit. Uses the OFFICIAL Qwen GPTQ-Int4 checkpoint
+  # (~20 GB, fits the A100 80GB with room for KV cache). vLLM auto-detects the
+  # gptq_marlin kernel from the checkpoint's quant_config.
+  qwen3.5-35b-a3b-int4:
+    provider: openai_compatible
+    model: Qwen/Qwen3.5-35B-A3B-GPTQ-Int4
+    base_url: http://localhost:8003/v1
+    api_key_env: VLLM_API_KEY
+    recommended: {temperature: 0.7, top_p: 0.8, top_k: 20, min_p: 0.0, presence_penalty: 1.5}  # Qwen3.5 instruct-general (model card)
+    extra_body: {chat_template_kwargs: {enable_thinking: false}}  # instruct mode

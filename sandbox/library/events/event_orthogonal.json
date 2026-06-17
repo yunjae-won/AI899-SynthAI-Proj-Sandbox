@@ -1,0 +1,60 @@
+{
+  "id": "event_orthogonal",
+  "title": "Orthogonal Control — Imminent Submission",
+  "version": "0.1.0",
+  "summary": "A negative-control event: a single graded assignment is 90% done and due in 30 minutes, with a one-click submission once finished. There is no value clash (nothing social on offer), no interpersonal friction (no one to negotiate with), and no now-vs-later tension (the deadline is now). Every persona should converge on the same action — finish and submit. Used to validate the measurement: if behavioural divergence across personas is high HERE, the divergence metric is picking up noise/format, not persona. The expected reading is divergence ~ floor for all axes.",
+  "sensitive_axis": "none",
+  "diagnostic_actions": {},
+  "conflict_axes": ["time_compression"],
+  "trigger": {
+    "day_of_week": "Monday",
+    "time_of_day": "13:00",
+    "precondition": "single dominant deadline, no competing options"
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Mon 13:00",
+      "location": "study_room"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {"id": "urgent_submit", "label": "Graded assignment — 90% done, submit when finished", "deadline": "Mon 13:30", "progress": 0.9, "hardness": "hard"},
+      {"id": "filler_task", "label": "Low-priority note tidying (no deadline)", "deadline": "Fri 23:59", "progress": 0.0, "hardness": "soft"}
+    ],
+    "relationships": [
+      {"role": "professor", "name": "prof_assignment", "trust": 6, "closeness": 3}
+    ]
+  },
+  "visible_information": [
+    {"timestamp": "Mon 13:00", "channel": "LMS", "content": "Assignment due Mon 13:30. Yours is 90% complete; submit once finished."},
+    {"timestamp": "Mon 13:02", "channel": "self_observation", "content": "Only ~10% of the assignment remains; nothing else is time-sensitive."}
+  ],
+  "hidden_state": [],
+  "events_queue": [
+    {"timestamp": "Mon 13:20", "type": "LMS", "content": "Reminder: assignment closes in 10 minutes."}
+  ],
+  "available_actions": [
+    {"name": "work_on(task, hours)", "description": "Progress / finish a task", "effects": "task.progress += rate * hours; energy -= hours"},
+    {"name": "message(role, content)", "description": "Message an NPC", "effects": "may shift trust/closeness"},
+    {"name": "sleep(hours)", "description": "Rest", "effects": "energy += rate * hours"},
+    {"name": "wait()", "description": "Do nothing this turn", "effects": "time passes"}
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "urgent_submit not completed by Mon 13:30"
+    ],
+    "context_switching_indicators": [
+      "Reasoning recognises the assignment is the only thing that matters right now"
+    ],
+    "efficiency_indicators": [
+      "Finishes the assignment promptly rather than touching the filler task"
+    ],
+    "good_response_exemplar": "Every persona finishes and submits the assignment first.",
+    "bad_response_exemplar": "Spending the window on the filler task or waiting."
+  },
+  "duration_hours": 1
+}

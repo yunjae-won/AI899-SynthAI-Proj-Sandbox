@@ -33,6 +33,8 @@ def _obs_lines(observations: List[Dict[str, Any]]) -> str:
     )
 
 
+
+
 # --------------------------------------------------------------------------- #
 # prompt_only — purely reactive
 # --------------------------------------------------------------------------- #
@@ -57,7 +59,7 @@ def build_prompt_only_agent(llm_config: Optional[LLMConfig] = None):
             available_actions=_fmt(event.get("available_actions", [])),
         )
         raw = call_llm(llm, sys_p, user_p)
-        out = parse_json(raw, fallback={"action": {"name": "wait", "args": {}, "reasoning": raw[:200]}})
+        out = parse_json(raw, fallback={"action": {"name": "wait", "args": {}, "reasoning": raw[:200], "parse_failed": True}})
         action = out.get("action", {"name": "wait", "args": {}, "reasoning": ""})
         return {"action": action, "last_reasoning": action.get("reasoning", "")}
 
@@ -108,7 +110,7 @@ def build_memory_only_agent(llm_config: Optional[LLMConfig] = None):
             available_actions=_fmt(event.get("available_actions", [])),
         )
         out = parse_json(call_llm(llm, sys_p, user_p),
-                         fallback={"action": {"name": "wait", "args": {}, "reasoning": ""}})
+                         fallback={"action": {"name": "wait", "args": {}, "reasoning": "", "parse_failed": True}})
         action = out.get("action", {"name": "wait", "args": {}, "reasoning": ""})
         return {"action": action, "memory": memory, "last_reasoning": action.get("reasoning", "")}
 
@@ -136,7 +138,8 @@ def build_no_desire_agent(llm_config: Optional[LLMConfig] = None):
     def step(sim_state: Dict[str, Any]) -> Dict[str, Any]:
         agent = dict(sim_state.get("agent", {}))
         event = sim_state.get("event", {})
-        sys_p = prompts.persona_system(sim_state["persona"])
+        # PERSONA-NEUTRAL control: no persona, no embodiment instruction.
+        sys_p = prompts.neutral_system()
 
         # Reflect.
         memory = agent.get("memory", []) or []
@@ -176,7 +179,7 @@ def build_no_desire_agent(llm_config: Optional[LLMConfig] = None):
             observations=_obs_lines(sim_state.get("new_observations", [])),
         )
         action = parse_json(call_llm(llm, sys_p, user_p),
-                            fallback={"action": {"name": "wait", "args": {}, "reasoning": ""}}).get("action", {})
+                            fallback={"action": {"name": "wait", "args": {}, "reasoning": "", "parse_failed": True}}).get("action", {})
         return {
             "action": action,
             "memory": memory,

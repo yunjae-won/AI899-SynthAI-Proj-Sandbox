@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate asked if I can finish their part since I'm better at it, but I have a deadline for my own share today."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00, progress is 0%, and task was just assigned. Must be finished before own task is considered complete."
+        },
+        {
+          "id": "g2",
+          "description": "Submit own share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00, progress is 100%. Submission required to meet deadline."
+        }
+      ],
+      "last_reasoning": "This advances g1 (teammate's share) which is at 0% progress and high priority. Cross-domain side effect: I must message teammate_A to acknowledge their offer before they feel ignored, preserving trust despite the extra workload."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00, progress is 0%, and task was just assigned. Must be finished before own task is considered complete."
+            },
+            {
+              "id": "g2",
+              "description": "Submit own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00, progress is 100%. Submission required to meet deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "This advances g1 (teammate's share) which is at 0% progress and high priority. Cross-domain side effect: I must message teammate_A to acknowledge their offer before they feel ignored, preserving trust despite the extra workload."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

@@ -1,14 +1,19 @@
 # Synthetic Person Sandbox
 
-This is the runnable sandbox for the **Synthetic Person** project — a
-proof-of-concept evaluation of whether LLM agents can behave like a single,
-self-motivated human: forming their own goals, revising them under new
-information, and staying recognizably themselves across an episode.
+This is the runnable sandbox for the **Synthetic Person** project.
 
-The sandbox is implemented in **LangGraph**. It consumes the persona and
-event libraries already defined in [`../src/`](../src) without modifying
-them — the idea is that the design team in `src/` keeps curating scenarios
-while this layer just runs them.
+> **Re-scope (current focus): a persona *measurement* study.** Earlier the
+> question was whether persona-conditioned cognitive scaffolding helps agents
+> *perform* better. The project has shifted to two measurement questions —
+> **(Q1) can models actually embody a persona, in the intended direction?** and
+> **(Q2) how does behaviour change across personas, and is that change caused by
+> persona rather than noise?** See [**Measurement study**](#measurement-study-current-focus)
+> below. The original engine/agents/evaluators are unchanged and still documented.
+
+The sandbox is implemented in **LangGraph**. Stimuli come from two merged
+roots: the upstream [`../src/`](../src) library (a teammate's repo, left
+untouched) and a sandbox-local `library/` authored in this repo — so we can
+grow the persona/event set without modifying the submodule.
 
 ## What's inside
 
@@ -16,23 +21,126 @@ while this layer just runs them.
 sandbox/
 ├── README.md            ← you are here
 ├── requirements.txt
-├── config.py            ← LLM provider selection (anthropic | openai)
-├── run.py               ← CLI: `single`, `matrix`, `list`
+├── config.py            ← LLM provider selection (anthropic | openai | openai_compatible)
+├── models.yaml          ← model registry: map a --model-key to a provider/model
+├── registry.py          ← resolve a model-key → LLMConfig
+├── run.py               ← CLI: `single`, `matrix`, `study`, `aggregate`, `list`
 ├── world/
 │   ├── state.py         ← TypedDict schemas (SimState, AgentState, ...)
-│   ├── loader.py        ← load personas/events from ../src/
+│   ├── loader.py        ← load personas/events (merges ../src/ + ./library/)
 │   └── engine.py        ← turn-based simulator with event-queue injection
+├── library/             ← sandbox-local stimuli (this repo)
+│   ├── personas/        ← 8 controlled-factorial personas (value × conflict × time)
+│   └── events/          ← 3 axis-sensitive events + 1 orthogonal control
 ├── agents/
-│   ├── full_agent.py    ← LangGraph graph: perceive → reflect → desires → goals → action
+│   ├── full_agent.py    ← LangGraph graph: reflect → desires → goals → action
 │   ├── baselines.py     ← prompt_only / memory_only / no_desire baselines
 │   ├── prompts.py       ← every LLM prompt template lives here
 │   └── _llm_utils.py    ← robust JSON parsing, single-shot call helper
 ├── evaluation/
+│   ├── measurement.py   ← PRIMARY: action-JSD, diagnostic hit-rate, parse-fail, axis×event matrix
 │   ├── rule_based.py    ← deterministic 3-axis scoring (hard_loss / context / efficiency)
-│   ├── judge.py         ← LLM-as-judge: persona consistency + adaptation
-│   └── swap_test.py     ← pairwise persona-swap consistency test
-└── runs/                ← trajectory + evaluation JSON outputs
+│   ├── judge.py         ← LLM-as-judge: persona consistency + adaptation (secondary)
+│   └── swap_test.py     ← pairwise persona-swap consistency test (secondary)
+└── runs/                ← trajectory + evaluation/measurement JSON outputs
+
+../scripts/serve_vllm.sh ← serve a HF model with vLLM (OpenAI-compatible) for local Qwen
+../run_study.sh          ← sweep the study across model-keys, then aggregate
 ```
+
+## Measurement study (current focus)
+
+### Personas — a controlled 2×2×2 factorial (`library/personas/`)
+
+Eight personas span three **simple binary axes**; only the axis-relevant fields
+vary, everything else (baseline state, relationships) is held constant, so a
+behavioural difference is attributable to an axis rather than a confound. Each
+persona carries an `axes` tag:
+
+| Axis | Poles | Fields it sets |
+|---|---|---|
+| **value** | `achievement` ↔ `affiliation` | `value_priorities` (academic vs relationships) |
+| **conflict** | `avoidant` ↔ `assertive` | `communication_style` (conflict_style, assertiveness) |
+| **time** | `impulsive` ↔ `deliberate` | `decision_tendencies` (planning_horizon, procrastination, sleep_discipline) |
+
+Names: `persona_{ach|aff}_{avo|asr}_{imp|del}`.
+
+### Events — axis-sensitive + an orthogonal control (`library/events/`)
+
+Each event carries `sensitive_axis` and pre-registered `diagnostic_actions`
+(the expected action per pole, for **directional fidelity**):
+
+| Event | sensitive_axis | Tension |
+|---|---|---|
+| `event_value_clash` | value | study block vs spontaneous lunch |
+| `event_boundary_push` | conflict | a teammate dumps work on you last-minute |
+| `event_now_vs_later` | time | invest early vs take the easy/now option |
+| `event_orthogonal` | none | one obviously-correct urgent submission (control floor) |
+
+An axis-A-sensitive event is automatically the **negative control** for axes B
+and C. The headline artifact is the **axis × event divergence matrix**: the
+diagonal (axis on its sensitive event) should dominate; off-diagonal and the
+orthogonal event should sit near the floor. That contrast is both the
+persona-effect estimate *and* the metric's discriminant-validity check.
+
+### Metrics (`evaluation/measurement.py`, deterministic, no LLM)
+
+- **action-distribution JS divergence** between persona poles → the matrix.
+- **`persona_effect`** = `divergence(sensitive) − divergence(orthogonal)` per axis.
+- **`diagnostic_hit_rate`** — did the agent take its pole's pre-registered action? (Q1 direction)
+- **`parse_fail_rate`** — fraction of turns the model failed to emit JSON (a confound covariate).
+
+The LLM judge and swap test still exist but are now *secondary* (`--judge`, `--swap-trials`).
+
+### Models — registry + local Qwen via vLLM
+
+Models are **data**, not code: add one entry to [`models.yaml`](models.yaml) and
+reference it with `--model-key`. Providers: `openai`, `anthropic`, and
+`openai_compatible` (any OpenAI-compatible endpoint — vLLM-served Qwen, local
+servers, proxies). For fair comparison the study **forces one temperature** on
+every model; each vendor's `recommended` sampling is recorded but unused unless
+you pass `--use-recommended`.
+
+The default registry includes hosted size ladders (`gpt-nano`/`gpt-mini`,
+`claude-haiku`/`claude-sonnet`) and the dense **Qwen3.5** ladder
+(`qwen3.5-4b` / `-9b` / `-27b`; HF, Feb 2026 — see
+[Qwen3.5-9B](https://huggingface.co/Qwen/Qwen3.5-9B),
+[Qwen3.5-27B](https://huggingface.co/Qwen/Qwen3.5-27B),
+[Qwen3.5-4B](https://huggingface.co/Qwen/Qwen3.5-4B)).
+
+Serve a Qwen model (separate GPU env; vLLM is **not** a sandbox dependency):
+
+```bash
+pip install -r ../requirements-serve.txt           # in a separate venv
+../scripts/serve_vllm.sh Qwen/Qwen3.5-9B 8001      # port matches models.yaml
+```
+
+### Running the study
+
+```bash
+pip install -r sandbox/requirements.txt
+export OPENAI_API_KEY=...        # and/or ANTHROPIC_API_KEY, or serve Qwen above
+
+# one model: factorial personas × 4 events × {full, no_desire} × seeds
+python -m sandbox.run study --model-key qwen3.5-9b --seeds 3
+
+# sweep several models, then build the model × axis table
+SEEDS=5 ../run_study.sh qwen3.5-4b qwen3.5-9b gpt-mini claude-sonnet
+python -m sandbox.run aggregate
+```
+
+Outputs:
+
+```
+runs/study__<model_key>/
+  <agent>/<persona_id>__<event_id>/seed<n>/trajectory.json
+  measurement.json        ← axis×event matrix, persona_effect, hit-rate, parse-fail
+runs/aggregate.json       ← model × axis contrasts across all study runs
+```
+
+**Validation gate:** on the pilot, confirm the matrix diagonal dominates and the
+orthogonal event is at the floor *before* scaling to API models. If it doesn't,
+the events need fixing, not the models.
 
 ## The question the sandbox is built to answer
 

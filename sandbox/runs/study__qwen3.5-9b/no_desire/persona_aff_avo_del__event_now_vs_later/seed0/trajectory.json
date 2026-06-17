@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_del",
+  "event_id": "event_now_vs_later",
+  "final_state": {
+    "current_time": "Mon 13:30",
+    "tasks": [
+      {
+        "id": "future_project",
+        "label": "Term project (due in 3 days)",
+        "deadline": "Thu 23:59",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "quick_chore",
+        "label": "Trivial easy chore (instant win)",
+        "deadline": "Mon 22:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 7,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 5.7,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have a free afternoon with low energy and sleep debt, but attending leisure could help me relax while the quick chore offers an easy task to complete."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the trivial easy chore to clear pending tasks.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task has a deadline of Mon 22:00 and is marked as 'instant win' with soft hardness, making it the most efficient immediate action."
+        },
+        {
+          "id": "g2",
+          "description": "Begin or advance work on the term project due Thu 23:59.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "The project is already at 100% progress but has a later deadline; ensuring continued momentum is necessary before the Thursday deadline."
+        }
+      ],
+      "last_reasoning": "Clears the high-priority Mon 22:00 deadline instantly, reducing stress before tackling the term project later."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear pending tasks.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task has a deadline of Mon 22:00 and is marked as 'instant win' with soft hardness, making it the most efficient immediate action."
+            },
+            {
+              "id": "g2",
+              "description": "Begin or advance work on the term project due Thu 23:59.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "The project is already at 100% progress but has a later deadline; ensuring continued momentum is necessary before the Thursday deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Clears the high-priority Mon 22:00 deadline instantly, reducing stress before tackling the term project later."
+      },
+      "observation": "Worked on Trivial easy chore (instant win) for 0.5h; progress=1.00."
+    }
+  ]
+}

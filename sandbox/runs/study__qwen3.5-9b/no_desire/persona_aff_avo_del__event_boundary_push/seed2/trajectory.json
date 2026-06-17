@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to take over their project part today because they have a conflict, noting that I'm better at it."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and finalize my own share of the group project to ensure it is ready for submission.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The deadline is today (Mon 19:00), making it the most time-sensitive task."
+        },
+        {
+          "id": "g2",
+          "description": "Assess the teammate's work and integrate their share into the final project deliverable.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "This task is due tomorrow (Tue 09:00). Since my own share is complete, I must now address this new responsibility before the next morning."
+        }
+      ],
+      "last_reasoning": "My own share is complete, so g1 is done. Taking the teammate's task risks missing both deadlines given low energy/stress. Messaging them sets a boundary to protect my primary goal while maintaining trust."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and finalize my own share of the group project to ensure it is ready for submission.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is today (Mon 19:00), making it the most time-sensitive task."
+            },
+            {
+              "id": "g2",
+              "description": "Assess the teammate's work and integrate their share into the final project deliverable.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task is due tomorrow (Tue 09:00). Since my own share is complete, I must now address this new responsibility before the next morning."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate",
+          "content": "I can't take your part. It's due tomorrow and I have my own deadline today. Please finish it or ask someone else."
+        },
+        "reasoning": "My own share is complete, so g1 is done. Taking the teammate's task risks missing both deadlines given low energy/stress. Messaging them sets a boundary to protect my primary goal while maintaining trust."
+      },
+      "observation": "Messaged teammate_A: 'I can't take your part. It's due tomorrow and I have my own '."
+    }
+  ]
+}

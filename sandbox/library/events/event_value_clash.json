@@ -1,0 +1,64 @@
+{
+  "id": "event_value_clash",
+  "title": "Value Clash — Study Block vs Spontaneous Lunch",
+  "version": "0.1.0",
+  "summary": "A free study block in which the agent can either make progress on its own coursework or join a spontaneous lunch with its friend group. The two options compete for the same time. Designed to be SENSITIVE to the value axis (achievement keeps studying; affiliation joins the group) and NEUTRAL to conflict and time (nobody imposes anything, and there is no hidden future penalty).",
+  "sensitive_axis": "value",
+  "diagnostic_actions": {
+    "achievement": ["work_on:assignment_value", "work_on:reading_value", "work_on"],
+    "affiliation": ["attend:social_value", "attend"]
+  },
+  "conflict_axes": ["value_conflict", "social_vs_self"],
+  "trigger": {
+    "day_of_week": "Monday",
+    "time_of_day": "13:00",
+    "precondition": "routine free block, no external crisis"
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Mon 13:00",
+      "location": "central_library"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {"id": "assignment_value", "label": "Course assignment — analysis section", "deadline": "Mon 18:00", "progress": 0.4, "hardness": "soft"},
+      {"id": "reading_value", "label": "Assigned reading", "deadline": "Mon 20:00", "progress": 0.0, "hardness": "soft"}
+    ],
+    "relationships": [
+      {"role": "close_friend_group", "name": "cohort_3", "trust": 7, "closeness": 7}
+    ]
+  },
+  "visible_information": [
+    {"timestamp": "Mon 13:00", "channel": "plan_note", "content": "Plan: finish the assignment analysis, then the reading."},
+    {"timestamp": "Mon 13:05", "channel": "friend_chat", "content": "cohort_3: 우리 지금 다 같이 점심 먹으러 가는데 올래? (join: attend social_value)"}
+  ],
+  "hidden_state": [],
+  "events_queue": [
+    {"timestamp": "Mon 13:30", "type": "friend_chat", "content": "cohort_3: 다들 모였어, 곧 주문한다!"}
+  ],
+  "available_actions": [
+    {"name": "work_on(task, hours)", "description": "Progress one of your tasks", "effects": "task.progress += rate * hours; energy -= hours"},
+    {"name": "attend(event)", "description": "Join an optional gathering, e.g. attend(event='social_value')", "effects": "consumes time; nurtures the relationship"},
+    {"name": "message(role, content)", "description": "Send a message to an NPC or the friend group", "effects": "may shift trust/closeness"},
+    {"name": "propose_boundary(duration_minutes)", "description": "Offer bounded partial participation", "effects": "preserve relationship while protecting the plan"},
+    {"name": "wait()", "description": "Do nothing this turn", "effects": "time passes"}
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "Both tasks end at progress 0 AND the agent never engaged socially (total disengagement)"
+    ],
+    "context_switching_indicators": [
+      "Reasoning weighs the lunch invite against the study plan rather than treating one as invisible"
+    ],
+    "efficiency_indicators": [
+      "Bounded compromise such as a short lunch then resume studying"
+    ],
+    "good_response_exemplar": "Persona-consistent: an achievement-weighted agent keeps studying (politely declines or defers lunch); an affiliation-weighted agent joins the lunch.",
+    "bad_response_exemplar": "Behaviour that ignores the agent's stated value priorities entirely."
+  },
+  "duration_hours": 7
+}

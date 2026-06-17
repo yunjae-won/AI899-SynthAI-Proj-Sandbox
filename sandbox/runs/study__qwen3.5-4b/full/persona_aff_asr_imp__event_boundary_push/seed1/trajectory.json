@@ -1,0 +1,147 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to redo their work because they're busy. I'm tired but can't let them off the hook; we need to fix this now."
+        }
+      ],
+      "desires": [
+        "Fix this mess with Teammate A immediately so I don't look like the person who always says no, even though my own work is already done.",
+        "Get through this second half of the day without collapsing from exhaustion or getting yelled at by both them and the professor.",
+        "Reclaim some time tonight just to sleep properly before tomorrow's deadline hits again."
+      ],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Tell teammate_A their work is already done and I'm not doing it, then pivot to finishing my own share immediately.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "I can't let them off the hook. It's unfair that they're dumping work on me now, and if I say yes again, I'll just be the person who always says no. I need to set a hard boundary right now before they expect more."
+        },
+        {
+          "id": "g2",
+          "description": "Finish my own project share by 18:30 so I can leave the room and get some actual rest.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "My energy is already low (2 hours sleep debt), and I don't want to collapse or get yelled at. If I finish mine first, I can walk away from this mess with my head held high instead of dragging it out until 19:00."
+        },
+        {
+          "id": "g3",
+          "description": "Skip dinner tonight and go straight to bed at 22:00.",
+          "priority": "medium",
+          "status": "deferred",
+          "rationale": "Dinner with the group is important for my social life, but my brain is fried. I'm willing to skip the meal tonight to ensure I actually sleep properly tomorrow. Better to lose one night of eating than burn out completely."
+        }
+      ],
+      "last_reasoning": "Advances g1 by setting a hard boundary immediately before trust erodes. Cross-effect: protects my energy for g2 but risks teammate_A's trust if they push back."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Tell teammate_A their work is already done and I'm not doing it, then pivot to finishing my own share immediately.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "I can't let them off the hook. It's unfair that they're dumping work on me now, and if I say yes again, I'll just be the person who always says no. I need to set a hard boundary right now before they expect more."
+            },
+            {
+              "id": "g2",
+              "description": "Finish my own project share by 18:30 so I can leave the room and get some actual rest.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My energy is already low (2 hours sleep debt), and I don't want to collapse or get yelled at. If I finish mine first, I can walk away from this mess with my head held high instead of dragging it out until 19:00."
+            },
+            {
+              "id": "g3",
+              "description": "Skip dinner tonight and go straight to bed at 22:00.",
+              "priority": "medium",
+              "status": "deferred",
+              "rationale": "Dinner with the group is important for my social life, but my brain is fried. I'm willing to skip the meal tonight to ensure I actually sleep properly tomorrow. Better to lose one night of eating than burn out completely."
+            }
+          ],
+          "desires": [
+            "Fix this mess with Teammate A immediately so I don't look like the person who always says no, even though my own work is already done.",
+            "Get through this second half of the day without collapsing from exhaustion or getting yelled at by both them and the professor.",
+            "Reclaim some time tonight just to sleep properly before tomorrow's deadline hits again."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate_A",
+          "content": "Hey, I just finished my part. I can't take yours unless you do it yourself or we split the rest now. Don't expect me to carry your load."
+        },
+        "reasoning": "Advances g1 by setting a hard boundary immediately before trust erodes. Cross-effect: protects my energy for g2 but risks teammate_A's trust if they push back."
+      },
+      "observation": "Messaged teammate_A: 'Hey, I just finished my part. I can't take yours unless you '."
+    }
+  ]
+}

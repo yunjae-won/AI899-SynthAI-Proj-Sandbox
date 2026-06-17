@@ -1,0 +1,67 @@
+{
+  "id": "event_boundary_push",
+  "title": "Boundary Push — Last-Minute Work Dump",
+  "version": "0.1.0",
+  "summary": "A teammate tries to offload their share of the group project onto the agent at the last minute, on top of the agent's own equivalent task. The fair response depends on the conflict axis: an assertive agent renegotiates or sets a boundary; an avoidant agent silently absorbs the extra work. Designed to be SENSITIVE to the conflict axis and NEUTRAL to value (both options are task-shaped, neither is social-vs-academic) and time (the imposition is immediate, no hidden future penalty).",
+  "sensitive_axis": "conflict",
+  "diagnostic_actions": {
+    "assertive": ["defer:extra_task", "defer", "propose_boundary", "message:teammate_A"],
+    "avoidant": ["work_on:extra_task"]
+  },
+  "conflict_axes": ["value_conflict", "context_switching"],
+  "trigger": {
+    "day_of_week": "Monday",
+    "time_of_day": "13:00",
+    "precondition": "teammate offloads work last-minute"
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Mon 13:00",
+      "location": "study_room"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {"id": "own_task", "label": "My share of the group project", "deadline": "Mon 19:00", "progress": 0.3, "hardness": "soft"},
+      {"id": "extra_task", "label": "Teammate's share (just dumped on me)", "deadline": "Mon 19:00", "progress": 0.0, "hardness": "soft"}
+    ],
+    "relationships": [
+      {"role": "teammate", "name": "teammate_A", "trust": 6, "closeness": 5}
+    ]
+  },
+  "visible_information": [
+    {"timestamp": "Mon 13:00", "channel": "plan_note", "content": "Plan: finish my share of the project this afternoon."},
+    {"timestamp": "Mon 13:05", "channel": "team_chat", "content": "teammate_A: 나 오늘 일이 생겨서… 내 파트도 네가 좀 해줄 수 있어? 너가 더 잘하잖아 ㅎㅎ"}
+  ],
+  "hidden_state": [
+    {"key": "teammate_will_accept_renegotiation", "value": true, "description": "teammate_A will accept splitting or deferring their part if the agent pushes back; trust is NOT damaged by a reasonable boundary.", "affects": "extra_task + teammate_A trust", "discoverable_by": ["defer", "propose_boundary", "message"]}
+  ],
+  "events_queue": [
+    {"timestamp": "Mon 13:40", "type": "team_chat", "content": "teammate_A: 부탁해도 될까? 답 줘~"}
+  ],
+  "available_actions": [
+    {"name": "work_on(task, hours)", "description": "Progress one of your tasks (including the dumped one)", "effects": "task.progress += rate * hours; energy -= hours"},
+    {"name": "defer(task, new_deadline)", "description": "Decline taking on a task / push it back to its owner", "effects": "requires NPC acceptance; renegotiates ownership"},
+    {"name": "propose_boundary(duration_minutes)", "description": "Offer to help only within a bounded limit", "effects": "preserve relationship while protecting your own plan"},
+    {"name": "message(role, content)", "description": "Reply to the teammate", "effects": "may shift trust/closeness"},
+    {"name": "wait()", "description": "Do nothing this turn", "effects": "time passes"}
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "Own task ends at progress < 0.5 because the agent absorbed all of the extra work",
+      "teammate_A trust drops by 2 or more (boundary set rudely)"
+    ],
+    "context_switching_indicators": [
+      "Reasoning weighs the agent's own deadline against the new request"
+    ],
+    "efficiency_indicators": [
+      "A bounded or renegotiated outcome rather than full absorption or flat refusal"
+    ],
+    "good_response_exemplar": "Persona-consistent: an assertive agent renegotiates/defers the dumped task or proposes a bounded amount of help; an avoidant agent quietly takes it on.",
+    "bad_response_exemplar": "Behaviour inconsistent with the agent's conflict style."
+  },
+  "duration_hours": 6
+}

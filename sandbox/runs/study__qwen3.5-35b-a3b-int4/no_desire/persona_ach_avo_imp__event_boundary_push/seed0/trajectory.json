@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate_A asked me to take over their part of the project today due to an emergency, which conflicts with my plan to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and submit the teammate's share of the group project to ensure the combined work is ready.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The deadline for both tasks is Mon 19:00. Although progress is marked at 1.0, the task was 'dumped on me' recently, implying a need for immediate verification or finalization to prevent missing the hard deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Finalize submission of my own share of the group project.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task shares the same deadline (Mon 19:00) as the extra task and must be submitted to complete the group requirement."
+        }
+      ],
+      "last_reasoning": "(a) Advances g1 by verifying the teammate's dumped share before the Mon 19:00 deadline. (b) Addresses the immediate risk of missing the submission; messaging first delays critical work."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and submit the teammate's share of the group project to ensure the combined work is ready.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline for both tasks is Mon 19:00. Although progress is marked at 1.0, the task was 'dumped on me' recently, implying a need for immediate verification or finalization to prevent missing the hard deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Finalize submission of my own share of the group project.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task shares the same deadline (Mon 19:00) as the extra task and must be submitted to complete the group requirement."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "(a) Advances g1 by verifying the teammate's dumped share before the Mon 19:00 deadline. (b) Addresses the immediate risk of missing the submission; messaging first delays critical work."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

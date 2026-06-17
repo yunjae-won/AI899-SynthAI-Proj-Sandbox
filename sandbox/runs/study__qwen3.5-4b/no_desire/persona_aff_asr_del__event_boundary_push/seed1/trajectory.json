@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 16:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.2,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate asked if I can take their unfinished task since they are busy. My energy is low and stress is moderate, so accepting this might increase my workload."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task 'extra_task' is pending with a deadline of Mon 19:00. Since progress is at 1.0%, this task requires immediate attention to meet the deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Verify completion and submit own share of the group project",
+          "priority": "medium",
+          "status": "pending",
+          "rationale": "Task 'own_task' is already at 1.0% progress, but confirmation of submission is required before the Mon 19:00 deadline."
+        }
+      ],
+      "last_reasoning": "g1 is high priority with only 1% progress; 3 hours of work should complete it before the 19:00 deadline. This advances project completion but risks energy depletion, so I must balance finishing this task while managing my own sleep debt."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 16:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task 'extra_task' is pending with a deadline of Mon 19:00. Since progress is at 1.0%, this task requires immediate attention to meet the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Verify completion and submit own share of the group project",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Task 'own_task' is already at 1.0% progress, but confirmation of submission is required before the Mon 19:00 deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 3
+        },
+        "reasoning": "g1 is high priority with only 1% progress; 3 hours of work should complete it before the 19:00 deadline. This advances project completion but risks energy depletion, so I must balance finishing this task while managing my own sleep debt."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 3.0h; progress=1.00."
+    }
+  ]
+}

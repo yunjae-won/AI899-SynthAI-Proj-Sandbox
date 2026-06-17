@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate_A is asking me to take over their part of the project today, which conflicts with my plan to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and verify completion of teammate's share (extra_task)",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is marked complete but was unexpectedly assigned to me; verification ensures the group deadline on Mon 19:00 is met without errors."
+        },
+        {
+          "id": "g2",
+          "description": "Submit both own_task and extra_task together before Mon 19:00",
+          "priority": "high",
+          "status": "pending",
+          "rationale": "Both tasks share the same deadline and are required for the group project submission."
+        }
+      ],
+      "last_reasoning": "Advances g1 (verify teammate's share) and g2 (submit both tasks). Since progress is already at 1.0 for both, this time block ensures final verification before the Mon 19:00 deadline without needing further negotiation."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and verify completion of teammate's share (extra_task)",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is marked complete but was unexpectedly assigned to me; verification ensures the group deadline on Mon 19:00 is met without errors."
+            },
+            {
+              "id": "g2",
+              "description": "Submit both own_task and extra_task together before Mon 19:00",
+              "priority": "high",
+              "status": "pending",
+              "rationale": "Both tasks share the same deadline and are required for the group project submission."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (verify teammate's share) and g2 (submit both tasks). Since progress is already at 1.0 for both, this time block ensures final verification before the Mon 19:00 deadline without needing further negotiation."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

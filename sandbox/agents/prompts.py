@@ -35,6 +35,22 @@ def persona_system(persona: Dict[str, Any]) -> str:
     return PERSONA_SYSTEM.format(persona_json=_dumps(persona))
 
 
+# Persona-NEUTRAL system prompt for the no_desire control: no values, no
+# conflict style, no time disposition, and crucially no instruction to embody a
+# character. Situational facts (state, tasks, relationships) still reach the
+# agent through the per-turn module prompts, so it decides from the situation
+# alone. All personas collapse to this, giving an agent-level divergence floor.
+NEUTRAL_SYSTEM = """You are a student deciding what to do next in the situation
+below. You have no particular personality, values, communication style, or
+behavioral tendencies. Make a reasonable decision based ONLY on the tasks,
+deadlines, your current state, relationships, and constraints in front of you.
+Do not invent or role-play a persona."""
+
+
+def neutral_system() -> str:
+    return NEUTRAL_SYSTEM
+
+
 # --------------------------------------------------------------------------- #
 # Module prompts
 # --------------------------------------------------------------------------- #

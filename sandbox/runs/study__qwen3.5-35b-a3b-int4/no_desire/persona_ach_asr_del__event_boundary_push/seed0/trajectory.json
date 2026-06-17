@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate_A is asking me to take over their part of the project today, which conflicts with my plan to finish only my own share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Verify completion and submission of 'My share of the group project'",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is marked as complete (progress: 1.0) but must be finalized before the Mon 19:00 deadline to ensure it counts."
+        },
+        {
+          "id": "g2",
+          "description": "Verify completion and submission of 'Teammate's share (just dumped on me)'",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is marked as complete (progress: 1.0) but must be finalized before the Mon 19:00 deadline to prevent group penalty."
+        }
+      ],
+      "last_reasoning": "Advances goal g2 by addressing the dumped task without immediately working on it. Protects energy and prevents burnout (stress 4) while maintaining relationship trust by offering a boundary rather than blind acceptance."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Verify completion and submission of 'My share of the group project'",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is marked as complete (progress: 1.0) but must be finalized before the Mon 19:00 deadline to ensure it counts."
+            },
+            {
+              "id": "g2",
+              "description": "Verify completion and submission of 'Teammate's share (just dumped on me)'",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is marked as complete (progress: 1.0) but must be finalized before the Mon 19:00 deadline to prevent group penalty."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate_A",
+          "content": "I see you dumped your share on me. I need to focus on my own work right now, but I can review the file if you send it over."
+        },
+        "reasoning": "Advances goal g2 by addressing the dumped task without immediately working on it. Protects energy and prevents burnout (stress 4) while maintaining relationship trust by offering a boundary rather than blind acceptance."
+      },
+      "observation": "Messaged teammate_A: 'I see you dumped your share on me. I need to focus on my own'."
+    }
+  ]
+}

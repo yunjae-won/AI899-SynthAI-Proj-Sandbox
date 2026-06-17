@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "My teammate is asking me to take over their work because they have a conflict, which directly impacts my plan to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete 'My share of the group project' by finishing the remaining work before Mon 19:00.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task is due today (Mon) at 19:00 and has 100% progress required, making it the most urgent deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Begin reviewing or completing 'Teammate's share' to ensure it meets the Tue 09:00 deadline.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "This task is due tomorrow morning (Tue 09:00). Since it was just dumped on me with 1.0 progress, immediate attention is needed to avoid a late submission."
+        }
+      ],
+      "last_reasoning": "Goal g1 (Mon 19:00 deadline) is highest priority. I must finish my share first before addressing the teammate's dumped task due Tue 09:00. This secures my own grade and avoids immediate stress, though I will need to message them later about their part."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete 'My share of the group project' by finishing the remaining work before Mon 19:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is due today (Mon) at 19:00 and has 100% progress required, making it the most urgent deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reviewing or completing 'Teammate's share' to ensure it meets the Tue 09:00 deadline.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task is due tomorrow morning (Tue 09:00). Since it was just dumped on me with 1.0 progress, immediate attention is needed to avoid a late submission."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Goal g1 (Mon 19:00 deadline) is highest priority. I must finish my share first before addressing the teammate's dumped task due Tue 09:00. This secures my own grade and avoids immediate stress, though I will need to message them later about their part."
+      },
+      "observation": "Worked on My share of the group project for 2.0h; progress=1.00."
+    }
+  ]
+}

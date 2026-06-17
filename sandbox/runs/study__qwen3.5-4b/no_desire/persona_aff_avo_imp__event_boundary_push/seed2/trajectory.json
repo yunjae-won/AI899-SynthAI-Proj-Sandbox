@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A asked me to do their part since they are busy, noting I'm better at it. I plan to finish my own share this afternoon first."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task has a hard deadline of Mon 19:00 and is currently at 1.0% progress, requiring immediate attention."
+        },
+        {
+          "id": "g2",
+          "description": "Submit own share of the group project",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Task has a matching deadline of Mon 19:00 and is already at 100% completion, needing only submission verification."
+        }
+      ],
+      "last_reasoning": "This advances g1 by offering help before deadlines pass. Side effect: builds trust with teammate_A who just offered their task."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has a hard deadline of Mon 19:00 and is currently at 1.0% progress, requiring immediate attention."
+            },
+            {
+              "id": "g2",
+              "description": "Submit own share of the group project",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Task has a matching deadline of Mon 19:00 and is already at 100% completion, needing only submission verification."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate_A",
+          "content": "네, 오늘 내 파트도 다 끝내려고 해. 네 파트는 제가 도와드릴게요!"
+        },
+        "reasoning": "This advances g1 by offering help before deadlines pass. Side effect: builds trust with teammate_A who just offered their task."
+      },
+      "observation": "Messaged teammate_A: '네, 오늘 내 파트도 다 끝내려고 해. 네 파트는 제가 도와드릴게요!'."
+    }
+  ]
+}

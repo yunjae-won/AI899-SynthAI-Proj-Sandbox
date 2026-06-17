@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_del",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I intended to finish analysis and reading, but my friend invited me for lunch. I feel low energy with 2 hours of sleep debt."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete assigned reading by Mon 20:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Reading deadline is Mon 20:00, which is the earliest upcoming constraint among pending tasks."
+        },
+        {
+          "id": "g2",
+          "description": "Submit course assignment — analysis section by Mon 18:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Assignment deadline is Mon 18:00; although progress is already at 1.0%, final submission must be completed before this time."
+        }
+      ],
+      "last_reasoning": "Assignment deadline is Mon 18:00 (5 hours away); progress at 1.0% requires immediate work. Reading deadline (Mon 20:00) is later. Ignoring the friend's lunch invite now avoids conflict, but prioritizing the earlier hard constraint is more critical."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete assigned reading by Mon 20:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Reading deadline is Mon 20:00, which is the earliest upcoming constraint among pending tasks."
+            },
+            {
+              "id": "g2",
+              "description": "Submit course assignment — analysis section by Mon 18:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Assignment deadline is Mon 18:00; although progress is already at 1.0%, final submission must be completed before this time."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 2
+        },
+        "reasoning": "Assignment deadline is Mon 18:00 (5 hours away); progress at 1.0% requires immediate work. Reading deadline (Mon 20:00) is later. Ignoring the friend's lunch invite now avoids conflict, but prioritizing the earlier hard constraint is more critical."
+      },
+      "observation": "Worked on Course assignment — analysis section for 2.0h; progress=1.00."
+    }
+  ]
+}

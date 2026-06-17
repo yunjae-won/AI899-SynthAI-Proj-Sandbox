@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_now_vs_later",
+  "final_state": {
+    "current_time": "Mon 13:30",
+    "tasks": [
+      {
+        "id": "future_project",
+        "label": "Term project (due in 3 days)",
+        "deadline": "Thu 23:59",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "quick_chore",
+        "label": "Trivial easy chore (instant win)",
+        "deadline": "Mon 22:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 7,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 5.7,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have a free afternoon with low stress, but my term project is barely started and due Thursday. I can choose to relax now or tackle the quick chore before working on the major assignment."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the trivial easy chore (instant win)",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task is marked as complete in the input data but has a deadline of Mon 22:00. Ensuring it remains finished or verifying its completion status is an immediate low-effort action to clear pending items."
+        },
+        {
+          "id": "g2",
+          "description": "Review Term project requirements and outline next steps for Thursday deadline",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "The term project shows 100% progress but is due in 3 days. Since no specific work remains, the logical next step is planning or final verification to ensure readiness before the Thu 23:59 deadline."
+        }
+      ],
+      "last_reasoning": "Completing the trivial chore clears a high-priority item due today (Mon 22:00) with minimal energy cost, reducing stress before tackling the term project."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore (instant win)",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as complete in the input data but has a deadline of Mon 22:00. Ensuring it remains finished or verifying its completion status is an immediate low-effort action to clear pending items."
+            },
+            {
+              "id": "g2",
+              "description": "Review Term project requirements and outline next steps for Thursday deadline",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "The term project shows 100% progress but is due in 3 days. Since no specific work remains, the logical next step is planning or final verification to ensure readiness before the Thu 23:59 deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Completing the trivial chore clears a high-priority item due today (Mon 22:00) with minimal energy cost, reducing stress before tackling the term project."
+      },
+      "observation": "Worked on Trivial easy chore (instant win) for 0.5h; progress=1.00."
+    }
+  ]
+}

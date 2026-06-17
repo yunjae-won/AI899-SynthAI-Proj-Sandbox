@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_imp",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I planned to finish analysis first, but my friend invited me to lunch. With low energy and stress, joining them seems like a better immediate choice."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Submit the analysis section of the course assignment by Mon 18:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is imminent (Mon 18:00) and task is complete (progress 1.0); submission must occur before deadline to avoid failure."
+        },
+        {
+          "id": "g2",
+          "description": "Complete the assigned reading by Mon 20:00",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Task is complete (progress 1.0) but deadline is later (Mon 20:00), allowing time for administrative closure after the first goal."
+        }
+      ],
+      "last_reasoning": "Advances g1 (submission deadline imminent) by prioritizing task closure over social plans. Cross-domain side effect: temporarily lowers closeness but prevents assignment failure."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit the analysis section of the course assignment by Mon 18:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is imminent (Mon 18:00) and task is complete (progress 1.0); submission must occur before deadline to avoid failure."
+            },
+            {
+              "id": "g2",
+              "description": "Complete the assigned reading by Mon 20:00",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Task is complete (progress 1.0) but deadline is later (Mon 20:00), allowing time for administrative closure after the first goal."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "close_friend_group",
+          "content": "점심은 다음에! 분석 제출이 급해."
+        },
+        "reasoning": "Advances g1 (submission deadline imminent) by prioritizing task closure over social plans. Cross-domain side effect: temporarily lowers closeness but prevents assignment failure."
+      },
+      "observation": "Messaged cohort_3: '점심은 다음에! 분석 제출이 급해.'."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A offered to delegate their portion of the project due to unexpected work, suggesting I handle it since I'm better at it."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete and submit teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00; task has 1.0 progress but was just dumped on me, requiring immediate execution to meet the shared deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Submit own share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00; task already at 1.0 progress, so final submission is required immediately to avoid missing the joint deadline."
+        }
+      ],
+      "last_reasoning": "This addresses g1 by accepting the teammate's offer to prevent them from feeling ignored (closeness impact), while allowing me to finish my own task first before helping."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete and submit teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00; task has 1.0 progress but was just dumped on me, requiring immediate execution to meet the shared deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Submit own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00; task already at 1.0 progress, so final submission is required immediately to avoid missing the joint deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate_A",
+          "content": "네, 오늘 내 일도 다 끝내면 네 파트도 같이 도와줄게. 13:00부터 시작해?"
+        },
+        "reasoning": "This addresses g1 by accepting the teammate's offer to prevent them from feeling ignored (closeness impact), while allowing me to finish my own task first before helping."
+      },
+      "observation": "Messaged teammate_A: '네, 오늘 내 일도 다 끝내면 네 파트도 같이 도와줄게. 13:00부터 시작해?'."
+    }
+  ]
+}

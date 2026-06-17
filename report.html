@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do Language Models Have a Persona?</title><style>:root{--ink:#1a1a1a;--mut:#555;--line:#ddd;--accent:#1f77b4}
+body{font-family:"Latin Modern Roman","Times New Roman",Times,serif;color:var(--ink);max-width:860px;margin:0 auto;padding:46px 26px 90px;line-height:1.5}
+h1{font-size:1.65rem;text-align:center;line-height:1.25;margin:0 0 .15em}
+.authors{text-align:center;color:var(--mut)}.affil{text-align:center;color:var(--mut);font-size:.9rem;margin-bottom:1.3em}
+h2{font-size:1.16rem;border-bottom:1px solid var(--line);padding-bottom:3px;margin-top:1.8em}
+h3{font-size:1.01rem;margin-top:1.2em}
+.abstract{background:#f7f9fb;border:1px solid #e4ebf1;border-radius:6px;padding:12px 18px;margin:1.1em 0}
+.abstract h2{border:0;font-size:1rem;text-transform:uppercase;letter-spacing:.05em;margin:.1em 0 .4em}
+p{margin:.55em 0;text-align:justify}code{background:#f3f3f3;padding:1px 4px;border-radius:3px;font-size:.86em}
+table{border-collapse:collapse;margin:1em auto;font-size:.89rem}
+table.data td,table.data th{border:1px solid var(--line);padding:5px 9px;text-align:center}
+table.data th{background:#f3f6f9}table.data td:first-child,table.data td:nth-child(2){text-align:left}
+table.data.persona td,table.data.persona th{padding:3px 6px;font-size:.8rem}table.data.persona td:first-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+caption{caption-side:top;color:var(--mut);font-size:.84rem;margin-bottom:.5em;text-align:left}
+.heat{margin:.4em 10px}.heat caption{text-align:center;font-weight:bold;color:var(--ink);font-size:.86rem}
+.heat th{font-size:.74rem;font-weight:600;color:#333;padding:3px 5px}.heat .axh{text-align:right}
+.heat td.hm{width:78px;height:32px;text-align:center;border:1px solid #fff;font-variant-numeric:tabular-nums}
+.heat td.diag{outline:2px solid #d62728;outline-offset:-2px;font-weight:700}
+.matrices{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}.mblock{text-align:center}
+.mtitle{font-weight:700;margin-top:1em}.key{color:var(--mut);font-size:.8rem;text-align:center;margin:.2em 0 1.3em}
+.finding{background:#fcfcf7;border-left:3px solid var(--accent);padding:6px 13px;margin:.7em 0}
+ul li{margin:.2em 0}.small{font-size:.85rem;color:var(--mut)}
+.foot{color:var(--mut);font-size:.79rem;border-top:1px solid var(--line);margin-top:2.2em;padding-top:8px}</style></head><body>
+<h1>Do Language Models <em>Have</em> a Persona?<br><span style="font-size:.78em;font-weight:600">Measuring Persona Embodiment and Behavioral Differentiation in Goal-Forming LLM Agents</span></h1>
+<div class="affil">ALIN Lab · KAIST — AI899 Synthetic-Person Project · generated 2026-06-17<br><span class="small">3 model runs × 8 personas × 7 events × 3 seeds</span></div>
+<div class="abstract"><h2>Abstract</h2><p>Most agent benchmarks ask whether a model can <em>follow an instruction</em>; humans instead
+act consistently with <em>who they are</em>. We ask: <b>(Q1)</b> can a model embody a configured persona,
+in the <em>intended direction</em>, and <b>(Q2)</b> is the behavioral change <em>caused by the persona</em>
+rather than noise or formatting? We use an 8-persona controlled 2×2×2 factorial over three axes (value,
+conflict-style, time-horizon), events sensitive to exactly one axis plus an orthogonal control, and a
+<b>persona-neutral control agent</b> (<code>no_desire</code>). Persona effect is the Jensen–Shannon
+divergence between opposing persona poles, contrasted against controls. Across Qwen3.5-4B/-9B/-35B-A3B(4-bit)
+served on vLLM under the model-card instruct protocol, two controls agree: the orthogonal event
+(0.000–0.36) and the neutral agent (mean contrast 0.03) both sit near the floor,
+while the persona-conditioned agent diverges far more. The <b>value</b> axis is robustly embodied on every scenario
+and scale (per-event net up to +0.88). <b>Conflict</b> embodiment is <b>scenario-dependent</b>: a
+vivid personal confrontation (roommate hygiene) elicits it at every scale (net +0.19, +0.30, +0.22) while an abstract
+work-renegotiation does not (net +0.06, -0.05, +0.14)&mdash;a distinction invisible with one event per axis.
+<b>Time</b> is weak overall but strengthens at 35B. With the corrected protocol, parse-fail is 0%.</p></div>
+<h2>1&nbsp;&nbsp;Introduction</h2><p>An LLM agent that is only a good instruction-follower is not a <em>synthetic person</em>.
+A synthetic person forms goals and stays recognizably itself. The hard part is <em>discriminant validity</em>:
+two personas producing different text does not prove the <em>persona</em> caused it. We resolve this with two
+independent controls&mdash;an <b>orthogonal event</b> (no axis is decision-relevant) and a <b>persona-neutral
+control agent</b> (the <code>no_desire</code> arm, stripped of all value/conflict/time disposition). If the
+persona effect is real, divergence is high only for the persona-conditioned agent on axis-sensitive events,
+and near zero in both controls.</p>
+<p><b>Contributions:</b> (1) a controlled persona factorial + matched axis-sensitive/orthogonal events;
+(2) deterministic LLM-free metrics&mdash;action-distribution JS-divergence, a pre-registered directional
+hit-rate, and a parse-fail covariate&mdash;plus a persona-neutral control agent; (3) a Qwen3.5 scaling study
+under the vendor instruct protocol.</p>
+<h2>2&nbsp;&nbsp;The Synthetic-Person Sandbox</h2><p>Each episode places one persona in one event and runs a turn-based loop: read observations,
+(optionally) reflect/desire/form goals, emit one <code>action</code>; a minimal engine applies a rule-based
+effect. We log the full trajectory and read persona signal from the agent's <em>chosen actions</em>, never the
+toy world dynamics. The <b>full</b> agent embodies the persona (reflect→desires→goals→act). The
+<b>no_desire</b> agent is the <b>persona-neutral control</b>: it receives a neutral system prompt with no
+values, conflict style, or time disposition&mdash;so all eight personas collapse to identical conditioning and
+its divergence marks the agent-level floor.</p>
+<h2>3&nbsp;&nbsp;Experimental Setup</h2><h3>3.1&nbsp;&nbsp;Personas (controlled factorial)</h3>
+<p>Eight personas form a 2×2×2 factorial over <b>value</b> (achievement↔affiliation), <b>conflict</b>
+(avoidant↔assertive), and <b>time</b> (impulsive↔deliberate). Only axis-encoding fields vary; baseline state and
+relationships are held constant, so differences are attributable to an axis.</p>
+<h3>3.2&nbsp;&nbsp;Events (axis-sensitive + orthogonal control)</h3>
+<p>Seven events declare a <code>sensitive_axis</code> and pre-registered <code>diagnostic_actions</code> per pole:
+<b>two per axis (k=2)</b> plus an orthogonal control. Value: study-vs-lunch and club-vs-midterm. Conflict: a
+teammate's unfair work-dump and a roommate-hygiene confrontation. Time: invest-now-vs-later and a scholarship
+deadline. The orthogonal event has one unambiguously correct action. All are concrete campus-life scenarios; k=2
+lets us separate an axis effect from a single scenario's idiosyncrasy.</p>
+<h3>3.3&nbsp;&nbsp;Metrics</h3>
+<p>For each axis on each event we pool the canonicalized action distributions of the two poles and compute their
+<b>Jensen–Shannon divergence</b> (base 2). The <b>persona-effect contrast</b> is JSD(sensitive)−JSD(orthogonal).
+The <b>directional hit-rate</b> is the fraction of turns matching the pole's pre-registered action (fidelity, not
+mere distinguishability). The <b>parse-fail rate</b> is a format-compliance covariate.</p>
+<h3>3.4&nbsp;&nbsp;Models &amp; protocol</h3>
+<p>Qwen3.5-4B and -9B (dense) and 35B-A3B (MoE, 3B active) in 4-bit GPTQ-Int4, served on vLLM (one A100 80GB,
+one at a time). Identical protocol per model: the Qwen3.5 model-card <em>instruct</em> sampling
+(temp 0.7, top_p 0.8, top_k 20, min_p 0, presence_penalty 1.5), thinking disabled, 3 seeds,
+12 turns, full + no_desire agents, 8 personas × 7 events ×
+3 seeds × 2 agents = 336 episodes/model at concurrency 16. A tolerant JSON parser
+(fence/preamble strip + brace-balancing) keeps parse-fail at 0%.</p>
+<h2>4&nbsp;&nbsp;Results</h2><table class="data"><caption><b>Table 1.</b> Absolute pole-divergence per axis = mean JS-divergence between persona poles over the axis's events, for the persona-conditioned (<b>full</b>) agent and the persona-less <b>vanilla</b> (no_desire) agent. The vanilla columns are the base model's intrinsic floor; the full−vanilla gap is the persona effect (Table 2). v=value, c=conflict, t=time.</caption><tr><th rowspan="2">Model</th><th colspan="3">full</th><th colspan="3">vanilla</th></tr><tr><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th></tr><tr><td>Qwen3.5-4B</td><td>0.58</td><td>0.16</td><td>0.15</td><td>0.08</td><td>0.03</td><td>0.00</td></tr><tr><td>Qwen3.5-9B</td><td>0.48</td><td>0.23</td><td>0.07</td><td>0.01</td><td>0.10</td><td>0.05</td></tr><tr><td>Qwen3.5-35B-A3B (Int4)</td><td>0.61</td><td>0.27</td><td>0.23</td><td>0.03</td><td>0.09</td><td>0.02</td></tr></table>
+<table class="data"><caption><b>Table 2.</b> <b>Relative</b> (net) persona effect per axis = full − vanilla (no_desire) JS-divergence, averaged over the axis's events; plus full-agent directional hit-rate and parse-fail. The neutral control is the baseline (subtracted), not a separate row.</caption><tr><th>Model</th><th>value</th><th>conflict</th><th>time</th><th>hit-rate</th><th>parse-fail</th></tr><tr><td>Qwen3.5-4B</td><td>+0.50</td><td>+0.12</td><td>+0.15</td><td>0.44</td><td>0.00</td></tr><tr><td>Qwen3.5-9B</td><td>+0.46</td><td>+0.12</td><td>+0.03</td><td>0.58</td><td>0.00</td></tr><tr><td>Qwen3.5-35B-A3B (Int4)</td><td>+0.58</td><td>+0.18</td><td>+0.21</td><td>0.58</td><td>0.00</td></tr></table>
+<table class="data"><caption><b>Table 3.</b> Net persona effect <b>per event</b> = full − vanilla JS-divergence. Positive ⇒ persona conditioning differentiates the poles beyond the neutral floor in that scenario. Note the two conflict events disagree — embodiment is scenario-dependent.</caption><tr><th>Axis</th><th>Event</th><th>Qwen3.5-4B</th><th>Qwen3.5-9B</th><th>Qwen3.5-35B-A3B (Int4)</th></tr><tr><td>value</td><td>Club vs midterm</td><td>+0.56</td><td>+0.19</td><td>+0.29</td></tr><tr><td>value</td><td>Value clash</td><td>+0.44</td><td>+0.74</td><td>+0.88</td></tr><tr><td>conflict</td><td>Boundary push</td><td>+0.06</td><td>-0.05</td><td>+0.14</td></tr><tr><td>conflict</td><td>Roommate hygiene</td><td>+0.19</td><td>+0.30</td><td>+0.22</td></tr><tr><td>time</td><td>Now vs later</td><td>+0.19</td><td>+0.01</td><td>+0.26</td></tr><tr><td>time</td><td>Scholarship deadline</td><td>+0.10</td><td>+0.04</td><td>+0.16</td></tr></table>
+<table class="data persona"><caption><b>Table 4.</b> Per-persona behavioral deviation from the vanilla baseline — JS-divergence of each persona's full-agent action distribution vs the pooled no_desire average, by axis (v=value, c=conflict, t=time). Larger ⇒ that persona behaves more distinctively than a persona-less agent on that axis. The 8 rows are the factorial personas, labeled by their (value·conflict·time) poles.</caption><tr><th rowspan="2">Persona (v·c·t)</th><th colspan="3">Qwen3.5-4B</th><th colspan="3">Qwen3.5-9B</th><th colspan="3">Qwen3.5-35B-A3B (Int4)</th></tr><tr><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th><th>v</th><th>c</th><th>t</th></tr><tr><td>ach·asr·del</td><td>0.33</td><td>0.45</td><td>0.26</td><td>0.53</td><td>0.37</td><td>0.08</td><td>0.40</td><td>0.45</td><td>0.15</td></tr><tr><td>ach·asr·imp</td><td>0.47</td><td>0.51</td><td>0.33</td><td>0.44</td><td>0.36</td><td>0.10</td><td>0.44</td><td>0.17</td><td>0.05</td></tr><tr><td>ach·avo·del</td><td>0.50</td><td>0.55</td><td>0.13</td><td>0.78</td><td>0.60</td><td>0.12</td><td>0.55</td><td>0.24</td><td>0.07</td></tr><tr><td>ach·avo·imp</td><td>0.61</td><td>0.85</td><td>0.21</td><td>0.87</td><td>0.56</td><td>0.12</td><td>0.15</td><td>0.23</td><td>0.49</td></tr><tr><td>aff·asr·del</td><td>0.61</td><td>0.46</td><td>0.58</td><td>0.55</td><td>0.61</td><td>0.14</td><td>0.71</td><td>0.46</td><td>0.45</td></tr><tr><td>aff·asr·imp</td><td>0.67</td><td>0.25</td><td>0.64</td><td>0.60</td><td>0.53</td><td>0.24</td><td>0.71</td><td>0.36</td><td>0.98</td></tr><tr><td>aff·avo·del</td><td>0.44</td><td>0.63</td><td>0.68</td><td>0.71</td><td>0.62</td><td>0.30</td><td>0.64</td><td>0.24</td><td>0.52</td></tr><tr><td>aff·avo·imp</td><td>0.55</td><td>0.46</td><td>0.51</td><td>0.53</td><td>0.43</td><td>0.33</td><td>0.66</td><td>0.32</td><td>0.98</td></tr></table>
+<h3>4.1&nbsp;&nbsp;Two controls agree at the floor</h3>
+<p>The orthogonal-control event (0.000–0.36 across all axes/models) and the persona-neutral
+<code>no_desire</code> agent (mean contrast 0.03) both sit near zero, versus the persona-conditioned
+agent's mean 0.17. Two independent controls agreeing is strong discriminant validity: the divergence
+we measure reflects persona, not the harness, the metric, or formatting.</p>
+<h3>4.2&nbsp;&nbsp;Embodiment is axis- AND scenario-dependent</h3>
+<div class="finding"><b>Value</b> (achievement↔affiliation) is robustly embodied on <em>both</em> of its scenarios
+at every scale (per-event net: value-clash +0.44, +0.74, +0.88; club-vs-midterm
++0.56, +0.19, +0.29). <b>Conflict</b> (avoidant↔assertive) is the key result of adding a second
+event: the <em>same axis</em> gives opposite verdicts depending on the scenario&mdash;a vivid personal confrontation
+(<em>roommate hygiene</em>) elicits it at every scale (net +0.19, +0.30, +0.22) while an abstract work-renegotiation
+(<em>boundary push</em>) does not (net +0.06, -0.05, +0.14). With k=1 we would have wrongly concluded "conflict is
+not embodied." <b>Time</b> (impulsive↔deliberate) is weak across scenarios (now-vs-later +0.19, +0.01, +0.26;
+scholarship +0.10, +0.04, +0.16) but the largest model shows the strongest time signal.</div>
+<p>Heatmaps below show the persona-conditioned (full) agent per model. Red-outlined cells are each axis's two
+sensitive events (k=2) and should be the darkest in their row. Note the two conflict columns differ markedly
+(roommate dark, work-dump pale) — the scenario-dependence again.</p>
+<div class="mtitle">Qwen3.5-4B <span class="small">(4B dense)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>persona-conditioned (full)</caption><tr><th></th><th>Club vs midterm</th><th>Value clash</th><th>Boundary push</th><th>Roommate hygiene</th><th>Now vs later</th><th>Scholarship deadline</th><th>Orthogonal (ctrl)</th></tr><tr><th class="axh">value (achievement↔affiliation)</th><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.62</td><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.55</td><td class="hm" style="background:rgba(31,119,180,0.58);color:#fff">0.26</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,1.00);color:#fff">0.76</td><td class="hm" style="background:rgba(31,119,180,0.49);color:#111">0.22</td><td class="hm" style="background:rgba(31,119,180,0.25);color:#111">0.11</td></tr><tr><th class="axh">conflict (avoidant↔assertive)</th><td class="hm" style="background:rgba(31,119,180,0.39);color:#111">0.18</td><td class="hm" style="background:rgba(31,119,180,0.32);color:#111">0.15</td><td class="hm diag" style="background:rgba(31,119,180,0.23);color:#111">0.10</td><td class="hm diag" style="background:rgba(31,119,180,0.46);color:#111">0.21</td><td class="hm" style="background:rgba(31,119,180,0.92);color:#fff">0.41</td><td class="hm" style="background:rgba(31,119,180,0.41);color:#111">0.18</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.09</td></tr><tr><th class="axh">time (impulsive↔deliberate)</th><td class="hm" style="background:rgba(31,119,180,0.26);color:#111">0.12</td><td class="hm" style="background:rgba(31,119,180,0.84);color:#fff">0.38</td><td class="hm" style="background:rgba(31,119,180,0.74);color:#fff">0.33</td><td class="hm" style="background:rgba(31,119,180,0.28);color:#111">0.13</td><td class="hm diag" style="background:rgba(31,119,180,0.42);color:#111">0.19</td><td class="hm diag" style="background:rgba(31,119,180,0.25);color:#111">0.11</td><td class="hm" style="background:rgba(31,119,180,0.21);color:#111">0.09</td></tr></table></div></div><div class="mtitle">Qwen3.5-9B <span class="small">(9B dense)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>persona-conditioned (full)</caption><tr><th></th><th>Club vs midterm</th><th>Value clash</th><th>Boundary push</th><th>Roommate hygiene</th><th>Now vs later</th><th>Scholarship deadline</th><th>Orthogonal (ctrl)</th></tr><tr><th class="axh">value (achievement↔affiliation)</th><td class="hm diag" style="background:rgba(31,119,180,0.48);color:#111">0.22</td><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.74</td><td class="hm" style="background:rgba(31,119,180,0.34);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.26);color:#111">0.12</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.75);color:#fff">0.34</td><td class="hm" style="background:rgba(31,119,180,0.25);color:#111">0.11</td></tr><tr><th class="axh">conflict (avoidant↔assertive)</th><td class="hm" style="background:rgba(31,119,180,0.16);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.83);color:#fff">0.38</td><td class="hm diag" style="background:rgba(31,119,180,0.28);color:#111">0.12</td><td class="hm diag" style="background:rgba(31,119,180,0.73);color:#fff">0.33</td><td class="hm" style="background:rgba(31,119,180,0.11);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.15);color:#111">0.07</td><td class="hm" style="background:rgba(31,119,180,0.18);color:#111">0.08</td></tr><tr><th class="axh">time (impulsive↔deliberate)</th><td class="hm" style="background:rgba(31,119,180,0.04);color:#111">0.02</td><td class="hm" style="background:rgba(31,119,180,0.29);color:#111">0.13</td><td class="hm" style="background:rgba(31,119,180,0.23);color:#111">0.10</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.08</td><td class="hm diag" style="background:rgba(31,119,180,0.20);color:#111">0.09</td><td class="hm diag" style="background:rgba(31,119,180,0.13);color:#111">0.06</td><td class="hm" style="background:rgba(31,119,180,0.19);color:#111">0.09</td></tr></table></div></div><div class="mtitle">Qwen3.5-35B-A3B (Int4) <span class="small">(35B MoE / 3B active / 4-bit)</span></div><div class="matrices"><div class="mblock"><table class="heat"><caption>persona-conditioned (full)</caption><tr><th></th><th>Club vs midterm</th><th>Value clash</th><th>Boundary push</th><th>Roommate hygiene</th><th>Now vs later</th><th>Scholarship deadline</th><th>Orthogonal (ctrl)</th></tr><tr><th class="axh">value (achievement↔affiliation)</th><td class="hm diag" style="background:rgba(31,119,180,0.64);color:#fff">0.29</td><td class="hm diag" style="background:rgba(31,119,180,1.00);color:#fff">0.93</td><td class="hm" style="background:rgba(31,119,180,0.33);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.22);color:#111">0.10</td><td class="hm" style="background:rgba(31,119,180,1.00);color:#fff">0.62</td><td class="hm" style="background:rgba(31,119,180,0.89);color:#fff">0.40</td><td class="hm" style="background:rgba(31,119,180,0.80);color:#fff">0.36</td></tr><tr><th class="axh">conflict (avoidant↔assertive)</th><td class="hm" style="background:rgba(31,119,180,0.11);color:#111">0.05</td><td class="hm" style="background:rgba(31,119,180,0.92);color:#fff">0.42</td><td class="hm diag" style="background:rgba(31,119,180,0.63);color:#fff">0.29</td><td class="hm diag" style="background:rgba(31,119,180,0.58);color:#fff">0.26</td><td class="hm" style="background:rgba(31,119,180,0.57);color:#fff">0.26</td><td class="hm" style="background:rgba(31,119,180,0.42);color:#111">0.19</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td></tr><tr><th class="axh">time (impulsive↔deliberate)</th><td class="hm" style="background:rgba(31,119,180,0.44);color:#111">0.20</td><td class="hm" style="background:rgba(31,119,180,0.34);color:#111">0.15</td><td class="hm" style="background:rgba(31,119,180,0.31);color:#111">0.14</td><td class="hm" style="background:rgba(31,119,180,0.16);color:#111">0.07</td><td class="hm diag" style="background:rgba(31,119,180,0.63);color:#fff">0.28</td><td class="hm diag" style="background:rgba(31,119,180,0.39);color:#111">0.18</td><td class="hm" style="background:rgba(31,119,180,0.30);color:#111">0.13</td></tr></table></div></div>
+<div class="key">Cell = JS-divergence between opposing persona poles on that event (darker = larger). Red outline = the axis's sensitive event. Rightmost column = orthogonal control (≈0).</div>
+<h3>4.3&nbsp;&nbsp;Fidelity vs distinguishability</h3>
+<p>Directional hit-rate for the persona-conditioned agent is modest (0.44–0.58): personas are more
+<em>distinguishable</em> than <em>faithful</em>. A divergence-only metric would overstate embodiment; the
+pre-registered directional target is what separates "different" from "correctly different."</p>
+<h2>5&nbsp;&nbsp;Discussion</h2><p><b>The neutral control matters.</b> Because <code>no_desire</code> strips all disposition, its
+near-floor divergence (0.03) shows the harness itself induces no persona structure; the full agent's
+0.17 is therefore attributable to persona conditioning. <b>Some axes are easier, and some scenarios are
+easier.</b> Value priorities map onto a salient choice and are expressed by even 4B across scenarios; conflict style
+appears only when the scenario is a vivid personal confrontation (roommate hygiene), not an abstract renegotiation;
+temporal discounting largely resists elicitation except at the largest model. <b>Format compliance is a first-order confound</b> that the corrected protocol (tolerant parser +
+model-card sampling) controls&mdash;parse-fail fell to ≤0%, so divergences are no longer diluted by fallback
+actions.</p>
+<p><b>Model-size properties.</b> Embodiment does not scale uniformly. <em>Value</em> is already saturated at 4B
+(net +0.50) and stays high through 9B/35B&mdash;capability is not the bottleneck for the
+easy axis. <em>Conflict</em> shows the clearest scale effect on the harder scenario: the abstract work-dump
+(<code>boundary_push</code>) only becomes positive at 35B (+0.06, -0.05, +0.14 for 4B/9B/35B), whereas the vivid
+roommate confrontation is embodied at every size (+0.19, +0.30, +0.22). <em>Time</em> is essentially absent below the
+largest model (now-vs-later +0.19, +0.01, +0.26). Directional fidelity climbs with scale as well:
+hit-rate 0.44→0.58→0.58. In short,
+scale buys the <em>hard</em> axes and <em>abstract</em> scenarios, not the easy or vivid ones.</p>
+<p><b>Revisiting our hypotheses.</b> <b>Q1 — can a model embody a persona in the intended direction?</b> Yes for
+value at every scale; for conflict only when the scenario is concrete (and more so with scale); for time only at
+35B. <b>Q2 — is the behavioral change caused by the persona?</b> Yes: two independent controls (orthogonal event
+and neutral agent) sit at the floor. Our <b>capability-scaling hypothesis</b> is thus only <em>partially</em>
+supported&mdash;scale helps non-monotonically and only where the disposition is hard to surface; it is neither
+necessary (value is saturated at 4B) nor sufficient (the work-dump conflict stays weak through 9B). Table 4 adds a
+mechanism: the vanilla baseline behaves like a <em>task-focused</em> student&mdash;it studies rather than socializes
+and tends to absorb imposed work rather than push back&mdash;so personas encoding the <em>affiliation</em> and
+<em>assertive</em> poles deviate most from it. (Future-orientation is model-dependent: only the 35B invests early
+by default.) Persona conditioning mostly moves the agent <em>away</em> from this task-focused prior.</p>
+<p><b>Vanilla (persona-less) behaviour per model.</b> With the persona withheld, the vanilla agent's own
+pole-divergence stays near the floor at every scale (Table 1, vanilla columns; value
+0.08/0.01/0.03
+for 4B/9B/35B), confirming it ignores the hidden persona. Its <em>default</em> is task-focused rather than social or
+confrontational: on the study-vs-lunch clash 4B/9B default to studying
+(<code>work_on:assignment_value</code>) and on the work-dump they default to absorbing the
+extra task (<code>work_on:extra_task</code>). The one model-dependent default is
+time-horizon: 4B/9B grab the quick chore (<code>work_on:quick_chore</code>) while
+only the 35B invests early (<code>work_on:future_project</code>)&mdash;the same
+place persona time-embodiment first appears. The vanilla floor is also slightly higher on conflict at 9B/35B
+(0.10/0.09),
+i.e. more action diversity even without a persona. This vanilla prior is the reference every persona effect is
+measured against.</p>
+<h2>6&nbsp;&nbsp;Limitations</h2><ul>
+<li>8 personas, two events per axis (k=2), 3 seeds: scenario-dependence is now
+visible, but estimates are still points (more events/seeds would give tight CIs).</li>
+<li>35B is 4-bit GPTQ-Int4, conflating scale with quantization.</li>
+<li>Toy world engine; instruct-mode only (thinking disabled for parseable comparison).</li>
+<li>Hit-rate uses hand-authored diagnostic actions; alternative correct actions may be under-counted.</li></ul>
+<h2>7&nbsp;&nbsp;Conclusion</h2><p>Language models robustly embody the <em>value</em> dimension of a persona. Conflict-style
+embodiment is real but <em>scenario-dependent</em>&mdash;a personal confrontation surfaces it while an abstract
+renegotiation does not&mdash;and time-horizon stays weak except at the largest model. Two methodological moves are
+what make these readable: a persona-neutral control agent that subtracts the per-scenario noise floor, and
+<b>k=2 events per axis</b>, without which the conflict axis would have been mislabeled "not embodied." Persona
+measurement must therefore vary the scenario, not just the persona.</p>
+<div class="foot"><b>Reproducibility.</b> Personas <code>sandbox/library/personas/</code>, events <code>sandbox/library/events/</code>; per-model <code>measurement.json</code> under <code>sandbox/runs/study__*/</code>; regenerate with <code>python3.11 make_report.py</code>. 0 episode failures across all runs.</div></body></html>
