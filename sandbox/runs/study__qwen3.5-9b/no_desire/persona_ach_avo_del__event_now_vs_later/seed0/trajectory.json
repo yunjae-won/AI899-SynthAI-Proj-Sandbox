@@ -2,20 +2,20 @@
   "persona_id": "persona_ach_avo_del",
   "event_id": "event_now_vs_later",
   "final_state": {
-    "current_time": "Mon 13:30",
+    "current_time": "Mon 21:30",
     "tasks": [
       {
         "id": "future_project",
         "label": "Term project (due in 3 days)",
         "deadline": "Thu 23:59",
-        "progress": 1.0,
+        "progress": 0.1,
         "hardness": "soft"
       },
       {
         "id": "quick_chore",
         "label": "Trivial easy chore (instant win)",
         "deadline": "Mon 22:00",
-        "progress": 1.0,
+        "progress": 0.4837500000000001,
         "hardness": "soft"
       }
     ],
@@ -28,33 +28,77 @@
       }
     ],
     "agent": {
-      "energy": 5.7,
+      "energy": 0.9000000000000006,
       "sleep_debt_hours": 2,
-      "stress": 3.9,
+      "stress": 3.199999999999999,
       "memory": [
         {
           "turn_time": "Mon 13:00",
-          "summary": "I have free time today, but my low energy and stress make a quick chore more appealing than leisure right now."
+          "summary": "With low energy and stress, I can either relax now or do a quick chore to feel better before tackling my term project later."
+        },
+        {
+          "turn_time": "Mon 13:30",
+          "summary": "Spending half an hour on a trivial chore yielded minimal progress but likely provided a small mental boost given my low energy and stress levels."
+        },
+        {
+          "turn_time": "Mon 14:00",
+          "summary": "The trivial chore provided minimal progress but likely offered a small mental boost given my low energy and stress levels."
+        },
+        {
+          "turn_time": "Mon 14:30",
+          "summary": "Spending time on a trivial chore gave minimal project progress while the afternoon slips by, yet it may have offered a small mental boost given my low energy and stress."
+        },
+        {
+          "turn_time": "Mon 15:00",
+          "summary": "The trivial chore consumed 30 minutes with minimal progress, yet it likely offered a small mental boost given my low energy and stress levels."
+        },
+        {
+          "turn_time": "Mon 16:30",
+          "summary": "Working on the trivial chore for 1.5 hours yielded minimal project progress, confirming it is an inefficient use of my time despite any potential mental boost."
+        },
+        {
+          "turn_time": "Mon 17:00",
+          "summary": "Spending 0.5 hours on a trivial task yielded minimal progress, confirming that even short distractions are inefficient given my low energy and stress levels."
+        },
+        {
+          "turn_time": "Mon 18:00",
+          "summary": "Spending 1.5 hours on a trivial task only advanced progress by 0.06, confirming it is highly inefficient despite any minor mental boost."
+        },
+        {
+          "turn_time": "Mon 19:00",
+          "summary": "Spending hours on trivial tasks yields negligible progress and wastes energy while stress remains high."
+        },
+        {
+          "turn_time": "Mon 20:00",
+          "summary": "Spending time on trivial tasks consistently yields negligible progress while maintaining high stress, confirming this approach is inefficient regardless of duration."
+        },
+        {
+          "turn_time": "Mon 20:30",
+          "summary": "Spending 0.5 hours on a trivial task only advanced progress by 0.01, confirming that even short durations are inefficient for high-stress periods."
+        },
+        {
+          "turn_time": "Mon 21:00",
+          "summary": "Spending 0.5 hours on this trivial task only advanced progress by 0.02, confirming that even short durations are inefficient while stress remains high."
         }
       ],
       "desires": [],
       "goals": [
         {
           "id": "g1",
-          "description": "Complete the trivial easy chore to clear pending tasks immediately.",
+          "description": "Complete the trivial easy chore to clear immediate obligations.",
           "priority": "high",
           "status": "active",
-          "rationale": "The task is marked as 'instant win' and has a deadline of Monday, making it the most efficient immediate action."
+          "rationale": "The task is marked as 'instant win' with low hardness and is already 40% complete, making it the most efficient first step to reduce pending workload."
         },
         {
           "id": "g2",
-          "description": "Review or advance work on the term project due Thursday.",
+          "description": "Work on the term project for the remaining hours.",
           "priority": "medium",
           "status": "active",
-          "rationale": "The project shows 100% progress but is due in 3 days; maintaining momentum is necessary before the deadline."
+          "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
         }
       ],
-      "last_reasoning": "Clears the high-priority 'instant win' due today, reducing stress (4->3) before tackling the term project."
+      "last_reasoning": "Completing the high-priority chore due in <1h clears immediate obligations (g1). This prevents stress spikes and frees mental space for the term project (g2) later, balancing urgency with future workload."
     }
   },
   "trajectory": [
@@ -71,17 +115,17 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Complete the trivial easy chore to clear pending tasks immediately.",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
               "priority": "high",
               "status": "active",
-              "rationale": "The task is marked as 'instant win' and has a deadline of Monday, making it the most efficient immediate action."
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
             },
             {
               "id": "g2",
-              "description": "Review or advance work on the term project due Thursday.",
+              "description": "Work on the term project for the remaining hours.",
               "priority": "medium",
               "status": "active",
-              "rationale": "The project shows 100% progress but is due in 3 days; maintaining momentum is necessary before the deadline."
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
             }
           ],
           "desires": []
@@ -91,14 +135,14 @@
             "id": "future_project",
             "label": "Term project (due in 3 days)",
             "deadline": "Thu 23:59",
-            "progress": 1.0,
+            "progress": 0.1,
             "hardness": "soft"
           },
           {
             "id": "quick_chore",
             "label": "Trivial easy chore (instant win)",
             "deadline": "Mon 22:00",
-            "progress": 1.0,
+            "progress": 0.0,
             "hardness": "soft"
           }
         ],
@@ -117,9 +161,702 @@
           "task": "quick_chore",
           "hours": 0.5
         },
-        "reasoning": "Clears the high-priority 'instant win' due today, reducing stress (4->3) before tackling the term project."
+        "reasoning": "Completing the high-priority trivial chore clears immediate obligations and reduces stress quickly. This efficient 'instant win' frees mental space to tackle the term project later, balancing workload without burning energy."
       },
-      "observation": "Worked on Trivial easy chore (instant win) for 0.5h; progress=1.00."
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.00 -> 0.04."
+    },
+    {
+      "turn": 1,
+      "timestamp": "Mon 14:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:30",
+        "location": "dorm",
+        "agent": {
+          "energy": 5.7,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.045,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Finishing the high-priority 'instant win' clears immediate obligations and reduces stress before tackling the term project, balancing efficiency with mental load."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.04 -> 0.09."
+    },
+    {
+      "turn": 2,
+      "timestamp": "Mon 14:30",
+      "state_snapshot": {
+        "current_time": "Mon 14:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 5.4,
+          "sleep_debt_hours": 2,
+          "stress": 3.8,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.08775,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Completing the trivial chore clears a high-priority obligation with low effort, reducing stress before shifting to the term project."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.09 -> 0.13."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 14:30",
+        "location": "dorm",
+        "agent": {
+          "energy": 5.1000000000000005,
+          "sleep_debt_hours": 2,
+          "stress": 4.1,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.12825,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Completing the trivial chore clears a high-priority obligation before tackling the larger project, reducing stress and ensuring immediate obligations are met without delaying the term project."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.13 -> 0.17."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Mon 16:30",
+      "state_snapshot": {
+        "current_time": "Mon 15:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 4.800000000000001,
+          "sleep_debt_hours": 2,
+          "stress": 3.9999999999999996,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.1665,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 1.5
+        },
+        "reasoning": "This clears the high-priority 'instant win' goal immediately, reducing pending workload before shifting to the term project. It avoids stress spikes while maintaining momentum."
+      },
+      "observation": "Worked 1.5h on Trivial easy chore (instant win): progress 0.17 -> 0.27."
+    },
+    {
+      "turn": 5,
+      "timestamp": "Mon 17:00",
+      "state_snapshot": {
+        "current_time": "Mon 16:30",
+        "location": "dorm",
+        "agent": {
+          "energy": 3.900000000000001,
+          "sleep_debt_hours": 2,
+          "stress": 3.8999999999999995,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.2745,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Goal g1 (clear trivial chore) is high priority and nearly done; finishing it reduces stress before tackling the term project. This avoids delaying g2 while maintaining energy for the harder task later."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.27 -> 0.30."
+    },
+    {
+      "turn": 6,
+      "timestamp": "Mon 18:00",
+      "state_snapshot": {
+        "current_time": "Mon 17:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 3.600000000000001,
+          "sleep_debt_hours": 2,
+          "stress": 3.7999999999999994,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.30375,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 1
+        },
+        "reasoning": "This advances goal g1 (clear immediate obligations) efficiently. The chore is nearly done and has a tight deadline; finishing it reduces stress before shifting to the term project."
+      },
+      "observation": "Worked 1h on Trivial easy chore (instant win): progress 0.30 -> 0.36."
+    },
+    {
+      "turn": 7,
+      "timestamp": "Mon 19:00",
+      "state_snapshot": {
+        "current_time": "Mon 18:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 3.000000000000001,
+          "sleep_debt_hours": 2,
+          "stress": 3.6999999999999993,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness, making it the most efficient first step to reduce pending workload before tackling the larger term project."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.35775,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 1
+        },
+        "reasoning": "Finishing the trivial chore clears a high-priority obligation quickly, reducing stress before shifting focus to the term project. This avoids delaying the deadline-sensitive work while managing energy."
+      },
+      "observation": "Worked 1h on Trivial easy chore (instant win): progress 0.36 -> 0.40."
+    },
+    {
+      "turn": 8,
+      "timestamp": "Mon 20:00",
+      "state_snapshot": {
+        "current_time": "Mon 19:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 2.400000000000001,
+          "sleep_debt_hours": 2,
+          "stress": 3.599999999999999,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness and is already 40% complete, making it the most efficient first step to reduce pending workload."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.40275000000000005,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 1
+        },
+        "reasoning": "Completing the high-priority trivial chore (40% done) clears an immediate obligation before tackling the term project. This avoids stress buildup while preserving energy for the medium-priority task later."
+      },
+      "observation": "Worked 1h on Trivial easy chore (instant win): progress 0.40 -> 0.44."
+    },
+    {
+      "turn": 9,
+      "timestamp": "Mon 20:30",
+      "state_snapshot": {
+        "current_time": "Mon 20:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 1.8000000000000007,
+          "sleep_debt_hours": 2,
+          "stress": 3.499999999999999,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness and is already 40% complete, making it the most efficient first step to reduce pending workload."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.4387500000000001,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Finishing the high-priority chore (deadline 22:00) clears immediate obligations and reduces stress, freeing mental space for the term project later."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.44 -> 0.45."
+    },
+    {
+      "turn": 10,
+      "timestamp": "Mon 21:00",
+      "state_snapshot": {
+        "current_time": "Mon 20:30",
+        "location": "dorm",
+        "agent": {
+          "energy": 1.5000000000000007,
+          "sleep_debt_hours": 2,
+          "stress": 3.399999999999999,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness and is already 40% complete, making it the most efficient first step to reduce pending workload."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.4537500000000001,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Completing the high-priority chore clears an immediate obligation and reduces stress, allowing focus to shift to the term project later. This avoids procrastination while managing limited energy."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.45 -> 0.47. Trivial easy chore (instant win) is due in under an hour and not finished yet."
+    },
+    {
+      "turn": 11,
+      "timestamp": "Mon 21:30",
+      "state_snapshot": {
+        "current_time": "Mon 21:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 1.2000000000000006,
+          "sleep_debt_hours": 2,
+          "stress": 3.299999999999999,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear immediate obligations.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'instant win' with low hardness and is already 40% complete, making it the most efficient first step to reduce pending workload."
+            },
+            {
+              "id": "g2",
+              "description": "Work on the term project for the remaining hours.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "This task has a deadline in 3 days and is only 10% complete; progress must be made while energy remains after the quick chore."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 0.1,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 0.4687500000000001,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Completing the high-priority chore due in <1h clears immediate obligations (g1). This prevents stress spikes and frees mental space for the term project (g2) later, balancing urgency with future workload."
+      },
+      "observation": "Worked 0.5h on Trivial easy chore (instant win): progress 0.47 -> 0.48."
     }
   ]
 }

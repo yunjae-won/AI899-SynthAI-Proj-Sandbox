@@ -2,7 +2,7 @@
   "persona_id": "persona_ach_asr_del",
   "event_id": "event_value_clash",
   "final_state": {
-    "current_time": "Mon 15:00",
+    "current_time": "Tue 07:00",
     "tasks": [
       {
         "id": "assignment_value",
@@ -15,7 +15,7 @@
         "id": "reading_value",
         "label": "Assigned reading",
         "deadline": "Mon 20:00",
-        "progress": 1.0,
+        "progress": 0.09,
         "hardness": "soft"
       }
     ],
@@ -23,23 +23,82 @@
       {
         "role": "close_friend_group",
         "name": "cohort_3",
-        "trust": 10.0,
+        "trust": 7,
         "closeness": 7
       }
     ],
     "agent": {
-      "energy": 4.8,
+      "energy": 0.0,
       "sleep_debt_hours": 2,
-      "stress": 3.9,
+      "stress": 4.000000000000003,
       "memory": [
         {
           "turn_time": "Mon 13:00",
-          "summary": "My plan to finish the assignment analysis and reading conflicts with my cohort's lunch invitation, which I should consider given my low energy."
+          "summary": "My plan to finish the assignment analysis and reading conflicts with my cohort's lunch invitation, which I could join if I attend."
+        },
+        {
+          "turn_time": "Mon 15:00",
+          "summary": "I made good progress on the assignment analysis, but my cohort is already gathering for lunch, creating a potential conflict with my original plan."
+        },
+        {
+          "turn_time": "Mon 17:30",
+          "summary": "I made significant progress on the analysis section, but with less than an hour left before the deadline and two hours of sleep debt, I must prioritize finishing the work over joining my cohort's lunch."
+        },
+        {
+          "turn_time": "Mon 18:00",
+          "summary": "I missed the deadline for the analysis section despite working late, leaving me with sleep debt and stress while the task remains incomplete."
+        },
+        {
+          "turn_time": "Mon 19:30",
+          "summary": "I missed the analysis deadline despite working late, which has increased my stress and sleep debt while leaving the task incomplete."
+        },
+        {
+          "turn_time": "Mon 21:00",
+          "summary": "I missed the assigned reading deadline entirely while only partially completing the analysis section, worsening my sleep debt and stress levels."
+        },
+        {
+          "turn_time": "Mon 22:30",
+          "summary": "I made progress on the analysis section after missing its deadline, but my low energy and high stress suggest I need to prioritize rest."
+        },
+        {
+          "turn_time": "Mon 23:00",
+          "summary": "I advanced the analysis progress slightly, but my critically low energy and high stress indicate I cannot continue working effectively."
+        },
+        {
+          "turn_time": "Tue 01:00",
+          "summary": "The analysis section is finally complete, but my zero energy and high stress mean I must stop working immediately to recover."
+        },
+        {
+          "turn_time": "Tue 02:30",
+          "summary": "Despite working 1.5 hours, my reading progress is negligible, and with zero energy and high stress, continuing to work is counterproductive."
+        },
+        {
+          "turn_time": "Tue 04:00",
+          "summary": "The course assignment analysis is now complete, but my zero energy and high stress confirm I must stop working immediately to recover."
+        },
+        {
+          "turn_time": "Tue 05:30",
+          "summary": "Despite working 1.5 hours, my reading progress is negligible while my zero energy and high stress confirm that continuing to work is counterproductive."
         }
       ],
       "desires": [],
-      "goals": [],
-      "last_reasoning": "I must finish the assignment by 18:00. With stress at 4 and energy low, I prioritize this hard deadline over the lunch invite to avoid last-minute panic."
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The deadline is at 18:00 and current progress is nearly complete (96%); this task must be prioritized immediately to avoid missing the deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Begin reading the assigned material to ensure completion by 20:00.",
+          "priority": "medium",
+          "status": "pending",
+          "rationale": "Progress is currently 4.5% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+        }
+      ],
+      "last_reasoning": "The assignment is 96% done with a hard 18:00 deadline; finishing it secures the high-priority goal. Reading progress (4.5%) can wait until after this task, balancing immediate completion against the medium-priority reading goal."
     }
   },
   "trajectory": [
@@ -53,7 +112,526 @@
           "energy": 6,
           "sleep_debt_hours": 2,
           "stress": 4,
-          "goals": [],
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is only 40%; this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting now allows sufficient time after finishing the higher-priority assignment."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.4,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 2
+        },
+        "reasoning": "Deadline is at 18:00 with only 40% done; this action directly advances the high-priority goal. I weighed the friend group's lunch invitation but prioritized avoiding deadline failure over immediate social engagement."
+      },
+      "observation": "Worked 2h on Course assignment — analysis section: progress 0.40 -> 0.58."
+    },
+    {
+      "turn": 1,
+      "timestamp": "Mon 17:30",
+      "state_snapshot": {
+        "current_time": "Mon 15:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 4.8,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is only 58%; this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.5800000000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 2.5
+        },
+        "reasoning": "This advances the high-priority assignment goal, moving progress from 58% toward 100% before the 18:00 deadline. I weighed ignoring the friend group's chat to avoid stress spikes, but the academic penalty for missing the deadline outweighs the social cost."
+      },
+      "observation": "Worked 2.5h on Course assignment — analysis section: progress 0.58 -> 0.76. Course assignment — analysis section is due in under an hour and not finished yet."
+    },
+    {
+      "turn": 2,
+      "timestamp": "Mon 18:00",
+      "state_snapshot": {
+        "current_time": "Mon 17:30",
+        "location": "central_library",
+        "agent": {
+          "energy": 3.3,
+          "sleep_debt_hours": 2,
+          "stress": 3.8,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is 76%; this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.76,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 0.5
+        },
+        "reasoning": "Advances g1 (finish assignment by 18:00). Skipping social interaction to meet the hard deadline prevents stress spike, though it delays g2 (reading) slightly; sufficient time remains after this burst."
+      },
+      "observation": "Worked 0.5h on Course assignment — analysis section: progress 0.76 -> 0.78. The deadline for Course assignment — analysis section passed at Mon 18:00 with it unfinished (progress 0.78)."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Mon 19:30",
+      "state_snapshot": {
+        "current_time": "Mon 18:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 3.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.3,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is 76%; this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.7847500000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 1.5
+        },
+        "reasoning": "Deadline just passed; finishing the high-priority assignment prevents immediate failure and frees mental space for the reading task due at 20:00."
+      },
+      "observation": "Worked 1.5h on Course assignment — analysis section: progress 0.78 -> 0.85."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Mon 21:00",
+      "state_snapshot": {
+        "current_time": "Mon 19:30",
+        "location": "central_library",
+        "agent": {
+          "energy": 2.1,
+          "sleep_debt_hours": 2,
+          "stress": 4.2,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is 85.2%; this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.8522500000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 1.5
+        },
+        "reasoning": "Deadline was missed (18:00 vs 19:30), but progress is only 85%. Finishing this high-priority task prevents further stress and frees time for the reading due at 20:00. Energy is low, so I'll work efficiently to clear both tasks before sleep."
+      },
+      "observation": "Worked 1.5h on Course assignment — analysis section: progress 0.85 -> 0.90. The deadline for Assigned reading passed at Mon 20:00 with it unfinished (progress 0.00)."
+    },
+    {
+      "turn": 5,
+      "timestamp": "Mon 22:30",
+      "state_snapshot": {
+        "current_time": "Mon 21:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 1.2000000000000002,
+          "sleep_debt_hours": 2,
+          "stress": 4.7,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (90%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.8995000000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 1.5
+        },
+        "reasoning": "The reading deadline passed, but the assignment is at 90% with a high priority to finish before 18:00 (overdue). Completing this mitigates the biggest failure risk now. I accept the stress increase as unavoidable given the missed reading."
+      },
+      "observation": "Worked 1.5h on Course assignment — analysis section: progress 0.90 -> 0.94."
+    },
+    {
+      "turn": 6,
+      "timestamp": "Mon 23:00",
+      "state_snapshot": {
+        "current_time": "Mon 22:30",
+        "location": "central_library",
+        "agent": {
+          "energy": 0.30000000000000027,
+          "sleep_debt_hours": 2,
+          "stress": 4.6000000000000005,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (94%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.9445000000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 0.5
+        },
+        "reasoning": "This advances the high-priority assignment goal to completion before its past deadline, preventing academic failure. I weighed this against my low energy and stress but prioritized the critical task over resting or socializing."
+      },
+      "observation": "Worked 0.5h on Course assignment — analysis section: progress 0.94 -> 0.96."
+    },
+    {
+      "turn": 7,
+      "timestamp": "Tue 01:00",
+      "state_snapshot": {
+        "current_time": "Mon 23:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 2.7755575615628914e-16,
+          "sleep_debt_hours": 2,
+          "stress": 4.500000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (96%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 0.9595000000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 2
+        },
+        "reasoning": "This advances g1 (finish assignment by 18:00) which is high priority and nearly done. Side effect: reduces energy further, but missing the deadline causes more stress than fatigue."
+      },
+      "observation": "Worked 2h on Course assignment — analysis section: progress 0.96 -> 1.00. It's essentially done."
+    },
+    {
+      "turn": 8,
+      "timestamp": "Tue 02:30",
+      "state_snapshot": {
+        "current_time": "Tue 01:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.400000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (96%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
           "desires": []
         },
         "tasks": [
@@ -68,7 +646,7 @@
             "id": "reading_value",
             "label": "Assigned reading",
             "deadline": "Mon 20:00",
-            "progress": 1.0,
+            "progress": 0.0,
             "hardness": "soft"
           }
         ],
@@ -76,7 +654,70 @@
           {
             "role": "close_friend_group",
             "name": "cohort_3",
-            "trust": 10.0,
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "reading_value",
+          "hours": 1.5
+        },
+        "reasoning": "Assignment is done; reading is next priority due to 20:00 deadline. I will start now while energy allows, though stress remains high."
+      },
+      "observation": "Worked 1.5h on Assigned reading: progress 0.00 -> 0.04."
+    },
+    {
+      "turn": 9,
+      "timestamp": "Tue 04:00",
+      "state_snapshot": {
+        "current_time": "Tue 02:30",
+        "location": "central_library",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.300000000000002,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (96%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 0% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.045,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
             "closeness": 7
           }
         ]
@@ -85,11 +726,137 @@
         "name": "work_on",
         "args": {
           "task": "assignment_value",
-          "hours": 2
+          "hours": 1.5
         },
-        "reasoning": "I must finish the assignment by 18:00. With stress at 4 and energy low, I prioritize this hard deadline over the lunch invite to avoid last-minute panic."
+        "reasoning": "Goal g1 requires finishing the assignment by 18:00; it is 96% done but needs final polish. Reading (g2) is low priority now. Working on the assignment advances the high-priority goal immediately without delaying the reading deadline."
       },
-      "observation": "Worked on Course assignment — analysis section for 2.0h; progress=1.00."
+      "observation": "Worked 1.5h on Course assignment — analysis section: progress 1.00 -> 1.00. It's essentially done."
+    },
+    {
+      "turn": 10,
+      "timestamp": "Tue 05:30",
+      "state_snapshot": {
+        "current_time": "Tue 04:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.200000000000002,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (96%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 4.5% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.045,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "reading_value",
+          "hours": 1.5
+        },
+        "reasoning": "The assignment is complete (100%), so I must shift focus to the reading due at 20:00. Starting now ensures sufficient time before the deadline, balancing study goals with the need to avoid last-minute stress."
+      },
+      "observation": "Worked 1.5h on Assigned reading: progress 0.04 -> 0.09."
+    },
+    {
+      "turn": 11,
+      "timestamp": "Tue 07:00",
+      "state_snapshot": {
+        "current_time": "Tue 05:30",
+        "location": "central_library",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.100000000000002,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the analysis section of the course assignment to finish it before 18:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The deadline is at 18:00 and current progress is nearly complete (96%); this task must be prioritized immediately to avoid missing the deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Begin reading the assigned material to ensure completion by 20:00.",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Progress is currently 4.5% with a 20:00 deadline; starting after finishing the higher-priority assignment allows sufficient time for completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 0.09,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 1.5
+        },
+        "reasoning": "The assignment is 96% done with a hard 18:00 deadline; finishing it secures the high-priority goal. Reading progress (4.5%) can wait until after this task, balancing immediate completion against the medium-priority reading goal."
+      },
+      "observation": "Worked 1.5h on Course assignment — analysis section: progress 1.00 -> 1.00. It's essentially done."
     }
   ]
 }

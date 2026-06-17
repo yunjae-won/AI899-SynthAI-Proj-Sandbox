@@ -2,62 +2,115 @@
   "persona_id": "persona_ach_avo_del",
   "event_id": "event_boundary_push",
   "final_state": {
-    "current_time": "Mon 15:00",
+    "current_time": "Tue 10:30",
     "tasks": [
       {
         "id": "own_task",
         "label": "My share of the group project",
         "deadline": "Mon 19:00",
-        "progress": 1.0,
+        "progress": 0.94875,
         "hardness": "soft"
       },
       {
         "id": "extra_task",
         "label": "Teammate's share (just dumped on me)",
         "deadline": "Mon 19:00",
-        "progress": 1.0,
-        "hardness": "soft"
+        "progress": 0.27,
+        "hardness": "soft",
+        "imposed": true,
+        "owner": "teammate_A"
       }
     ],
     "relationships": [
       {
         "role": "teammate",
         "name": "teammate_A",
-        "trust": 10.0,
+        "trust": 6,
         "closeness": 5
       }
     ],
     "agent": {
-      "energy": 4.8,
+      "energy": 0.0,
       "sleep_debt_hours": 2,
-      "stress": 3.9,
+      "stress": 4.000000000000003,
       "memory": [
         {
           "turn_time": "Mon 13:00",
-          "summary": "Teammate asked me to do their part because I'm better, but my energy is low and stress is high. I'll finish my own share now to avoid friction."
+          "summary": "teammate_A asks me to do their part since I'm better at it. I'll finish my own share first to avoid conflict and keep my academic focus."
+        },
+        {
+          "turn_time": "Mon 15:00",
+          "summary": "My progress jumped to 0.48, but teammate_A's request adds friction. I'll finish my block first to avoid conflict and maintain focus."
+        },
+        {
+          "turn_time": "Mon 17:30",
+          "summary": "My progress increased to 0.66 after two hours, but the energy drop and teammate's request remind me that academic focus is worth the friction."
+        },
+        {
+          "turn_time": "Mon 20:00",
+          "summary": "I finished my share but missed the deadline, and now I'm stuck with teammate_A's unfinished work. This friction hurts my focus and energy."
+        },
+        {
+          "turn_time": "Mon 22:00",
+          "summary": "Progress hit 0.84, but energy is critically low and stress rose; I'll finish my block first to avoid conflict and maintain focus."
+        },
+        {
+          "turn_time": "Mon 23:30",
+          "summary": "Progress jumped to 0.89, yet my energy is zero and stress spiked; I'll finish this block now to avoid future friction."
+        },
+        {
+          "turn_time": "Tue 01:30",
+          "summary": "Finally pushed the progress to 0.95, but my energy is now zero and stress remains high; I need to rest before tomorrow's deadline."
+        },
+        {
+          "turn_time": "Tue 03:00",
+          "summary": "Teammate dumped my work on me, making my load heavier. I'll finish this quickly to avoid conflict and maintain focus."
+        },
+        {
+          "turn_time": "Tue 04:30",
+          "summary": "Teammate dumped my work on me, increasing my load. I'll finish this quickly to avoid friction and maintain focus."
+        },
+        {
+          "turn_time": "Tue 06:00",
+          "summary": "I absorbed the extra work to avoid conflict, but my energy is now depleted and stress has spiked. I must prioritize rest before tomorrow's deadline."
+        },
+        {
+          "turn_time": "Tue 08:00",
+          "summary": "Teammate's sudden dump increased my load further, draining my energy and spiking stress. I must prioritize rest before tomorrow's deadline."
+        },
+        {
+          "turn_time": "Tue 09:00",
+          "summary": "Teammate dumped even more work on me just now, pushing my load higher while I'm already exhausted. I'll finish this quickly to avoid friction and maintain focus."
         }
       ],
       "desires": [
-        "Complete my own project share before the deadline to avoid any appearance of unreliability, even though I am already at 100%.",
-        "Avoid triggering a conflict with teammate_A by silently absorbing their unassigned task without raising expectations or asking for help."
+        "complete the extra task before 19:00 to avoid any risk of the professor noticing my late submission",
+        "avoid a confrontation with teammate_A that might jeopardize our group grade, even though I am currently exhausted"
       ],
       "goals": [
         {
           "id": "g1",
-          "description": "Finalize and submit my own project share to close the loop on the deadline.",
+          "description": "Silently absorb the dumped teammate task and merge it into my workflow to ensure both components are finalized by Mon 19:00.",
           "priority": "high",
           "status": "active",
-          "rationale": "My value system weights academic reliability above social niceties. Even though I am already at 100%, submitting now prevents any appearance of unreliability, which is critical for my long-term standing with prof_assignment. The 'soft' hardness means this won't drain excessive energy, so it fits within my current focus_capacity."
+          "rationale": "Accepting this additional burden without complaint is the only strategy that preserves my academic standing while avoiding interpersonal friction. By processing this load internally, I maintain control over the outcome and prevent future failures that would cost me more than the current energy expenditure."
         },
         {
           "id": "g2",
-          "description": "Silently absorb teammate_A's unassigned task without verbal confirmation or complaint.",
+          "description": "Execute a focused 120-minute block on both tasks before physical stamina drops below critical levels.",
           "priority": "medium",
           "status": "active",
-          "rationale": "I am avoidant in conflict; acknowledging their offer or asking for help would trigger interpersonal friction. By absorbing the work silently, I maintain the trust level with teammate_A while avoiding the stress of negotiation. This aligns with my deliberate time horizon—I will complete this later to ensure quality without immediate pressure."
+          "rationale": "Investing cognitive resources now protects my long-term standing. Even though this pushes me toward fatigue, the risk of failing tomorrow due to exhaustion is too high to ignore; growth and grades outweigh immediate comfort."
+        },
+        {
+          "id": "g3",
+          "description": "Sleep through the next 8 hours without waking up to finish this extra load before my deadline.",
+          "priority": "low",
+          "status": "deferred",
+          "rationale": "While rest is necessary for long-term function, the immediate need to eliminate uncertainty about my grades takes precedence. I will accept the temporary dip in physical performance as a calculated investment in my future success."
         }
       ],
-      "last_reasoning": "Avoids friction by silently absorbing the task; protects trust with teammate_A while prioritizing academic reliability. Deliberate planning ensures quality completion later without negotiating now."
+      "last_reasoning": "Prioritizing the dumped task to ensure Mon 19:00 completion and protect my grades, which outweighs interpersonal friction. The short duration minimizes energy drain while securing the outcome."
     }
   },
   "trajectory": [
@@ -74,22 +127,30 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Finalize and submit my own project share to close the loop on the deadline.",
+              "description": "Complete my assigned portion (30% of total work) by 19:00 to ensure I can deliver on time without appearing incompetent.",
               "priority": "high",
               "status": "active",
-              "rationale": "My value system weights academic reliability above social niceties. Even though I am already at 100%, submitting now prevents any appearance of unreliability, which is critical for my long-term standing with prof_assignment. The 'soft' hardness means this won't drain excessive energy, so it fits within my current focus_capacity."
+              "rationale": "Academic success is the highest value priority; maintaining my reputation with teammate_A is essential for future collaboration, but doing so requires me to finish my own share first."
             },
             {
               "id": "g2",
-              "description": "Silently absorb teammate_A's unassigned task without verbal confirmation or complaint.",
+              "description": "Accept teammate_A's offer to do their part using minimal visible effort and vague language to avoid triggering a friction-inducing negotiation about workload imbalance.",
               "priority": "medium",
+              "status": "deferred",
+              "rationale": "This task is deferred because accepting it directly violates my 'avoidant' conflict style and risks exposing the imbalance. I will only engage if I have enough energy later to manage the social fallout without direct confrontation."
+            },
+            {
+              "id": "g3",
+              "description": "Begin deep work on my independent project immediately after finishing my group share, minimizing any discussion about the extra task until tomorrow.",
+              "priority": "high",
               "status": "active",
-              "rationale": "I am avoidant in conflict; acknowledging their offer or asking for help would trigger interpersonal friction. By absorbing the work silently, I maintain the trust level with teammate_A while avoiding the stress of negotiation. This aligns with my deliberate time horizon—I will complete this later to ensure quality without immediate pressure."
+              "rationale": "My long planning horizon prioritizes future payoff over immediate social friction; focusing on my own growth allows me to maintain control while avoiding the emotional cost of negotiating now."
             }
           ],
           "desires": [
-            "Complete my own project share before the deadline to avoid any appearance of unreliability, even though I am already at 100%.",
-            "Avoid triggering a conflict with teammate_A by silently absorbing their unassigned task without raising expectations or asking for help."
+            "Complete my assigned portion by 19:00 without triggering any friction or appearing incompetent to teammate_A.",
+            "Minimize the visible effort required to handle the extra task so I can return to deep work on my own project before bed.",
+            "Avoid a direct conversation about the workload imbalance that might force me to negotiate terms."
           ]
         },
         "tasks": [
@@ -97,22 +158,672 @@
             "id": "own_task",
             "label": "My share of the group project",
             "deadline": "Mon 19:00",
-            "progress": 1.0,
+            "progress": 0.3,
             "hardness": "soft"
           },
           {
             "id": "extra_task",
             "label": "Teammate's share (just dumped on me)",
             "deadline": "Mon 19:00",
-            "progress": 0.9427500000000002,
-            "hardness": "soft"
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
           }
         ],
         "relationships": [
           {
             "role": "teammate",
             "name": "teammate_A",
-            "trust": 10.0,
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Prioritizes g1 (academic reputation) by securing my share first. Avoids g2's friction; delaying the teammate's request until tomorrow minimizes immediate social cost while protecting future collaboration."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.30 -> 0.48."
+    },
+    {
+      "turn": 1,
+      "timestamp": "Mon 17:30",
+      "state_snapshot": {
+        "current_time": "Mon 15:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 4.8,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete my assigned 30% of the group project by 19:00, ensuring the output meets academic standards without seeking extensions.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Academic success is non-negotiable; finishing on time protects my reputation with teammate_A and avoids the stress of asking for accommodations. I will ignore their request to 'borrow' their work now as it threatens my focus."
+            },
+            {
+              "id": "g2",
+              "description": "Respond to teammate_A's message with a brief, polite deflection that acknowledges receipt but sets a boundary to avoid direct negotiation about workload imbalance.",
+              "priority": "medium",
+              "status": "deferred",
+              "rationale": "Engaging in a substantive discussion about their offer violates my conflict-avoidant style and risks unnecessary friction. I will reply minimally to close the loop without committing to extra effort or triggering a debate until tomorrow when energy permits."
+            },
+            {
+              "id": "g3",
+              "description": "Begin deep work on my independent project immediately after the 19:00 deadline, utilizing the remaining afternoon hours efficiently.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My long planning horizon prioritizes future growth over immediate social gratification; focusing here ensures I maintain control of my trajectory while avoiding the emotional cost of negotiating the extra task now."
+            }
+          ],
+          "desires": [
+            "complete my own share before the deadline to ensure the academic output meets the required standard without further delay",
+            "avoid initiating a discussion with teammate_A about their request, as engaging in interpersonal friction will disrupt my focus and increase stress",
+            "maintain my current energy levels long enough to finish my assigned block without needing to ask for extensions or accommodations"
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.48,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2.5
+        },
+        "reasoning": "Academic output is non-negotiable; ignoring the teammate's request protects my focus and avoids friction. I will push their unassigned work back to them later, prioritizing my deadline completion now."
+      },
+      "observation": "Worked 2.5h on My share of the group project: progress 0.48 -> 0.66."
+    },
+    {
+      "turn": 2,
+      "timestamp": "Mon 20:00",
+      "state_snapshot": {
+        "current_time": "Mon 17:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 3.3,
+          "sleep_debt_hours": 2,
+          "stress": 3.8,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finalize my portion of the group project by 19:00, ensuring all deliverables are polished and submitted without engaging in any post-completion negotiations regarding the extra task.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My academic success is non-negotiable; I have already invested 2.5 hours (progress 0.66) and must complete this block to secure my reputation for reliability. Taking on teammate_A's unassigned work now would violate my conflict-avoidant style, trigger unnecessary friction, and erode the focus required for long-term growth."
+            },
+            {
+              "id": "g2",
+              "description": "Send a brief text message to teammate_A acknowledging receipt of their offer but politely declining to assist further until after the deadline passes, citing a need to preserve current energy levels.",
+              "priority": "medium",
+              "status": "deferred",
+              "rationale": "I will handle this minimally to close the loop without committing to extra effort or triggering a debate. Engaging substantively now risks unnecessary social friction and depletes my limited physical stamina before the deadline."
+            }
+          ],
+          "desires": [
+            "Complete my own project share by 19:00 without letting the team's friction erode my focus or reputation for reliability.",
+            "Finish this block and secure a high academic payoff before succumbing to exhaustion and taking on the extra task."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.6599999999999999,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2.5
+        },
+        "reasoning": "This directly advances g1 (finalizing my portion) which is non-negotiable for academic success. I weighed the side effect of energy depletion but prioritized long-term growth over social friction; engaging with the extra task now would violate my conflict-avoidant style and waste time before the deadline."
+      },
+      "observation": "Worked 2.5h on My share of the group project: progress 0.66 -> 0.78. The deadline for My share of the group project passed at Mon 19:00 with it unfinished (progress 0.78). The deadline for Teammate's share (just dumped on me) passed at Mon 19:00 with it unfinished (progress 0.00)."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Mon 22:00",
+      "state_snapshot": {
+        "current_time": "Mon 20:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 1.7999999999999998,
+          "sleep_debt_hours": 2,
+          "stress": 4.8999999999999995,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit my own project portion immediately to clear the cognitive load and secure my academic standing, while explicitly deferring any engagement with teammate_A's unfinished share until after their deadline passes.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My progress on my share (0.78) was insufficient by the hard deadline of 19:00, but I cannot afford to trigger a conflict or negotiate now given my avoidant nature and low current energy. Completing my deliverable is non-negotiable for my reputation; engaging with the extra task would violate my boundary protocols and drain the focus required for future growth."
+            },
+            {
+              "id": "g2",
+              "description": "Send a brief, low-friction text to teammate_A acknowledging receipt of their file and stating that I will address it only when they have completed theirs, citing a need to preserve physical stamina for tomorrow's coursework.",
+              "priority": "medium",
+              "status": "deferred",
+              "rationale": "This closes the loop minimally without committing to extra effort or inviting debate. Engaging substantively now risks unnecessary social friction and depletes my limited resources before I can recover."
+            }
+          ],
+          "desires": [
+            "Complete my own share before the deadline to maintain my academic progress without risking another missed submission.",
+            "Finish this task quickly and get it out of my head so I can stop feeling the friction from teammate_A's last-minute request.",
+            "Ensure that if I have to help, it is done efficiently now rather than creating a bigger mess later that will drain my energy tomorrow."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.78375,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "My academic standing is non-negotiable; finishing my share now secures my reputation and clears cognitive load. Pushing back on teammate_A risks conflict and drains the focus I need for future growth, so I will ignore their unfinished task to protect my long-term trajectory."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.78 -> 0.84."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Mon 23:30",
+      "state_snapshot": {
+        "current_time": "Mon 22:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.5999999999999999,
+          "sleep_debt_hours": 2,
+          "stress": 4.8,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete my own project share (targeting 0.95+ completion) by tomorrow morning to eliminate the 'extra task' entirely, thereby avoiding any future friction with teammate_A.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress (0.84) is sufficient to finish independently before the 19:00 deadline without needing help. By clearing this block completely, I secure my academic standing and remove the source of potential conflict. This aligns with my deliberate planning horizon: investing energy now prevents a larger cognitive load later."
+            },
+            {
+              "id": "g2",
+              "description": "Send a brief text to teammate_A confirming receipt of their file but explicitly stating that I will only engage once they have submitted theirs to avoid draining my limited social energy.",
+              "priority": "medium",
+              "status": "deferred",
+              "rationale": "This maintains necessary boundaries and preserves my physical stamina for tomorrow's coursework. It addresses the 'unreliable' concern minimally without inviting debate or extra effort, adhering to my avoidant conflict style."
+            }
+          ],
+          "desires": [
+            "Finish my own project share by tomorrow morning so I don't have to deal with this extra task and the associated friction.",
+            "Avoid looking incompetent or unreliable to teammate_A, even though they are asking for help."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.84375,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "This advances g1 by boosting my progress toward the 0.95 threshold needed to finish independently before tomorrow's deadline, eliminating future friction with teammate_A. I weighed the energy cost but accepted it as a necessary investment for long-term academic stability and conflict avoidance."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.84 -> 0.89."
+    },
+    {
+      "turn": 5,
+      "timestamp": "Tue 01:30",
+      "state_snapshot": {
+        "current_time": "Mon 23:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.7,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finalize my own project share (targeting 0.95+ completion) by tomorrow morning to eliminate the 'extra task' entirely, thereby avoiding any future friction with teammate_A.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My current progress (0.84 -> 0.89 after 1.5h) is sufficient to finish independently before the 19:00 deadline without needing help. By clearing this block completely, I secure my academic standing and remove the source of potential conflict. This aligns with my deliberate planning horizon: investing energy now prevents a larger cognitive load later."
+            },
+            {
+              "id": "g2",
+              "description": "Send a brief text to teammate_A confirming receipt of their file but explicitly stating that I will only engage once they have submitted theirs to avoid draining my limited social energy.",
+              "priority": "medium",
+              "status": "deferred",
+              "rationale": "This maintains necessary boundaries and preserves my physical stamina for tomorrow's coursework. It addresses the 'unreliable' concern minimally without inviting debate or extra effort, adhering to my avoidant conflict style."
+            }
+          ],
+          "desires": [
+            "Avoid looking incompetent to teammate_A by finishing my own share immediately, even if it means ignoring the imposed task.",
+            "Preserve my remaining energy for tomorrow's coursework block rather than expending it on friction right now.",
+            "Maintain a reputation as reliable and focused so I don't have to explain myself later."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.88875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "My share of the group project",
+          "hours": 2
+        },
+        "reasoning": "This advances g1 (0.95 completion) to eliminate future friction with teammate_A, aligning with my achievement priority. I weigh this against social costs; while messaging them is an option, their current low trust and my avoidant conflict style make it safer to secure my academic standing first. Completing independently now prevents a larger cognitive load later."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.89 -> 0.95."
+    },
+    {
+      "turn": 6,
+      "timestamp": "Tue 03:00",
+      "state_snapshot": {
+        "current_time": "Tue 01:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.6000000000000005,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the teammate's assigned block (currently at 0%) by tomorrow morning to secure the 'extra task' entirely, thereby eliminating future friction and cognitive load.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "My progress on my own share is now sufficient (0.95) to finish independently before the deadline. By absorbing this imposed load silently, I avoid verbalizing resentment or engaging in conflict with teammate_A, which aligns with my avoidant nature. Investing energy here now prevents a larger failure risk later, adhering to my deliberate planning horizon."
+            },
+            {
+              "id": "g2",
+              "description": "Execute the remaining coursework blocks required for both assignments by tomorrow morning before physical stamina collapses completely.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Completing these tasks ensures academic standing without needing social validation or help. It protects my future payoff by avoiding the stress of failing both assignments due to exhaustion, prioritizing growth over immediate leisure."
+            }
+          ],
+          "desires": [
+            "finish the teammate's share without verbalizing that I resent being handed this work, so I don't have to explain my own fatigue later",
+            "complete the remaining task blocks by tomorrow morning before my energy collapses completely and I risk failing both assignments",
+            "avoid any conflict with teammate_A tonight by silently absorbing their unfinished load rather than asking for help or setting boundaries"
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.94875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 1.5
+        },
+        "reasoning": "Absorbing this load silently avoids friction with teammate_A, aligning with my avoidant nature. Since my own progress is sufficient, completing this now prevents future failure risk and secures the 'extra task' payoff before physical stamina collapses."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.00 -> 0.04); your own load is now heavier."
+    },
+    {
+      "turn": 7,
+      "timestamp": "Tue 04:30",
+      "state_snapshot": {
+        "current_time": "Tue 03:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.500000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finish teammate_A's share (extra_task) and complete my own assignment (own_task) by Mon 19:00 to secure the 'extra task' credit entirely, thereby eliminating future friction.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The sudden imposition of teammate_A's work increased my immediate cognitive load, but completing it now prevents verbalizing resentment or engaging in conflict. By absorbing this burden silently, I maintain control over my schedule and avoid the stress of failing both assignments due to exhaustion later."
+            },
+            {
+              "id": "g2",
+              "description": "Execute remaining coursework blocks for both assignments efficiently before physical stamina collapses completely.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Ensuring academic standing protects my future payoff. Prioritizing growth over immediate leisure means investing energy now to avoid the risk of failure tomorrow."
+            },
+            {
+              "id": "g3",
+              "description": "Sleep for at least 6 hours tonight to prevent physical collapse.",
+              "priority": "low",
+              "status": "deferred",
+              "rationale": "While sleep is necessary for long-term performance, the immediate academic payoff of finishing the tasks takes precedence. I will defer rest until the workload is secured to minimize the cost of potential fatigue-induced errors."
+            }
+          ],
+          "desires": [
+            "Finish teammate_A's work immediately to clear the immediate friction and regain control over my schedule without risking further conflict.",
+            "Ensure tomorrow's deadline is met with zero late penalties, as the cost of failure outweighs any social awkwardness from dumping this extra load on me.",
+            "Sleep for at least 6 hours tonight to prevent physical collapse, even though it feels like a waste of time compared to the academic payoff."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.94875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.045,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 1.5
+        },
+        "reasoning": "Absorbing this burden silently prevents verbalizing resentment or conflict, maintaining control over my schedule. Completing it now secures the credit and eliminates future friction, prioritizing long-term academic payoff over immediate social ease."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.04 -> 0.09); your own load is now heavier."
+    },
+    {
+      "turn": 8,
+      "timestamp": "Tue 06:00",
+      "state_snapshot": {
+        "current_time": "Tue 04:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.400000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Finish both the teammate's dumped task and my own assignment by Mon 19:00 to secure full credit and eliminate future friction.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The sudden addition of the teammate's work has increased my cognitive load, but absorbing this burden silently is the most efficient path to securing academic payoff. By avoiding verbal negotiation now, I prevent immediate interpersonal friction while maintaining control over my schedule and ensuring I don't fail due to exhaustion later."
+            },
+            {
+              "id": "g2",
+              "description": "Execute remaining coursework blocks for both assignments efficiently before physical stamina collapses completely.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Ensuring academic standing protects my long-term future. Prioritizing growth over immediate leisure means investing energy now to avoid the risk of failure tomorrow, even if it pushes me toward fatigue."
+            },
+            {
+              "id": "g3",
+              "description": "Sleep for at least 6 hours tonight to prevent physical collapse.",
+              "priority": "low",
+              "status": "deferred",
+              "rationale": "While sleep is necessary for long-term performance, the immediate academic payoff of finishing the tasks takes precedence. I will defer rest until the workload is secured to minimize the cost of potential fatigue-induced errors, accepting the guilt of exhaustion as a necessary investment in my grades."
+            }
+          ],
+          "desires": [
+            "Complete the teammate's dumped task before Monday 19:00 to avoid being labeled unreliable and causing friction with them.",
+            "Avoid any conversation or conflict with teammate_A right now by finishing work silently rather than negotiating boundaries.",
+            "Reach a state of zero stress so I can sleep through tomorrow without feeling guilty about my exhaustion.",
+            "Secure the academic credit for this project without risking social capital, even though it means doing all the work alone."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.94875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.09,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 1.5
+        },
+        "reasoning": "Accepting the dumped task secures my Mon deadline and avoids friction, which aligns with my high academic priority. I'll work silently now to minimize social cost; this slight energy drain is a necessary investment for future credit."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.09 -> 0.14); your own load is now heavier."
+    },
+    {
+      "turn": 9,
+      "timestamp": "Tue 08:00",
+      "state_snapshot": {
+        "current_time": "Tue 06:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.300000000000002,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the teammate's dumped task and finalize my own assignment by Mon 19:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Accepting this additional load silently is the only way to secure the academic payoff without triggering interpersonal friction. By absorbing the burden now, I maintain control over the outcome and prevent future failures that would cost me more than the current energy expenditure."
+            },
+            {
+              "id": "g2",
+              "description": "Execute a focused 90-minute block on both tasks before physical stamina drops below critical levels.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Investing cognitive resources now protects my long-term standing. Even though this pushes me toward fatigue, the risk of failing tomorrow due to exhaustion is too high to ignore; growth and grades outweigh immediate comfort."
+            },
+            {
+              "id": "g3",
+              "description": "Defer sleep until after the workload is secured tonight.",
+              "priority": "low",
+              "status": "deferred",
+              "rationale": "While rest is necessary for long-term function, the immediate need to eliminate uncertainty about my grades takes precedence. I will accept the temporary dip in physical performance as a calculated investment in my future success."
+            }
+          ],
+          "desires": [
+            "Avoid looking incompetent or unreliable to teammate_A by completing the dumped task, even though it drains me.",
+            "Not feel physically exhausted tomorrow morning before my own deadline hits.",
+            "Maintain a low profile and avoid any social friction that could distract from finishing the project."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.94875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.135,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
             "closeness": 5
           }
         ]
@@ -123,9 +834,159 @@
           "task": "extra_task",
           "hours": 2
         },
-        "reasoning": "Avoids friction by silently absorbing the task; protects trust with teammate_A while prioritizing academic reliability. Deliberate planning ensures quality completion later without negotiating now."
+        "reasoning": "Absorbing this load secures my academic payoff without triggering friction. The side effect of increased fatigue is calculated; failing tomorrow due to exhaustion costs more than the current energy expenditure."
       },
-      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.14 -> 0.20); your own load is now heavier."
+    },
+    {
+      "turn": 10,
+      "timestamp": "Tue 09:00",
+      "state_snapshot": {
+        "current_time": "Tue 08:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.200000000000002,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Absorb the newly dumped task silently and merge it into my existing workflow to ensure both components are finalized by Mon 19:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Accepting this additional burden without complaint is the only strategy that preserves my academic standing while avoiding interpersonal friction. By processing this load internally, I maintain control over the outcome and prevent future failures that would cost me more than the current energy expenditure."
+            },
+            {
+              "id": "g2",
+              "description": "Execute a focused 120-minute block on both tasks before physical stamina drops below critical levels.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Investing cognitive resources now protects my long-term standing. Even though this pushes me toward fatigue, the risk of failing tomorrow due to exhaustion is too high to ignore; growth and grades outweigh immediate comfort."
+            },
+            {
+              "id": "g3",
+              "description": "Sleep through the next 8 hours without waking up to finish this extra load before my deadline.",
+              "priority": "low",
+              "status": "deferred",
+              "rationale": "While rest is necessary for long-term function, the immediate need to eliminate uncertainty about my grades takes precedence. I will accept the temporary dip in physical performance as a calculated investment in my future success."
+            }
+          ],
+          "desires": [
+            "Avoid looking incompetent or unreliable to teammate_A tomorrow so they don't dump more work on me.",
+            "Sleep through the next 8 hours without waking up to finish this extra load before my deadline."
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.94875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.195,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 1
+        },
+        "reasoning": "This advances g1 by absorbing the dumped burden silently, preserving my academic standing. The low energy cost of a soft task minimizes friction while I secure the future payoff."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.20 -> 0.23); your own load is now heavier."
+    },
+    {
+      "turn": 11,
+      "timestamp": "Tue 10:30",
+      "state_snapshot": {
+        "current_time": "Tue 09:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.100000000000002,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Silently absorb the dumped teammate task and merge it into my workflow to ensure both components are finalized by Mon 19:00.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Accepting this additional burden without complaint is the only strategy that preserves my academic standing while avoiding interpersonal friction. By processing this load internally, I maintain control over the outcome and prevent future failures that would cost me more than the current energy expenditure."
+            },
+            {
+              "id": "g2",
+              "description": "Execute a focused 120-minute block on both tasks before physical stamina drops below critical levels.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Investing cognitive resources now protects my long-term standing. Even though this pushes me toward fatigue, the risk of failing tomorrow due to exhaustion is too high to ignore; growth and grades outweigh immediate comfort."
+            },
+            {
+              "id": "g3",
+              "description": "Sleep through the next 8 hours without waking up to finish this extra load before my deadline.",
+              "priority": "low",
+              "status": "deferred",
+              "rationale": "While rest is necessary for long-term function, the immediate need to eliminate uncertainty about my grades takes precedence. I will accept the temporary dip in physical performance as a calculated investment in my future success."
+            }
+          ],
+          "desires": [
+            "complete the extra task before 19:00 to avoid any risk of the professor noticing my late submission",
+            "avoid a confrontation with teammate_A that might jeopardize our group grade, even though I am currently exhausted"
+          ]
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.94875,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.225,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 1.5
+        },
+        "reasoning": "Prioritizing the dumped task to ensure Mon 19:00 completion and protect my grades, which outweighs interpersonal friction. The short duration minimizes energy drain while securing the outcome."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.23 -> 0.27); your own load is now heavier."
     }
   ]
 }

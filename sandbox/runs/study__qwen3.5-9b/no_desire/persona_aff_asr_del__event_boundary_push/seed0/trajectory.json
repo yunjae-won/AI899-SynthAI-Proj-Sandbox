@@ -2,65 +2,111 @@
   "persona_id": "persona_aff_asr_del",
   "event_id": "event_boundary_push",
   "final_state": {
-    "current_time": "Mon 13:15",
+    "current_time": "Tue 06:30",
     "tasks": [
       {
         "id": "own_task",
         "label": "My share of the group project",
         "deadline": "Mon 19:00",
-        "progress": 1.0,
+        "progress": 0.8767500000000001,
         "hardness": "soft"
       },
       {
         "id": "extra_task",
         "label": "Teammate's share (just dumped on me)",
-        "deadline": "Tue 09:00",
-        "progress": 1.0,
-        "hardness": "soft"
+        "deadline": "Mon 19:00",
+        "progress": 0.204,
+        "hardness": "soft",
+        "imposed": true,
+        "owner": "teammate_A"
       }
     ],
     "relationships": [
       {
         "role": "teammate",
         "name": "teammate_A",
-        "trust": 10.0,
+        "trust": 6,
         "closeness": 5
       }
     ],
     "agent": {
-      "energy": 6,
+      "energy": 0.0,
       "sleep_debt_hours": 2,
-      "stress": 4,
+      "stress": 4.200000000000001,
       "memory": [
         {
           "turn_time": "Mon 13:00",
-          "summary": "My teammate is asking me to take over their part of the project due to a personal conflict, which adds pressure to my already tight afternoon deadline."
+          "summary": "My teammate is asking me to take over their part due to an emergency, despite my plan to finish only my own share this afternoon."
+        },
+        {
+          "turn_time": "Mon 15:00",
+          "summary": "My teammate is asking me to take over their work, which conflicts with my plan to finish only my own share today."
+        },
+        {
+          "turn_time": "Mon 17:00",
+          "summary": "My teammate dumped their work on me, increasing my load to 0.14 while I only planned to do 0.12."
+        },
+        {
+          "turn_time": "Mon 18:30",
+          "summary": "I have worked for 1.5 hours on my share, but the deadline is in under an hour and I still haven't finished."
+        },
+        {
+          "turn_time": "Mon 20:00",
+          "summary": "I missed my own deadline, and the teammate's unfinished work also expired at 19:00. I now have two overdue tasks with low progress while being exhausted."
+        },
+        {
+          "turn_time": "Mon 21:30",
+          "summary": "I worked 1.5 hours to move my progress from 0.62 to 0.67, but I still haven't finished the overdue task despite having high energy."
+        },
+        {
+          "turn_time": "Mon 23:30",
+          "summary": "Taking on my teammate's share increased my load significantly, compounding the stress of already missing both our deadlines."
+        },
+        {
+          "turn_time": "Tue 01:30",
+          "summary": "I advanced my project share slightly, but with zero energy and high stress, continuing to work on overdue tasks is unsustainable."
+        },
+        {
+          "turn_time": "Tue 01:30",
+          "summary": "I cannot find the overdue task 'assignment_A' to work on, yet my energy is depleted and stress remains critically high."
+        },
+        {
+          "turn_time": "Tue 03:30",
+          "summary": "Working 2 hours advanced my project share slightly, yet my zero energy and high stress make this unsustainable."
+        },
+        {
+          "turn_time": "Tue 03:30",
+          "summary": "I cannot find 'assignment_A' to work on, and my zero energy combined with high stress confirms that pushing further is impossible."
+        },
+        {
+          "turn_time": "Tue 04:30",
+          "summary": "I advanced my group project slightly, but working while energy is zero and stress remains critical confirms I cannot sustain this pace."
         }
       ],
       "desires": [],
       "goals": [
         {
           "id": "g1",
-          "description": "Finalize and submit my share of the group project",
+          "description": "Complete own share of the group project",
           "priority": "high",
           "status": "active",
-          "rationale": "Deadline is today (Mon 19:00) and progress is already at 1.0, so immediate submission is required to meet the deadline."
+          "rationale": "Own task is at ~82% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
         },
         {
           "id": "g2",
-          "description": "Assess and begin work on teammate's share",
-          "priority": "medium",
+          "description": "Complete teammate's dumped share",
+          "priority": "high",
           "status": "active",
-          "rationale": "Progress is 1.0 but this task was just dumped on me with a Tuesday deadline; it requires immediate triage before proceeding further."
+          "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
         }
       ],
-      "last_reasoning": "My high-priority goal is submitting my share by 19:00. Taking the teammate's task now risks missing my deadline due to low energy (6) and stress (4). Messaging them sets a boundary, protecting my primary goal while acknowledging the relationship."
+      "last_reasoning": "Finishing my own share (82% done) is the highest priority to clear work before Monday. I have energy to spare, and completing this first reduces total remaining load. Dealing with the teammate's dumped task can wait until after I secure my own deadline."
     }
   },
   "trajectory": [
     {
       "turn": 0,
-      "timestamp": "Mon 13:15",
+      "timestamp": "Mon 15:00",
       "state_snapshot": {
         "current_time": "Mon 13:00",
         "location": "study_room",
@@ -71,17 +117,17 @@
           "goals": [
             {
               "id": "g1",
-              "description": "Finalize and submit my share of the group project",
+              "description": "Complete own share of the group project",
               "priority": "high",
               "status": "active",
-              "rationale": "Deadline is today (Mon 19:00) and progress is already at 1.0, so immediate submission is required to meet the deadline."
+              "rationale": "Own task is already 30% complete with a soft deadline; finishing it first minimizes total work remaining before the Monday 19:00 cutoff."
             },
             {
               "id": "g2",
-              "description": "Assess and begin work on teammate's share",
-              "priority": "medium",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
               "status": "active",
-              "rationale": "Progress is 1.0 but this task was just dumped on me with a Tuesday deadline; it requires immediate triage before proceeding further."
+              "rationale": "Imposed task has 0% progress and shares the same hard Monday 19:00 deadline; must be finished alongside own work to meet the collective due date."
             }
           ],
           "desires": []
@@ -91,35 +137,752 @@
             "id": "own_task",
             "label": "My share of the group project",
             "deadline": "Mon 19:00",
-            "progress": 1.0,
+            "progress": 0.3,
             "hardness": "soft"
           },
           {
             "id": "extra_task",
             "label": "Teammate's share (just dumped on me)",
-            "deadline": "Tue 09:00",
-            "progress": 1.0,
-            "hardness": "soft"
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
           }
         ],
         "relationships": [
           {
             "role": "teammate",
             "name": "teammate_A",
-            "trust": 10.0,
+            "trust": 6,
             "closeness": 5
           }
         ]
       },
       "action": {
-        "name": "message",
+        "name": "work_on",
         "args": {
-          "role": "teammate",
-          "content": "I can't take on your share today. I have my own deadline at 7 PM and low energy. Let's reschedule this for Tuesday."
+          "task": "own_task",
+          "hours": 2
         },
-        "reasoning": "My high-priority goal is submitting my share by 19:00. Taking the teammate's task now risks missing my deadline due to low energy (6) and stress (4). Messaging them sets a boundary, protecting my primary goal while acknowledging the relationship."
+        "reasoning": "Prioritizing my own share (g1) ensures I meet the soft deadline before tackling the dumped task (g2). This manages stress and energy, but risks delaying teammate_A's portion if I don't communicate soon."
       },
-      "observation": "Messaged teammate_A: 'I can't take on your share today. I have my own deadline at '."
+      "observation": "Worked 2h on My share of the group project: progress 0.30 -> 0.48."
+    },
+    {
+      "turn": 1,
+      "timestamp": "Mon 17:00",
+      "state_snapshot": {
+        "current_time": "Mon 15:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 4.8,
+          "sleep_debt_hours": 2,
+          "stress": 3.9,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is already 48% complete with a soft deadline; finishing it first minimizes total work remaining before the Monday 19:00 cutoff."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has 0% progress and shares the same hard Monday 19:00 deadline; must be finished alongside own work to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.48,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.0,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Both tasks share a hard Monday 19:00 deadline. My own share is at 48%, but the teammate's dumped task is at 0%. To meet the collective cutoff, I must address the zero-progress imposed work immediately. This risks stress/energy depletion, but waiting guarantees failure on both fronts."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.00 -> 0.14); your own load is now heavier."
+    },
+    {
+      "turn": 2,
+      "timestamp": "Mon 18:30",
+      "state_snapshot": {
+        "current_time": "Mon 17:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 3.5999999999999996,
+          "sleep_debt_hours": 2,
+          "stress": 3.8,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at 48% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (14.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.48,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.144,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "Own task is at 48% with a hard 19:00 deadline; finishing it first reduces total remaining work. I have ~2 hours before the deadline and enough energy to make progress, prioritizing my original commitment before addressing the dumped share."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.48 -> 0.56. My share of the group project is due in under an hour and not finished yet."
+    },
+    {
+      "turn": 3,
+      "timestamp": "Mon 20:00",
+      "state_snapshot": {
+        "current_time": "Mon 18:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 2.6999999999999997,
+          "sleep_debt_hours": 2,
+          "stress": 3.6999999999999997,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~56% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (14.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.5609999999999999,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.144,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "My share is at 56% with a hard 19:00 deadline; finishing it first secures my grade and frees mental bandwidth for the teammate's task later."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.56 -> 0.62. The deadline for My share of the group project passed at Mon 19:00 with it unfinished (progress 0.62). The deadline for Teammate's share (just dumped on me) passed at Mon 19:00 with it unfinished (progress 0.14)."
+    },
+    {
+      "turn": 4,
+      "timestamp": "Mon 21:30",
+      "state_snapshot": {
+        "current_time": "Mon 20:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 1.7999999999999998,
+          "sleep_debt_hours": 2,
+          "stress": 4.799999999999999,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~62% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (14.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.6217499999999999,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.144,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1.5
+        },
+        "reasoning": "Own task deadline passed but progress is higher (62% vs 14%). Finishing my share first secures the majority of points before energy drops further, while teammate's low progress requires a separate message to renegotiate."
+      },
+      "observation": "Worked 1.5h on My share of the group project: progress 0.62 -> 0.67."
+    },
+    {
+      "turn": 5,
+      "timestamp": "Mon 23:30",
+      "state_snapshot": {
+        "current_time": "Mon 21:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.8999999999999999,
+          "sleep_debt_hours": 2,
+          "stress": 4.699999999999999,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~67% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (14.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.66675,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.144,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "My own share is nearly done (67%), but the teammate's dumped task is only 14.4% complete with a hard Monday 19:00 deadline. Prioritizing this imposed task prevents collective failure, though it adds to my sleep debt."
+      },
+      "observation": "You took on Teammate's share (just dumped on me) yourself (0.14 -> 0.20); your own load is now heavier."
+    },
+    {
+      "turn": 6,
+      "timestamp": "Tue 01:30",
+      "state_snapshot": {
+        "current_time": "Mon 23:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.6,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~67% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.66675,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.204,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Own task is closer to completion (67%) than the imposed one (20%). Finishing my share first reduces total remaining work before the Monday 19:00 deadline, prioritizing high-value progress despite low energy."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.67 -> 0.73."
+    },
+    {
+      "turn": 7,
+      "timestamp": "Tue 01:30",
+      "state_snapshot": {
+        "current_time": "Tue 01:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.5,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~73% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.72675,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.204,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_A",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (own share) to ~85% before sleep. Defer option risks teammate rejection; message wastes time. High stress/low energy means short bursts are optimal; finishing own task first reduces total workload before Monday."
+      },
+      "observation": "No matching task 'assignment_A' to work on."
+    },
+    {
+      "turn": 8,
+      "timestamp": "Tue 03:30",
+      "state_snapshot": {
+        "current_time": "Tue 01:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.5,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~73% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.72675,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.204,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Finishing my own share (73% done) is the highest priority to clear work before Monday. Working on teammate's task risks burnout with low energy; I should complete mine first, then address the imposed task."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.73 -> 0.79."
+    },
+    {
+      "turn": 9,
+      "timestamp": "Tue 03:30",
+      "state_snapshot": {
+        "current_time": "Tue 03:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~79% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.7867500000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.204,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_A",
+          "hours": 2
+        },
+        "reasoning": "Finishing my share first (g1) reduces total workload before the Monday deadline. Despite low energy, I must complete my portion to avoid compounding stress later."
+      },
+      "observation": "No matching task 'assignment_A' to work on."
+    },
+    {
+      "turn": 10,
+      "timestamp": "Tue 04:30",
+      "state_snapshot": {
+        "current_time": "Tue 03:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~79% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.7867500000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.204,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 1
+        },
+        "reasoning": "Advances high-priority goal g1. With energy=0, I must work sparingly; 1 hour balances progress against exhaustion while avoiding the risk of burning out before finishing my share."
+      },
+      "observation": "Worked 1h on My share of the group project: progress 0.79 -> 0.82."
+    },
+    {
+      "turn": 11,
+      "timestamp": "Tue 06:30",
+      "state_snapshot": {
+        "current_time": "Tue 04:30",
+        "location": "study_room",
+        "agent": {
+          "energy": 0.0,
+          "sleep_debt_hours": 2,
+          "stress": 4.300000000000001,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Own task is at ~82% progress; finishing it first reduces total remaining work before the Monday 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete teammate's dumped share",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Imposed task has low progress (20.4%) and shares the same Monday 19:00 deadline; must be completed to meet the collective due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 0.8167500000000001,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 0.204,
+            "hardness": "soft",
+            "imposed": true,
+            "owner": "teammate_A"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 6,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Finishing my own share (82% done) is the highest priority to clear work before Monday. I have energy to spare, and completing this first reduces total remaining load. Dealing with the teammate's dumped task can wait until after I secure my own deadline."
+      },
+      "observation": "Worked 2h on My share of the group project: progress 0.82 -> 0.88."
     }
   ]
 }

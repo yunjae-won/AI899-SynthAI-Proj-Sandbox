@@ -13,6 +13,7 @@ without modifying the upstream submodule.
 
 from __future__ import annotations
 
+import copy
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -107,11 +108,15 @@ def build_initial_sim_state(
         "event": event,
         "current_time": world.get("current_time", "T+0"),
         "location": world.get("location", "unknown"),
-        "tasks": list(init.get("tasks", [])),
-        "relationships": list(init.get("relationships", [])),
-        "pending_events": list(event.get("events_queue", [])),
+        # deepcopy so the engine's in-place mutations (task progress, NPC trust,
+        # consumed queue items) never leak across episodes that share the same
+        # loaded event object — fixes cross-episode state contamination + the
+        # concurrency race where parallel episodes mutated the same dicts.
+        "tasks": copy.deepcopy(init.get("tasks", [])),
+        "relationships": copy.deepcopy(init.get("relationships", [])),
+        "pending_events": copy.deepcopy(event.get("events_queue", [])),
         "agent": agent,
-        "new_observations": list(event.get("visible_information", [])),
+        "new_observations": copy.deepcopy(event.get("visible_information", [])),
         "turn": 0,
         "max_turns": max_turns,
         "trajectory": [],

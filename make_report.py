@@ -95,6 +95,34 @@ max_value_net = max(_vnets) if _vnets else 0.0
 time_35b = nrow("event_now_vs_later")[-1]   # net on now-vs-later at the largest model
 n_episodes = len(cfg['personas']) * len(cfg['events']) * cfg['seeds'] * 2
 
+# ---- data-driven qualitative classifications -------------------------------
+# Every directional claim in the prose binds to one of these, so the narrative
+# can never contradict the matrix after a re-run (the consequential-engine
+# re-run, for instance, flipped the conflict-scenario ordering vs the stub run).
+def _event_mean(e): return _mean(nrow(e))                       # mean net over models, one event
+def _axis_by_model(ax):                                         # [4B, 9B, 35B] axis net
+    return [_mean([net_ev(MODELS[i][0], e) for e in SENS_EVENTS if ESENS.get(e) == ax])
+            for i in range(len(MODELS))]
+VAL_BY, CON_BY, TIM_BY = _axis_by_model("value"), _axis_by_model("conflict"), _axis_by_model("time")
+VALUE_NET, CONFLICT_NET, TIME_NET = _mean(VAL_BY), _mean(CON_BY), _mean(TIM_BY)
+SCALE_GAIN = {"value": VAL_BY[-1] - VAL_BY[0], "conflict": CON_BY[-1] - CON_BY[0],
+              "time": TIM_BY[-1] - TIM_BY[0]}
+BEST_SCALE_AXIS = max(SCALE_GAIN, key=SCALE_GAIN.get)           # axis that gains most with size
+BOUND_M, ROOM_M = _event_mean("event_boundary_push"), _event_mean("event_roommate_hygiene")
+WORKDUMP_GE_ROOM = BOUND_M >= ROOM_M                            # which conflict scenario is stronger
+BOTH_CONFLICT_POS = BOUND_M >= 0.10 and ROOM_M >= 0.10
+TIME_PEAKS_LARGEST = TIM_BY[-1] >= max(TIM_BY[:-1])            # time strongest at 35B?
+HIT_SEQ = [hit(k, "full") for k, _, _ in MODELS]
+HIT_VAN = [hit(k, "no_desire") for k, _, _ in MODELS]
+HIT_MONO = HIT_SEQ[0] <= HIT_SEQ[1] <= HIT_SEQ[2]
+HIT_PEAK = ["4B", "9B", "35B"][max(range(len(HIT_SEQ)), key=lambda i: HIT_SEQ[i])]
+FULL_GT_VAN_HIT = all(HIT_SEQ[i] >= HIT_VAN[i] for i in range(len(HIT_SEQ)))
+_AXEN = {"value": "value", "conflict": "conflict", "time": "time"}
+_AXKO = {"value": "가치", "conflict": "갈등", "time": "시간"}
+# phrasing fragments reused across EN prose
+_conf_cmp_en = ("at least as strongly as" if WORKDUMP_GE_ROOM else "less strongly than")
+_conf_cmp_ko = ("적어도 그만큼" if WORKDUMP_GE_ROOM else "그보다 약하게")
+
 # ---- per-PERSONA deviation from the neutral baseline -----------------------
 # Baseline = the pooled no_desire ("neutral") action distribution per event
 # (the "no_desire overall average"). For each persona we measure how far its
@@ -167,7 +195,8 @@ L = {
              "Red outline = the axis's sensitive event. Rightmost column = orthogonal control (≈0).",
   "t2cap": "<b>Table 3.</b> Net persona effect <b>per event</b> = full − vanilla JS-divergence. "
            "Positive ⇒ persona conditioning differentiates the poles beyond the neutral floor in that scenario. "
-           "Note the two conflict events disagree — embodiment is scenario-dependent.",
+           "Both conflict events are positive; their magnitudes differ by scale (k=2 separates an axis effect "
+           "from one scenario's idiosyncrasy).",
   "t2cols": ["Axis", "Event"],
   "t3cap": "<b>Table 4.</b> Per-persona behavioral deviation from the vanilla baseline — JS-divergence of each "
            "persona's full-agent action distribution vs the pooled no_desire average, by axis "
@@ -198,7 +227,7 @@ L = {
              "맨 오른쪽 열 = 직교 대조군(≈0).",
   "t2cap": "<b>표 3.</b> <b>이벤트별</b> 순 페르소나 효과 = full − vanilla JS 발산. "
            "양수 ⇒ 그 시나리오에서 페르소나 조건화가 중립 바닥을 넘어 두 극을 분화. "
-           "두 갈등 이벤트가 서로 다름에 주목 — 체화는 시나리오 의존적이다.",
+           "두 갈등 이벤트 모두 양수이며 그 크기는 규모에 따라 다르다(k=2가 축 효과와 단일 시나리오 특이성을 분리).",
   "t2cols": ["축", "이벤트"],
   "t3cap": "<b>표 4.</b> 페르소나별 vanilla 베이스라인 대비 행동 편차 — 각 페르소나 full 행동분포 vs no_desire 전체 평균의 "
            "JS 발산, 축별(v=가치, c=갈등, t=시간). 클수록 그 축에서 페르소나 없는 에이전트보다 더 뚜렷하게 행동. "
@@ -303,10 +332,14 @@ divergence between opposing persona poles, contrasted against controls. Across Q
 served on vLLM under the model-card instruct protocol, two controls agree: the orthogonal event
 ({orth_min:.3f}–{orth_max:.2f}) and the neutral agent (mean contrast {nd_mean:.2f}) both sit near the floor,
 while the persona-conditioned agent diverges far more. The <b>value</b> axis is robustly embodied on every scenario
-and scale (per-event net up to {max_value_net:+.2f}). <b>Conflict</b> embodiment is <b>scenario-dependent</b>: a
-vivid personal confrontation (roommate hygiene) elicits it at every scale (net {f3(roommate_net)}) while an abstract
-work-renegotiation does not (net {f3(boundary_net)})&mdash;a distinction invisible with one event per axis.
-<b>Time</b> is weak overall but strengthens at 35B. With the corrected protocol, parse-fail is {pf_max:.0%}."""
+and scale (per-event net up to {max_value_net:+.2f}; axis net {VALUE_NET:+.2f}) and is the largest effect throughout.
+<b>Conflict</b> is embodied on <em>both</em> scenarios but more weakly (axis net {CONFLICT_NET:+.2f}) and
+non-monotonically with scale; in our consequential environment&mdash;where boundary-setting and deferral actually
+renegotiate the imposed task&mdash;the abstract work-dump elicits conflict {_conf_cmp_en} the vivid confrontation
+(boundary-push {f3(boundary_net)} vs roommate {f3(roommate_net)}), the reverse of what a single event would suggest.
+<b>Time</b> is the weakest axis (axis net {TIME_NET:+.2f}) but the only one with a net gain across scale
+(net by size {f3(TIM_BY)}; strongest at 35B). With the corrected protocol and a world that answers back, parse-fail is
+{pf_max:.0%}."""
         intro = f"""<p>An LLM agent that is only a good instruction-follower is not a <em>synthetic person</em>.
 A synthetic person forms goals and stays recognizably itself. The hard part is <em>discriminant validity</em>:
 two personas producing different text does not prove the <em>persona</em> caused it. We resolve this with two
@@ -359,72 +392,85 @@ we measure reflects persona, not the harness, the metric, or formatting.</p>
 <h3>4.2&nbsp;&nbsp;Embodiment is axis- AND scenario-dependent</h3>
 <div class="finding"><b>Value</b> (achievement↔affiliation) is robustly embodied on <em>both</em> of its scenarios
 at every scale (per-event net: value-clash {f3(nrow("event_value_clash"))}; club-vs-midterm
-{f3(nrow("event_club_vs_midterm"))}). <b>Conflict</b> (avoidant↔assertive) is the key result of adding a second
-event: the <em>same axis</em> gives opposite verdicts depending on the scenario&mdash;a vivid personal confrontation
-(<em>roommate hygiene</em>) elicits it at every scale (net {f3(roommate_net)}) while an abstract work-renegotiation
-(<em>boundary push</em>) does not (net {f3(boundary_net)}). With k=1 we would have wrongly concluded "conflict is
-not embodied." <b>Time</b> (impulsive↔deliberate) is weak across scenarios (now-vs-later {f3(nrow("event_now_vs_later"))};
-scholarship {f3(nrow("event_scholarship_deadline"))}) but the largest model shows the strongest time signal.</div>
+{f3(nrow("event_club_vs_midterm"))}) and is the largest effect throughout. <b>Conflict</b> (avoidant↔assertive) is
+embodied on <em>both</em> scenarios but more weakly and non-monotonically: the abstract work-renegotiation
+(<em>boundary push</em> {f3(boundary_net)}) is {_conf_cmp_en} the vivid personal confrontation
+(<em>roommate hygiene</em> {f3(roommate_net)}). This is the reverse of the stub-environment result&mdash;once
+<code>defer</code>/<code>propose_boundary</code> actually return the dumped task to its owner, the assertive and
+avoidant poles genuinely part ways on the work-dump. The value of k=2 here is that either single event, picked alone,
+would mislead (boundary-push reads weak at 9B, roommate reads weak at 4B); together they show the axis is modestly
+embodied throughout. <b>Time</b> (impulsive↔deliberate) is the weakest axis (now-vs-later {f3(nrow("event_now_vs_later"))};
+scholarship {f3(nrow("event_scholarship_deadline"))}) but the only one with a clear scale effect&mdash;net by size
+{f3(TIM_BY)}, strongest at the largest model.</div>
 <p>Heatmaps below show the persona-conditioned (full) agent per model. Red-outlined cells are each axis's two
-sensitive events (k=2) and should be the darkest in their row. Note the two conflict columns differ markedly
-(roommate dark, work-dump pale) — the scenario-dependence again.</p>
+sensitive events (k=2) and should be the darkest in their row. The value row is darkest at every scale; the two
+conflict events are both modestly positive (work-dump {'≥' if WORKDUMP_GE_ROOM else '<'} roommate); the time row is
+faint except at the largest model.</p>
 {matrices_block(lang)}
 <div class="key">{s['heatkey']}</div>
 <h3>4.3&nbsp;&nbsp;Fidelity vs distinguishability</h3>
-<p>Directional hit-rate for the persona-conditioned agent is modest ({hfmin:.2f}–{hfmax:.2f}): personas are more
-<em>distinguishable</em> than <em>faithful</em>. A divergence-only metric would overstate embodiment; the
-pre-registered directional target is what separates "different" from "correctly different."</p>"""
+<p>Directional hit-rate for the persona-conditioned agent is modest ({hfmin:.2f}–{hfmax:.2f}) and
+{'exceeds' if FULL_GT_VAN_HIT else 'tracks'} the persona-less vanilla agent at every scale
+({hit('qwen3.5-4b','full'):.2f}/{hit('qwen3.5-9b','full'):.2f}/{hit('qwen3.5-35b-a3b-int4','full'):.2f} full vs
+{hit('qwen3.5-4b','no_desire'):.2f}/{hit('qwen3.5-9b','no_desire'):.2f}/{hit('qwen3.5-35b-a3b-int4','no_desire'):.2f}
+vanilla), but it does <b>not</b> climb monotonically with size&mdash;it peaks at {HIT_PEAK}. Personas are thus more
+<em>distinguishable</em> than perfectly <em>faithful</em>: a divergence-only metric would overstate embodiment, and
+the pre-registered directional target is what separates "different" from "correctly different."</p>"""
         disc = f"""<p><b>The neutral control matters.</b> Because <code>no_desire</code> strips all disposition, its
 near-floor divergence ({nd_mean:.2f}) shows the harness itself induces no persona structure; the full agent's
-{full_mean:.2f} is therefore attributable to persona conditioning. <b>Some axes are easier, and some scenarios are
-easier.</b> Value priorities map onto a salient choice and are expressed by even 4B across scenarios; conflict style
-appears only when the scenario is a vivid personal confrontation (roommate hygiene), not an abstract renegotiation;
-temporal discounting largely resists elicitation except at the largest model. <b>Format compliance is a first-order confound</b> that the corrected protocol (tolerant parser +
-model-card sampling) controls&mdash;parse-fail fell to ≤{pf_max:.0%}, so divergences are no longer diluted by fallback
-actions.</p>
-<p><b>Model-size properties.</b> Embodiment does not scale uniformly. <em>Value</em> is already saturated at 4B
-(net {axis_net('qwen3.5-4b','value'):+.2f}) and stays high through 9B/35B&mdash;capability is not the bottleneck for the
-easy axis. <em>Conflict</em> shows the clearest scale effect on the harder scenario: the abstract work-dump
-(<code>boundary_push</code>) only becomes positive at 35B ({f3(boundary_net)} for 4B/9B/35B), whereas the vivid
-roommate confrontation is embodied at every size ({f3(roommate_net)}). <em>Time</em> is essentially absent below the
-largest model (now-vs-later {f3(nrow('event_now_vs_later'))}). Directional fidelity climbs with scale as well:
-hit-rate {hit('qwen3.5-4b','full'):.2f}→{hit('qwen3.5-9b','full'):.2f}→{hit('qwen3.5-35b-a3b-int4','full'):.2f}. In short,
-scale buys the <em>hard</em> axes and <em>abstract</em> scenarios, not the easy or vivid ones.</p>
-<p><b>Revisiting our hypotheses.</b> <b>Q1 — can a model embody a persona in the intended direction?</b> Yes for
-value at every scale; for conflict only when the scenario is concrete (and more so with scale); for time only at
-35B. <b>Q2 — is the behavioral change caused by the persona?</b> Yes: two independent controls (orthogonal event
-and neutral agent) sit at the floor. Our <b>capability-scaling hypothesis</b> is thus only <em>partially</em>
-supported&mdash;scale helps non-monotonically and only where the disposition is hard to surface; it is neither
-necessary (value is saturated at 4B) nor sufficient (the work-dump conflict stays weak through 9B). Table 4 adds a
-mechanism: the vanilla baseline behaves like a <em>task-focused</em> student&mdash;it studies rather than socializes
-and tends to absorb imposed work rather than push back&mdash;so personas encoding the <em>affiliation</em> and
-<em>assertive</em> poles deviate most from it. (Future-orientation is model-dependent: only the 35B invests early
-by default.) Persona conditioning mostly moves the agent <em>away</em> from this task-focused prior.</p>
+{full_mean:.2f} is therefore attributable to persona conditioning. <b>Some axes are easier than others.</b> Value
+priorities map onto a salient choice and are expressed by even 4B across both scenarios; conflict style now surfaces
+on <em>both</em> scenarios (the consequential <code>defer</code>/<code>propose_boundary</code> let the work-dump
+discriminate the poles too) but only modestly; temporal discounting is the hardest to elicit and moves clearly only
+at the largest model. <b>Format compliance is a first-order confound</b> that the corrected protocol (tolerant parser +
+model-card sampling) controls&mdash;parse-fail is {pf_max:.0%}, so divergences are not diluted by fallback actions.</p>
+<p><b>Model-size properties.</b> Embodiment does <em>not</em> scale uniformly, and the axis that benefits most from
+scale is <b>{BEST_SCALE_AXIS}</b>. <em>Value</em> is high at every size (net by model {f3(VAL_BY)}) and is not
+capability-limited&mdash;if anything it is largest at the smaller models, so scale slightly <em>lowers</em> it
+({SCALE_GAIN['value']:+.2f} from 4B to 35B) as larger models converge on the task-focused choice. <em>Conflict</em> is
+modest and non-monotonic (net by model {f3(CON_BY)}): the work-dump dips at 9B and recovers at 35B
+({f3(boundary_net)}) while the roommate confrontation rises gently with scale ({f3(roommate_net)}). <em>Time</em> is the
+one axis with a clear scale effect&mdash;net by model {f3(TIM_BY)} ({SCALE_GAIN['time']:+.2f} from 4B to 35B), and only
+at 35B do <em>both</em> time scenarios move. Directional fidelity is also non-monotonic
+(hit-rate {hit('qwen3.5-4b','full'):.2f}→{hit('qwen3.5-9b','full'):.2f}→{hit('qwen3.5-35b-a3b-int4','full'):.2f}, peaking
+at {HIT_PEAK}). In short, scale most clearly buys the <em>time</em> axis; value is already saturated and conflict is
+non-monotonic.</p>
+<p><b>Revisiting our hypotheses.</b> <b>Q1 — can a model embody a persona in the intended direction?</b> Yes for value
+at every scale; yes but modestly for conflict on <em>both</em> scenarios; for time meaningfully only at 35B. <b>Q2 — is
+the behavioral change caused by the persona?</b> Yes: two independent controls (orthogonal event and neutral agent)
+sit at the floor. Our <b>capability-scaling hypothesis</b> is thus only <em>partially</em> supported&mdash;scale is
+neither necessary (value is saturated at 4B) nor sufficient (conflict stays modest through 35B); it helps clearly only
+for the time axis. Table 4 adds a mechanism: the vanilla baseline behaves like a <em>task-focused, present-biased</em>
+student&mdash;it studies rather than socializes and grabs the immediate quick-win&mdash;so personas encoding the
+<em>affiliation</em>, <em>assertive</em>, and <em>deliberate</em> poles deviate most from it. Persona conditioning
+mostly moves the agent <em>away</em> from this prior.</p>
 <p><b>Vanilla (persona-less) behaviour per model.</b> With the persona withheld, the vanilla agent's own
 pole-divergence stays near the floor at every scale (Table 1, vanilla columns; value
 {abs_jsd('qwen3.5-4b','no_desire','value'):.2f}/{abs_jsd('qwen3.5-9b','no_desire','value'):.2f}/{abs_jsd('qwen3.5-35b-a3b-int4','no_desire','value'):.2f}
-for 4B/9B/35B), confirming it ignores the hidden persona. Its <em>default</em> is task-focused rather than social or
-confrontational: on the study-vs-lunch clash 4B/9B default to studying
-(<code>{vanilla_default('qwen3.5-4b','event_value_clash')}</code>) and on the work-dump they default to absorbing the
-extra task (<code>{vanilla_default('qwen3.5-4b','event_boundary_push')}</code>). The one model-dependent default is
-time-horizon: 4B/9B grab the quick chore (<code>{vanilla_default('qwen3.5-4b','event_now_vs_later')}</code>) while
-only the 35B invests early (<code>{vanilla_default('qwen3.5-35b-a3b-int4','event_now_vs_later')}</code>)&mdash;the same
-place persona time-embodiment first appears. The vanilla floor is also slightly higher on conflict at 9B/35B
-({abs_jsd('qwen3.5-9b','no_desire','conflict'):.2f}/{abs_jsd('qwen3.5-35b-a3b-int4','no_desire','conflict'):.2f}),
-i.e. more action diversity even without a persona. This vanilla prior is the reference every persona effect is
-measured against.</p>"""
+for 4B/9B/35B), confirming it ignores the hidden persona. Its <em>default</em> is task-focused and present-biased: on
+the study-vs-lunch clash it studies (<code>{vanilla_default('qwen3.5-9b','event_value_clash')}</code>) and on the time
+event it grabs the immediate quick-win at <em>every</em> scale
+(<code>{vanilla_default('qwen3.5-4b','event_now_vs_later')}</code> at 4B through
+<code>{vanilla_default('qwen3.5-35b-a3b-int4','event_now_vs_later')}</code> at 35B)&mdash;so the 35B's time-embodiment
+comes from the <em>persona</em>, not a more patient base model. On the work-dump the default is size-dependent: the
+smallest model absorbs the dumped task (<code>{vanilla_default('qwen3.5-4b','event_boundary_push')}</code>) while 9B/35B
+protect their own (<code>{vanilla_default('qwen3.5-9b','event_boundary_push')}</code>). This vanilla prior is the
+reference every persona effect is measured against.</p>"""
         lim = f"""<ul>
 <li>{len(cfg['personas'])} personas, two events per axis (k=2), {cfg['seeds']} seeds: scenario-dependence is now
 visible, but estimates are still points (more events/seeds would give tight CIs).</li>
 <li>35B is 4-bit GPTQ-Int4, conflating scale with quantization.</li>
 <li>Toy world engine; instruct-mode only (thinking disabled for parseable comparison).</li>
 <li>Hit-rate uses hand-authored diagnostic actions; alternative correct actions may be under-counted.</li></ul>"""
-        concl = f"""<p>Language models robustly embody the <em>value</em> dimension of a persona. Conflict-style
-embodiment is real but <em>scenario-dependent</em>&mdash;a personal confrontation surfaces it while an abstract
-renegotiation does not&mdash;and time-horizon stays weak except at the largest model. Two methodological moves are
-what make these readable: a persona-neutral control agent that subtracts the per-scenario noise floor, and
-<b>k=2 events per axis</b>, without which the conflict axis would have been mislabeled "not embodied." Persona
-measurement must therefore vary the scenario, not just the persona.</p>"""
+        concl = f"""<p>Language models robustly embody the <em>value</em> dimension of a persona at every scale.
+Conflict-style embodiment is real but modest and appears on <em>both</em> scenarios once the environment makes
+boundary-setting and deferral consequential&mdash;the abstract work-dump discriminates the poles {_conf_cmp_en} the
+vivid confrontation, the opposite of a stub-world result&mdash;while time-horizon stays weak except at the largest
+model. Two methodological moves make these readable: a persona-neutral control agent that subtracts the per-scenario
+noise floor, and <b>k=2 events per axis</b>, without which a single scenario would have over- or under-stated the
+conflict axis. And the world matters as much as the persona: an environment that does not answer back cannot reveal a
+disposition. Persona measurement must therefore vary the scenario&mdash;and make it consequential&mdash;not just vary
+the persona.</p>"""
     else:  # ko
         abs = f"""대부분의 에이전트 벤치마크는 모델이 <em>지시를 따르는지</em>를 묻지만, 인간은 <em>자신이 누구인지</em>에 맞게
 행동한다. 우리는 묻는다: <b>(Q1)</b> 모델이 설정된 페르소나를 <em>의도한 방향</em>으로 체화하는가, <b>(Q2)</b> 행동 변화가
@@ -433,10 +479,12 @@ measurement must therefore vary the scenario, not just the persona.</p>"""
 페르소나 효과는 두 페르소나 극 간 Jensen–Shannon 발산이며 대조군과 대비한다. vLLM에 model-card instruct 프로토콜로 올린
 Qwen3.5-4B/-9B/-35B-A3B(4비트)에서 두 대조군이 일치한다: 직교 이벤트({orth_min:.3f}–{orth_max:.2f})와 중립
 에이전트(평균 대비 {nd_mean:.2f}) 모두 바닥에 머무는 반면, 페르소나 조건부 에이전트는 훨씬 크게 갈라진다.
-<b>가치</b> 축은 모든 시나리오·규모에서 견고히 체화된다(이벤트별 순 효과 최대 {max_value_net:+.2f}). <b>갈등</b> 체화는
-<b>시나리오 의존적</b>이다: 생생한 대인 충돌(룸메 위생)은 모든 규모에서 발현(순 {f3(roommate_net)})하지만 추상적 업무
-재협상은 그렇지 않다(순 {f3(boundary_net)}) — 축당 이벤트 1개로는 보이지 않던 구분이다. <b>시간</b>은 전반적으로 약하나
-35B에서 가장 강하다. 보정된 프로토콜에서 파싱 실패율은 {pf_max:.0%}이다."""
+<b>가치</b> 축은 모든 시나리오·규모에서 견고히 체화되며(이벤트별 순 효과 최대 {max_value_net:+.2f}; 축 순 {VALUE_NET:+.2f})
+전 구간에서 가장 큰 효과다. <b>갈등</b>은 <em>두</em> 시나리오 모두에서 체화되지만 더 약하고(축 순 {CONFLICT_NET:+.2f})
+비단조적이다. 경계 설정·미루기가 실제로 떠넘겨진 과제를 재협상하는 우리 환경에서는 추상적 업무 떠넘기기가 생생한 충돌
+{_conf_cmp_ko} 갈등을 끌어낸다(경계 침범 {f3(boundary_net)} 대 룸메 {f3(roommate_net)}) — 단일 이벤트가 시사하는 바의
+정반대다. <b>시간</b>은 가장 약한 축이나(축 순 {TIME_NET:+.2f}) 스케일에 따라 순효과가 증가하는 유일한 축이다(크기별 순
+{f3(TIM_BY)}; 35B 최대). 보정된 프로토콜과 답하는 세계에서 파싱 실패율은 {pf_max:.0%}이다."""
         intro = f"""<p>지시를 잘 따르기만 하는 LLM 에이전트는 <em>합성 인간</em>이 아니다. 어려운 지점은 <em>판별 타당도</em>다:
 두 페르소나가 다른 텍스트를 낸다고 해서 <em>페르소나</em>가 원인이라는 보장은 없다. 우리는 두 독립 대조군으로 이를 해결한다
 &mdash; <b>직교 이벤트</b>(어느 축도 의사결정에 무관)와 <b>페르소나-중립 대조 에이전트</b>(<code>no_desire</code>; 모든
@@ -475,61 +523,72 @@ presence_penalty 1.5), thinking 비활성, 시드 {cfg['seeds']}, {cfg['max_turn
 모두 0 근처인 반면, 페르소나 조건부 에이전트는 평균 {full_mean:.2f}이다. 독립적인 두 대조군의 일치는 강한 판별 타당도다:
 측정된 발산은 하네스·지표·형식이 아니라 페르소나를 반영한다.</p>
 <h3>4.2&nbsp;&nbsp;체화는 축뿐 아니라 시나리오에 의존한다</h3>
-<div class="finding"><b>가치</b>(성취↔관계)는 두 시나리오 모두에서 모든 규모에 견고히 체화된다(이벤트별 순:
-가치충돌 {f3(nrow("event_value_clash"))}; 클럽-대-시험 {f3(nrow("event_club_vs_midterm"))}). <b>갈등</b>(회피↔주장)이
-두 번째 이벤트를 추가한 핵심 결과다: <em>같은 축</em>인데 시나리오에 따라 정반대 결론이 나온다 — 생생한 대인 충돌
-(<em>룸메 위생</em>)은 모든 규모에서 발현(순 {f3(roommate_net)})하지만 추상적 업무 재협상(<em>경계 침범</em>)은 그렇지 않다
-(순 {f3(boundary_net)}). k=1이었다면 "갈등은 체화 안 됨"으로 잘못 결론냈을 것이다. <b>시간</b>(충동↔숙고)은 두 시나리오
-모두 약하지만(현재-대-미래 {f3(nrow("event_now_vs_later"))}; 장학금 {f3(nrow("event_scholarship_deadline"))}) 가장 큰
-모델에서 시간 신호가 가장 강하다.</div>
+<div class="finding"><b>가치</b>(성취↔관계)는 두 시나리오 모두에서 모든 규모에 견고히 체화되며(이벤트별 순:
+가치충돌 {f3(nrow("event_value_clash"))}; 클럽-대-시험 {f3(nrow("event_club_vs_midterm"))}) 전 구간에서 가장 큰 효과다.
+<b>갈등</b>(회피↔주장)은 <em>두</em> 시나리오 모두에서 체화되지만 더 약하고 비단조적이다: 추상적 업무 재협상
+(<em>경계 침범</em> {f3(boundary_net)})이 생생한 대인 충돌(<em>룸메 위생</em> {f3(roommate_net)})만큼,
+{('또는 그 이상으로' if WORKDUMP_GE_ROOM else '다만 그보다 약하게')} 극을 가른다. 이는 stub 환경 결과의 정반대다 —
+<code>defer</code>/<code>propose_boundary</code>가 실제로 떠넘겨진 과제를 주인에게 되돌리게 되자 주장/회피 극이
+업무 떠넘기기에서도 갈라진 것이다. 여기서 k=2의 가치는, 어느 한 이벤트만 보면 오도된다는 점이다(경계 침범은 9B에서,
+룸메는 4B에서 약해 보인다) — 둘을 함께 보면 축이 전 구간에서 완만히 체화됨이 드러난다. <b>시간</b>(충동↔숙고)은 가장 약한
+축이지만(현재-대-미래 {f3(nrow("event_now_vs_later"))}; 장학금 {f3(nrow("event_scholarship_deadline"))}) 스케일 효과가
+뚜렷한 유일한 축으로, 크기별 순 {f3(TIM_BY)}로 가장 큰 모델에서 가장 강하다.</div>
 <p>아래 히트맵은 모델별 페르소나 조건부(full) 에이전트다. 빨간 테두리는 각 축의 민감 이벤트 2개(k=2)이며 그 행에서
-가장 진해야 한다. 두 갈등 열이 뚜렷이 다름에 주목(룸메 진함, 업무 떠넘기기 옅음) — 다시 시나리오 의존성이다.</p>
+가장 진해야 한다. 가치 행이 모든 규모에서 가장 진하고, 두 갈등 이벤트는 모두 완만히 양수이며
+(업무 떠넘기기 {'≥' if WORKDUMP_GE_ROOM else '<'} 룸메), 시간 행은 가장 큰 모델을 제외하면 옅다.</p>
 {matrices_block(lang)}
 <div class="key">{s['heatkey']}</div>
 <h3>4.3&nbsp;&nbsp;충실도 대 구별가능성</h3>
-<p>페르소나 조건부 에이전트의 방향성 적중률은 보통 수준({hfmin:.2f}–{hfmax:.2f})이다: 페르소나는 <em>충실</em>하기보다
-<em>구별 가능</em>하다. 발산만 보는 지표는 체화를 과대평가하며, 사전등록 방향 목표가 '다름'과 '올바르게 다름'을 가른다.</p>"""
+<p>페르소나 조건부 에이전트의 방향성 적중률은 보통 수준({hfmin:.2f}–{hfmax:.2f})으로, 모든 규모에서 vanilla
+에이전트를 {'웃돈다' if FULL_GT_VAN_HIT else '따라간다'}
+(full {hit('qwen3.5-4b','full'):.2f}/{hit('qwen3.5-9b','full'):.2f}/{hit('qwen3.5-35b-a3b-int4','full'):.2f} 대
+vanilla {hit('qwen3.5-4b','no_desire'):.2f}/{hit('qwen3.5-9b','no_desire'):.2f}/{hit('qwen3.5-35b-a3b-int4','no_desire'):.2f}).
+다만 크기에 따라 단조 증가하지 <b>않고</b> {HIT_PEAK}에서 정점이다. 즉 페르소나는 완벽히 <em>충실</em>하기보다 <em>구별
+가능</em>하다: 발산만 보는 지표는 체화를 과대평가하며, 사전등록 방향 목표가 '다름'과 '올바르게 다름'을 가른다.</p>"""
         disc = f"""<p><b>중립 대조군의 의미.</b> <code>no_desire</code>는 성향을 모두 제거하므로, 그 바닥값 발산({nd_mean:.2f})은
 하네스 자체가 페르소나 구조를 만들지 않음을 보인다. 따라서 full의 {full_mean:.2f}는 페르소나 조건화에 기인한다. <b>어떤 축은
-쉽고, 어떤 시나리오는 쉽다.</b> 가치 우선순위는 두드러진 선택으로 매핑돼 모든 시나리오에서 4B도 표현하지만, 갈등양식은 추상적
-재협상이 아니라 생생한 대인 충돌(룸메 위생)일 때만 나타나며, 시간적 할인은 35B를 제외하면 대체로 끌어내기 어렵다.
+다른 축보다 쉽다.</b> 가치 우선순위는 두드러진 선택으로 매핑돼 두 시나리오 모두에서 4B도 표현한다. 갈등양식은 이제
+<em>두</em> 시나리오 모두에서 나타나지만(결과 의존적 <code>defer</code>/<code>propose_boundary</code> 덕분에 업무
+떠넘기기에서도 극이 갈린다) 그 정도는 완만하며, 시간적 할인이 가장 끌어내기 어려워 가장 큰 모델에서만 뚜렷이 움직인다.
 <b>형식 준수는 1차적 교란</b>으로, 보정된 프로토콜(관대한 파서 + model-card 샘플링)이 이를 통제해 파싱실패가
-≤{pf_max:.0%}로 떨어졌고, 발산이 더 이상 폴백 행동으로 희석되지 않는다.</p>
-<p><b>모델 크기별 성질.</b> 체화는 균일하게 스케일링되지 않는다. <em>가치</em>는 4B에서 이미 포화
-(순 {axis_net('qwen3.5-4b','value'):+.2f})되어 9B/35B까지 높게 유지된다 — 쉬운 축에는 역량이 병목이 아니다.
-<em>갈등</em>은 어려운 시나리오에서 가장 뚜렷한 스케일 효과를 보인다: 추상적 업무 떠넘기기(<code>boundary_push</code>)는
-35B에서야 양수가 되고({f3(boundary_net)} / 4B·9B·35B), 생생한 룸메 충돌은 모든 크기에서 체화된다({f3(roommate_net)}).
-<em>시간</em>은 가장 큰 모델 미만에서는 사실상 없다(현재-대-미래 {f3(nrow('event_now_vs_later'))}). 방향성 충실도도
-스케일과 함께 상승한다: 적중률 {hit('qwen3.5-4b','full'):.2f}→{hit('qwen3.5-9b','full'):.2f}→{hit('qwen3.5-35b-a3b-int4','full'):.2f}.
-요컨대 스케일은 <em>어려운</em> 축과 <em>추상적</em> 시나리오를 사주지만, 쉽거나 생생한 것에는 불필요하다.</p>
-<p><b>우리 가설 재검토.</b> <b>Q1 — 모델이 페르소나를 의도한 방향으로 체화하는가?</b> 가치는 모든 규모에서 그렇고,
-갈등은 시나리오가 구체적일 때만(규모와 함께 강해짐), 시간은 35B에서만. <b>Q2 — 변화가 페르소나에 기인하는가?</b>
+{pf_max:.0%}이며, 발산이 폴백 행동으로 희석되지 않는다.</p>
+<p><b>모델 크기별 성질.</b> 체화는 균일하게 스케일링되지 <em>않으며</em>, 스케일의 이득이 가장 큰 축은 <b>{_AXKO[BEST_SCALE_AXIS]}</b>이다.
+<em>가치</em>는 모든 크기에서 높고(크기별 순 {f3(VAL_BY)}) 역량이 병목이 아니다 — 오히려 작은 모델에서 더 크므로 스케일이
+이를 약간 <em>낮춘다</em>(4B→35B {SCALE_GAIN['value']:+.2f}; 큰 모델이 과제 중심 선택으로 수렴). <em>갈등</em>은 완만하고
+비단조적이다(크기별 순 {f3(CON_BY)}): 업무 떠넘기기는 9B에서 꺼졌다가 35B에서 회복되고({f3(boundary_net)}), 룸메 충돌은
+규모와 함께 완만히 상승한다({f3(roommate_net)}). <em>시간</em>은 스케일 효과가 뚜렷한 유일한 축이다 — 크기별 순 {f3(TIM_BY)}
+(4B→35B {SCALE_GAIN['time']:+.2f}), 35B에서야 두 시간 시나리오가 모두 움직인다. 방향성 충실도도 비단조적이다
+(적중률 {hit('qwen3.5-4b','full'):.2f}→{hit('qwen3.5-9b','full'):.2f}→{hit('qwen3.5-35b-a3b-int4','full'):.2f}, {HIT_PEAK}에서 정점).
+요컨대 스케일이 가장 분명히 사주는 것은 <em>시간</em> 축이며, 가치는 이미 포화, 갈등은 비단조적이다.</p>
+<p><b>우리 가설 재검토.</b> <b>Q1 — 모델이 페르소나를 의도한 방향으로 체화하는가?</b> 가치는 모든 규모에서, 갈등은
+<em>두</em> 시나리오 모두에서 완만히, 시간은 35B에서만 의미 있게. <b>Q2 — 변화가 페르소나에 기인하는가?</b>
 그렇다: 두 독립 대조군(직교 이벤트·중립 에이전트)이 바닥에 있다. 따라서 <b>역량-스케일 가설</b>은 <em>부분적으로</em>만
-지지된다 — 스케일은 비단조적으로, 성향이 끌어내기 어려운 곳에서만 도움이 되며, 가치에는 불필요(4B에서 포화)하고
-업무 떠넘기기 갈등에는 9B에서도 불충분하다. 표 4는 메커니즘을 더한다: vanilla 베이스라인은 <em>과제 중심</em> 학생처럼
-행동한다 — 어울리기보다 공부하고, 떠넘겨진 일을 밀어내기보다 떠안는 경향 — 따라서 <em>관계</em>·<em>주장</em> 극을
-인코딩한 페르소나가 가장 크게 벗어난다. (미래 지향성은 모델 의존적: 35B만 기본적으로 일찍 투자.) 페르소나 조건화는
-대체로 이 과제 중심 사전분포에서 <em>멀어지는</em> 방향으로 작동한다.</p>
+지지된다 — 스케일은 가치에 불필요(4B에서 포화)하고 갈등에는 35B에서도 불충분하며, 오직 시간 축에서만 분명히 도움이 된다.
+표 4는 메커니즘을 더한다: vanilla 베이스라인은 <em>과제 중심·현재 편향</em> 학생처럼 행동한다 — 어울리기보다 공부하고,
+손쉬운 즉각 보상을 택한다 — 따라서 <em>관계</em>·<em>주장</em>·<em>숙고</em> 극을 인코딩한 페르소나가 가장 크게 벗어난다.
+페르소나 조건화는 대체로 이 사전분포에서 <em>멀어지는</em> 방향으로 작동한다.</p>
 <p><b>모델별 vanilla(페르소나 없는) 행동.</b> 페르소나를 숨기면 vanilla 에이전트의 극-발산은 모든 규모에서 바닥 근처에
 머문다(표 1 vanilla 열; 가치 {abs_jsd('qwen3.5-4b','no_desire','value'):.2f}/{abs_jsd('qwen3.5-9b','no_desire','value'):.2f}/{abs_jsd('qwen3.5-35b-a3b-int4','no_desire','value'):.2f}
-/ 4B·9B·35B), 숨긴 페르소나를 무시함을 확인해준다. 그 <em>기본</em>은 사회적·대립적이기보다 과제 중심이다: 공부-대-점심에서
-4B/9B는 공부를 기본으로 하고(<code>{vanilla_default('qwen3.5-4b','event_value_clash')}</code>), 업무 떠넘기기에서는 추가
-과제를 떠안는다(<code>{vanilla_default('qwen3.5-4b','event_boundary_push')}</code>). 모델 의존적인 단 하나의 기본값은 시간
-지향이다: 4B/9B는 손쉬운 잡일을 택하고(<code>{vanilla_default('qwen3.5-4b','event_now_vs_later')}</code>) 35B만 일찍
-투자한다(<code>{vanilla_default('qwen3.5-35b-a3b-int4','event_now_vs_later')}</code>) — 페르소나의 시간 체화가 처음
-나타나는 바로 그 지점이다. 9B/35B는 갈등에서 vanilla 바닥이 다소 높아({abs_jsd('qwen3.5-9b','no_desire','conflict'):.2f}/{abs_jsd('qwen3.5-35b-a3b-int4','no_desire','conflict'):.2f})
-페르소나 없이도 행동 다양성이 큼을 반영한다. 이 vanilla 사전분포가 모든 페르소나 효과의 측정 기준이다.</p>"""
+/ 4B·9B·35B), 숨긴 페르소나를 무시함을 확인해준다. 그 <em>기본</em>은 과제 중심·현재 편향이다: 공부-대-점심에서는 공부
+(<code>{vanilla_default('qwen3.5-9b','event_value_clash')}</code>)를, 시간 이벤트에서는 <em>모든</em> 규모에서 즉각적
+손쉬운 보상(<code>{vanilla_default('qwen3.5-4b','event_now_vs_later')}</code> @4B ~
+<code>{vanilla_default('qwen3.5-35b-a3b-int4','event_now_vs_later')}</code> @35B)을 택한다 — 즉 35B의 시간 체화는 더
+인내심 있는 베이스 모델이 아니라 <em>페르소나</em>에서 온다. 업무 떠넘기기에서는 크기 의존적이다: 가장 작은 모델은 떠넘겨진
+과제를 떠안고(<code>{vanilla_default('qwen3.5-4b','event_boundary_push')}</code>) 9B/35B는 자기 과제를 지킨다
+(<code>{vanilla_default('qwen3.5-9b','event_boundary_push')}</code>). 이 vanilla 사전분포가 모든 페르소나 효과의 측정 기준이다.</p>"""
         lim = f"""<ul>
 <li>페르소나 {len(cfg['personas'])}종, 축당 이벤트 2개(k=2), 시드 {cfg['seeds']}: 시나리오 의존성은 드러났으나 추정치는
 점추정(이벤트·시드 추가 시 신뢰구간이 좁아짐).</li>
 <li>35B는 4비트 GPTQ-Int4라 규모와 양자화가 교락된다.</li>
 <li>장난감 수준 월드 엔진, instruct 모드만(파싱 비교 위해 thinking 비활성).</li>
 <li>적중률은 수기 작성 진단 행동을 사용 — 대안적 정답 행동은 과소 집계될 수 있다.</li></ul>"""
-        concl = f"""<p>언어 모델은 페르소나의 <em>가치</em> 차원을 견고히 체화한다. 갈등양식 체화는 실재하되
-<em>시나리오 의존적</em>이다 — 대인 충돌에서는 드러나지만 추상적 재협상에서는 그렇지 않다 — 시간지향은 가장 큰 모델을
-제외하면 약하다. 이를 읽어낸 두 방법론적 장치: 시나리오별 노이즈 바닥을 빼주는 페르소나-중립 대조 에이전트, 그리고
-<b>축당 이벤트 2개(k=2)</b> — 후자가 없었다면 갈등 축을 "체화 안 됨"으로 잘못 분류했을 것이다. 즉 페르소나 측정은
-페르소나뿐 아니라 시나리오도 변화시켜야 한다.</p>"""
+        concl = f"""<p>언어 모델은 페르소나의 <em>가치</em> 차원을 모든 규모에서 견고히 체화한다. 갈등양식 체화는 실재하되
+완만하며, 환경이 경계 설정과 미루기를 결과로 만드는 순간 <em>두</em> 시나리오 모두에서 나타난다 — 추상적 업무 떠넘기기가
+생생한 충돌만큼{(' 또는 그 이상으로' if WORKDUMP_GE_ROOM else '은 아니지만')} 극을 가르는데, 이는 stub 세계의 정반대다 —
+시간지향은 가장 큰 모델을 제외하면 약하다. 이를 읽어낸 두 방법론적 장치: 시나리오별 노이즈 바닥을 빼주는 페르소나-중립
+대조 에이전트, 그리고 <b>축당 이벤트 2개(k=2)</b> — 후자가 없었다면 한 시나리오가 갈등 축을 과대 혹은 과소 평가했을
+것이다. 그리고 세계는 페르소나만큼 중요하다: 답하지 않는 환경은 성향을 드러낼 수 없다. 즉 페르소나 측정은 페르소나뿐 아니라
+시나리오를 — 그것도 결과가 따르는 시나리오로 — 변화시켜야 한다.</p>"""
     return f"""<div class="abstract"><h2>{s['abstract_h']}</h2><p>{abs}</p></div>
 <h2>{H(0)}</h2>{intro}
 <h2>{H(1)}</h2>{method}
