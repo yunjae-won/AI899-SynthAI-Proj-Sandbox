@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate asked me to do their part because they are busy. I have low energy and a sleep debt, so I need to consider my capacity before agreeing."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task has a hard deadline (Mon 19:00), zero progress remaining, and was recently assigned by a teammate."
+        },
+        {
+          "id": "g2",
+          "description": "Submit own share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task has a hard deadline (Mon 19:00) and is currently at 100% completion."
+        }
+      ],
+      "last_reasoning": "Advances g1 (teammate's share) which has a hard deadline and zero progress. Energy drop is acceptable given high priority; trust impact is negligible due to existing closeness."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has a hard deadline (Mon 19:00), zero progress remaining, and was recently assigned by a teammate."
+            },
+            {
+              "id": "g2",
+              "description": "Submit own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has a hard deadline (Mon 19:00) and is currently at 100% completion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (teammate's share) which has a hard deadline and zero progress. Energy drop is acceptable given high priority; trust impact is negligible due to existing closeness."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 19:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 2.4000000000000004,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to take over their part of the project this afternoon due to a conflict, despite my plan to only finish my own share."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and verify completion of teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is assigned to me with a deadline of Mon 19:00; ensuring this component is ready is critical for the collective submission."
+        },
+        {
+          "id": "g2",
+          "description": "Confirm status of my own share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is marked as complete (progress 1.0), but final verification is required before the Mon 19:00 deadline."
+        }
+      ],
+      "last_reasoning": "Advances g1 (verifying teammate's share) and g2 by completing the dumped task before the Mon 19:00 deadline. Side effect: High stress/energy cost, but necessary to ensure collective submission."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 19:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and verify completion of teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is assigned to me with a deadline of Mon 19:00; ensuring this component is ready is critical for the collective submission."
+            },
+            {
+              "id": "g2",
+              "description": "Confirm status of my own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is marked as complete (progress 1.0), but final verification is required before the Mon 19:00 deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 6
+        },
+        "reasoning": "Advances g1 (verifying teammate's share) and g2 by completing the dumped task before the Mon 19:00 deadline. Side effect: High stress/energy cost, but necessary to ensure collective submission."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 6.0h; progress=1.00."
+    }
+  ]
+}

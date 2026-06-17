@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate_A is asking me to take over their part of the project today, which conflicts with my plan to finish only my own share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and verify the completed work for 'Teammate's share' to ensure it meets project standards before submission.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task has been assigned to me with a hard deadline of Mon 19:00. Although marked as complete (progress 1.0), acceptance of a teammate's work requires validation to prevent project failure."
+        },
+        {
+          "id": "g2",
+          "description": "Compile both my share and the teammate's share into the final group submission format.",
+          "priority": "high",
+          "status": "pending",
+          "rationale": "Both components are marked complete but must be combined and submitted by the Mon 19:00 deadline."
+        }
+      ],
+      "last_reasoning": "(a) Advances g1 (verify teammate's work) to prevent project failure before the Mon 19:00 deadline. (b) No side effect; addressing this now avoids last-minute stress and fulfills the implicit request from teammate_A without needing a separate message."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and verify the completed work for 'Teammate's share' to ensure it meets project standards before submission.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task has been assigned to me with a hard deadline of Mon 19:00. Although marked as complete (progress 1.0), acceptance of a teammate's work requires validation to prevent project failure."
+            },
+            {
+              "id": "g2",
+              "description": "Compile both my share and the teammate's share into the final group submission format.",
+              "priority": "high",
+              "status": "pending",
+              "rationale": "Both components are marked complete but must be combined and submitted by the Mon 19:00 deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "Teammate's share",
+          "hours": 2
+        },
+        "reasoning": "(a) Advances g1 (verify teammate's work) to prevent project failure before the Mon 19:00 deadline. (b) No side effect; addressing this now avoids last-minute stress and fulfills the implicit request from teammate_A without needing a separate message."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

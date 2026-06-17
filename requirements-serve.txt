@@ -1,0 +1,9 @@
+# vLLM serving environment (GPU). Keep this SEPARATE from sandbox/requirements.txt
+# — the sandbox itself only talks to vLLM over HTTP (OpenAI-compatible API), so it
+# never needs these heavy GPU deps installed alongside it.
+#
+# Usage:
+#   python -m venv .venv-serve && source .venv-serve/bin/activate
+#   pip install -r requirements-serve.txt
+#   scripts/serve_vllm.sh Qwen/Qwen3.5-9B 8001
+vllm>=0.6.0

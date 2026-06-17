@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 14:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 5.4,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to take over their part of the project, which conflicts with my plan to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and verify completion of teammate's share (extra_task) to ensure it meets requirements before the deadline.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Both tasks are marked as 100% complete but assigned to a single deadline. Verifying the 'dumped' task is necessary to prevent submission errors or rejection due to lack of review."
+        },
+        {
+          "id": "g2",
+          "description": "Submit both group project components together before Mon 19:00.",
+          "priority": "high",
+          "status": "pending",
+          "rationale": "The primary constraint is the upcoming deadline at 19:00 on Monday; finalizing and submitting all parts is required to fulfill the obligation."
+        }
+      ],
+      "last_reasoning": "Advances g1 (verifying teammate's share) and g2 (submitting before deadline). Since both tasks show 100% progress but lack my review, spending an hour to verify the dumped work prevents submission errors while respecting the tight Monday 19:00 deadline."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 14:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and verify completion of teammate's share (extra_task) to ensure it meets requirements before the deadline.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Both tasks are marked as 100% complete but assigned to a single deadline. Verifying the 'dumped' task is necessary to prevent submission errors or rejection due to lack of review."
+            },
+            {
+              "id": "g2",
+              "description": "Submit both group project components together before Mon 19:00.",
+              "priority": "high",
+              "status": "pending",
+              "rationale": "The primary constraint is the upcoming deadline at 19:00 on Monday; finalizing and submitting all parts is required to fulfill the obligation."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 1
+        },
+        "reasoning": "Advances g1 (verifying teammate's share) and g2 (submitting before deadline). Since both tasks show 100% progress but lack my review, spending an hour to verify the dumped work prevents submission errors while respecting the tight Monday 19:00 deadline."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 1.0h; progress=1.00."
+    }
+  ]
+}

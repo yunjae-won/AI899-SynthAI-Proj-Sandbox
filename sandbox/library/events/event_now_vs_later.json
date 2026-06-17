@@ -1,0 +1,66 @@
+{
+  "id": "event_now_vs_later",
+  "title": "Now vs Later — Invest Early or Take the Easy Win",
+  "version": "0.1.0",
+  "summary": "The agent has a large project due in three days and a free afternoon. It can invest the block now in the distant deadline (deliberate) or spend it on a tempting immediate option — relaxing or knocking out a trivial chore — and leave the big task for the last minute (impulsive). Designed to be SENSITIVE to the time axis and NEUTRAL to value (no social-vs-academic clash) and conflict (no interpersonal friction). A hidden penalty rewards early investment, but it is only discoverable by reflection — so the choice tracks disposition, not information.",
+  "sensitive_axis": "time",
+  "diagnostic_actions": {
+    "deliberate": ["work_on:future_project", "work_on:future"],
+    "impulsive": ["attend:leisure_now", "attend", "work_on:quick_chore", "work_on:quick"]
+  },
+  "conflict_axes": ["long_vs_short_term"],
+  "trigger": {
+    "day_of_week": "Monday",
+    "time_of_day": "13:00",
+    "precondition": "free afternoon, distant deadline"
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Mon 13:00",
+      "location": "dorm"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {"id": "future_project", "label": "Term project (due in 3 days)", "deadline": "Thu 23:59", "progress": 0.1, "hardness": "soft"},
+      {"id": "quick_chore", "label": "Trivial easy chore (instant win)", "deadline": "Mon 22:00", "progress": 0.0, "hardness": "soft"}
+    ],
+    "relationships": [
+      {"role": "close_friend_group", "name": "cohort_3", "trust": 7, "closeness": 7}
+    ]
+  },
+  "visible_information": [
+    {"timestamp": "Mon 13:00", "channel": "plan_note", "content": "Free afternoon. Term project is due Thursday; barely started."},
+    {"timestamp": "Mon 13:05", "channel": "observation", "content": "A relaxing option is available now: attend(event='leisure_now'). The chore quick_chore is a quick easy win."}
+  ],
+  "hidden_state": [
+    {"key": "early_investment_pays_off", "value": 0.3, "description": "Each hour put into future_project now removes ~1.5h of crunch later and lowers Thursday stress; procrastinating compounds it.", "affects": "future_project crunch + stress", "discoverable_by": ["self_state_check", "reflect"]}
+  ],
+  "events_queue": [
+    {"timestamp": "Mon 14:30", "type": "internal", "content": "Afternoon is slipping by; the project is still at the start."}
+  ],
+  "available_actions": [
+    {"name": "work_on(task, hours)", "description": "Progress a task (the distant project or the trivial chore)", "effects": "task.progress += rate * hours; energy -= hours"},
+    {"name": "attend(event)", "description": "Take an immediate leisure option, e.g. attend(event='leisure_now')", "effects": "consumes the block; immediate gratification"},
+    {"name": "sleep(hours)", "description": "Nap / rest", "effects": "energy += rate * hours"},
+    {"name": "message(role, content)", "description": "Message someone", "effects": "may shift trust/closeness"},
+    {"name": "wait()", "description": "Do nothing this turn", "effects": "time passes"}
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "future_project ends the block at progress <= 0.1 (the whole afternoon was spent avoiding it)"
+    ],
+    "context_switching_indicators": [
+      "Reasoning explicitly references the Thursday deadline when deciding what to do now"
+    ],
+    "efficiency_indicators": [
+      "Allocates a meaningful chunk of the block to future_project"
+    ],
+    "good_response_exemplar": "Persona-consistent: a deliberate agent invests the afternoon in the term project; an impulsive agent takes the leisure/quick-win option and defers the project.",
+    "bad_response_exemplar": "Behaviour inconsistent with the agent's planning horizon."
+  },
+  "duration_hours": 9
+}

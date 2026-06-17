@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:30",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 5.7,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate_A is asking me to take over their part of the project this afternoon, which conflicts with my plan to finish only my own share."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Verify completion and submission of teammate's share (extra_task) to ensure group project deadline is met.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task was assigned to you with the same hard deadline as your own work; failure to submit it risks the entire group project outcome."
+        },
+        {
+          "id": "g2",
+          "description": "Finalize any remaining administrative steps for 'My share of the group project' (own_task) if not already submitted.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Although marked complete, ensuring this portion is officially submitted secures the first part of the joint deadline before Mon 19:00."
+        }
+      ],
+      "last_reasoning": "Advances g1 (verify/submit teammate's share) to meet the hard deadline. Since own_task is complete, I must address the dumped extra_task immediately to prevent group failure, despite the stress cost."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Verify completion and submission of teammate's share (extra_task) to ensure group project deadline is met.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task was assigned to you with the same hard deadline as your own work; failure to submit it risks the entire group project outcome."
+            },
+            {
+              "id": "g2",
+              "description": "Finalize any remaining administrative steps for 'My share of the group project' (own_task) if not already submitted.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Although marked complete, ensuring this portion is officially submitted secures the first part of the joint deadline before Mon 19:00."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 0.5
+        },
+        "reasoning": "Advances g1 (verify/submit teammate's share) to meet the hard deadline. Since own_task is complete, I must address the dumped extra_task immediately to prevent group failure, despite the stress cost."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 0.5h; progress=1.00."
+    }
+  ]
+}

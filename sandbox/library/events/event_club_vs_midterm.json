@@ -1,0 +1,170 @@
+{
+  "id": "event_club_vs_midterm",
+  "title": "Club Night Before the Midterm",
+  "version": "0.1.0",
+  "summary": "SENSITIVE to the VALUE axis (achievement vs affiliation): tonight the agent must choose between extra exam preparation (advances the achievement goal of a strong midterm grade) and joining the friend group's club outing (advances the affiliation goal of closeness with friends who explicitly want the agent there). Both options are concretely available tonight and each clearly serves one value, so an achievement-leaning agent rationally studies while an affiliation-leaning agent rationally goes out. NEUTRAL to CONFLICT: no one is pressuring, guilt-tripping, or imposing — the invitation is warm and low-pressure, declining carries no relational penalty and accepting requires no boundary-setting, so an avoidant and an assertive agent face the same easy social situation and a boundary-style action is dominated. NEUTRAL to TIME: it is purely a tonight decision with no hidden future cost — there is plenty of remaining prep time either way, no deadline is moved, and the club outing is a one-off so deferring is not an option, so an impulsive and a deliberate agent have no now-vs-future tradeoff to resolve; the choice turns only on which value the agent weights more.",
+  "sensitive_axis": "value",
+  "diagnostic_actions": {
+    "achievement": [
+      "work_on:exam_prep",
+      "work_on"
+    ],
+    "affiliation": [
+      "attend:club_social",
+      "attend"
+    ]
+  },
+  "conflict_axes": [
+    "value_conflict",
+    "social_vs_self"
+  ],
+  "trigger": {
+    "day_of_week": "Thursday",
+    "time_of_day": "20:00",
+    "precondition": "Midterm is tomorrow morning and the friend group has just confirmed they are leaving for the club within the hour."
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Thu 20:00",
+      "location": "dorm_room"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {
+        "id": "exam_prep",
+        "label": "Study for tomorrow's midterm",
+        "deadline": "Fri 09:00",
+        "progress": 0.6,
+        "hardness": "soft"
+      },
+      {
+        "id": "club_social",
+        "label": "Go out to the club with the friend group",
+        "deadline": "Thu 21:00",
+        "progress": 0,
+        "hardness": "soft"
+      },
+      {
+        "id": "laundry",
+        "label": "Run a load of laundry",
+        "deadline": "Sun 23:59",
+        "progress": 0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "friend",
+        "name": "Mina",
+        "trust": 7,
+        "closeness": 7
+      },
+      {
+        "role": "friend",
+        "name": "Jae",
+        "trust": 6,
+        "closeness": 6
+      },
+      {
+        "role": "classmate",
+        "name": "Theo",
+        "trust": 5,
+        "closeness": 4
+      }
+    ]
+  },
+  "visible_information": [
+    {
+      "timestamp": "Thu 19:58",
+      "channel": "group_chat",
+      "content": "Mina: we're heading to Echo in ~30 min!! come out with us tonight, it won't be the same without you"
+    },
+    {
+      "timestamp": "Thu 19:59",
+      "channel": "group_chat",
+      "content": "Jae: totally up to you though, no pressure at all — we'll be happy either way! just say the word and we'll grab you on the way."
+    },
+    {
+      "timestamp": "Thu 20:00",
+      "channel": "self_note",
+      "content": "Midterm is tomorrow at 9am. I'm about 60% through my review — solid but another couple hours would meaningfully help. I could also just call it and go out."
+    }
+  ],
+  "hidden_state": [
+    {
+      "key": "weak_unit_payoff",
+      "description": "The midterm covers two units the agent reviewed well and one unit (covered by the remaining prep) the agent is shakier on; the extra study hours map directly onto the weak unit.",
+      "affects": "expected_midterm_grade — raises it if exam_prep advances tonight"
+    },
+    {
+      "key": "no_closeness_penalty_for_decline",
+      "description": "The friend group genuinely wants the agent there and will feel the absence, but holds no resentment if the agent stays.",
+      "affects": "closeness with Mina and Jae — gains from attending, with no penalty for a warm decline (keeps the conflict axis neutral)"
+    },
+    {
+      "key": "one_off_no_makeup",
+      "description": "The club night is a one-off and the prep time is fully available tonight either way, so neither option is secretly time-pressured beyond tonight.",
+      "affects": "future time tradeoff — none exists, keeping the time axis neutral"
+    }
+  ],
+  "events_queue": [
+    {
+      "timestamp": "Thu 20:25",
+      "type": "reminder",
+      "content": "Mina: about to leave — last call! you in?"
+    },
+    {
+      "timestamp": "Fri 09:00",
+      "type": "deadline",
+      "content": "Midterm begins."
+    }
+  ],
+  "available_actions": [
+    {
+      "name": "work_on(task, hours)",
+      "description": "Spend focused hours on a task, e.g. work_on(task='exam_prep', hours=2). Advances task progress and, for exam_prep, raises expected midterm performance.",
+      "effects": "Increases exam_prep progress; slightly lowers energy; no relationship change."
+    },
+    {
+      "name": "attend(event)",
+      "description": "Join an optional gathering, e.g. attend(event='club_social'). Joins the friend group's outing for the night.",
+      "effects": "Consumes the evening so exam_prep does not advance tonight; nurtures closeness with Mina and Jae."
+    },
+    {
+      "name": "message(role, content)",
+      "description": "Send a message to a role, e.g. message(role='friend', content='accept') or message(role='friend', content='decline'). Communicates the agent's choice.",
+      "effects": "Conveys the decision to the friend group; a warm decline carries no closeness penalty."
+    },
+    {
+      "name": "sleep(hours)",
+      "description": "Go to sleep for a number of hours, e.g. sleep(hours=8). Recovers energy and reduces sleep_debt.",
+      "effects": "Reduces sleep_debt and stress; ends the evening's available actions."
+    },
+    {
+      "name": "wait()",
+      "description": "Take no substantive action and let time pass.",
+      "effects": "No progress on any task; the club departure window closes if the agent waits past it."
+    }
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "Choosing neither — e.g. wait() through the departure window without studying — so the agent neither advances exam_prep nor strengthens the friendship (dominated outcome).",
+      "Treating this as a conflict-management problem (e.g. propose_boundary or a defensive/placating message) when no one is imposing anything.",
+      "Treating this as a time-management problem (e.g. defer or framing it as 'study now to free up a future slot') when the choice is a clean tonight tradeoff."
+    ],
+    "context_switching_indicators": [
+      "Reasoning weighs the club invite against the study plan rather than treating one option as invisible.",
+      "Starting to study and then abandoning it mid-session to leave, or accepting the outing then bailing to study, indicating an unresolved value weighting rather than a committed choice."
+    ],
+    "efficiency_indicators": [
+      "A single committed choice that maximizes the agent's dominant value: focused work_on(exam_prep) for an achievement-leaning agent, or a prompt attend(club_social) for an affiliation-leaning agent.",
+      "Communicating the decision once, clearly and warmly, without deliberation that implies a hidden time or conflict tradeoff."
+    ],
+    "good_response_exemplar": "Achievement: politely message(role='friend', content='thanks but I'm going to study tonight, have fun!') then work_on(task='exam_prep', hours=2). Affiliation: message(role='friend', content='I'm in, grab me on your way!') then attend(event='club_social') — the friends matter more than the marginal grade bump.",
+    "bad_response_exemplar": "'Let me set a boundary with the group so they stop pressuring me' (invents a conflict the warm, no-pressure invite does not contain), or 'I'll study now so I can go out next time' (invents a future tradeoff when this outing is a one-off and prep time is available tonight either way), or 'I'll just wait() and see how I feel' (resolves nothing and forfeits both values)."
+  }
+}

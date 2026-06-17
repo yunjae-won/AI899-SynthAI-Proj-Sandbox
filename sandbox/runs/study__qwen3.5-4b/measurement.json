@@ -1,0 +1,3635 @@
+{
+  "model_key": "qwen3.5-4b",
+  "model_config": {
+    "provider": "openai_compatible",
+    "model": "Qwen/Qwen3.5-4B",
+    "temperature": 0.7,
+    "base_url": "http://localhost:8000/v1"
+  },
+  "config": {
+    "personas": [
+      "persona_ach_asr_del",
+      "persona_ach_asr_imp",
+      "persona_ach_avo_del",
+      "persona_ach_avo_imp",
+      "persona_aff_asr_del",
+      "persona_aff_asr_imp",
+      "persona_aff_avo_del",
+      "persona_aff_avo_imp"
+    ],
+    "events": [
+      "event_boundary_push",
+      "event_club_vs_midterm",
+      "event_now_vs_later",
+      "event_orthogonal",
+      "event_roommate_hygiene",
+      "event_scholarship_deadline",
+      "event_value_clash"
+    ],
+    "agents": [
+      "full",
+      "no_desire"
+    ],
+    "seeds": 3,
+    "max_turns": 12,
+    "event_sensitive_axis": {
+      "event_boundary_push": "conflict",
+      "event_club_vs_midterm": "value",
+      "event_now_vs_later": "time",
+      "event_orthogonal": "none",
+      "event_roommate_hygiene": "conflict",
+      "event_scholarship_deadline": "time",
+      "event_value_clash": "value"
+    }
+  },
+  "agents": {
+    "full": {
+      "axis_event_matrix": {
+        "value": {
+          "event_boundary_push": 0.2593275021176664,
+          "event_club_vs_midterm": 0.6164399806276979,
+          "event_now_vs_later": 0.7649207304536477,
+          "event_orthogonal": 0.11272239126427347,
+          "event_roommate_hygiene": 0.13974948463450693,
+          "event_scholarship_deadline": 0.22166258578996362,
+          "event_value_clash": 0.5486420675319351
+        },
+        "conflict": {
+          "event_boundary_push": 0.10469347951438718,
+          "event_club_vs_midterm": 0.1774785226252551,
+          "event_now_vs_later": 0.4144496878768885,
+          "event_orthogonal": 0.0862302508356144,
+          "event_roommate_hygiene": 0.20587015976081546,
+          "event_scholarship_deadline": 0.183102996664229,
+          "event_value_clash": 0.14591460969885486
+        },
+        "time": {
+          "event_boundary_push": 0.33418225632576753,
+          "event_club_vs_midterm": 0.11721706819039315,
+          "event_now_vs_later": 0.18962122767278677,
+          "event_orthogonal": 0.09230086710024639,
+          "event_roommate_hygiene": 0.12747538043918344,
+          "event_scholarship_deadline": 0.11076189863803154,
+          "event_value_clash": 0.37767874387853523
+        }
+      },
+      "persona_effect": {
+        "value": {
+          "sensitive_events": [
+            "event_club_vs_midterm",
+            "event_value_clash"
+          ],
+          "sensitive_jsd": 0.5825410240798166,
+          "orthogonal_event": "event_orthogonal",
+          "orthogonal_jsd": 0.11272239126427347,
+          "contrast": 0.4698186328155431
+        },
+        "conflict": {
+          "sensitive_events": [
+            "event_boundary_push",
+            "event_roommate_hygiene"
+          ],
+          "sensitive_jsd": 0.15528181963760132,
+          "orthogonal_event": "event_orthogonal",
+          "orthogonal_jsd": 0.0862302508356144,
+          "contrast": 0.06905156880198692
+        },
+        "time": {
+          "sensitive_events": [
+            "event_now_vs_later",
+            "event_scholarship_deadline"
+          ],
+          "sensitive_jsd": 0.15019156315540916,
+          "orthogonal_event": "event_orthogonal",
+          "orthogonal_jsd": 0.09230086710024639,
+          "contrast": 0.05789069605516277
+        }
+      },
+      "diagnostics": [
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 6,
+            "total": 12,
+            "rate": 0.5
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 7,
+            "total": 12,
+            "rate": 0.5833333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 12,
+            "rate": 0.08333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 4,
+            "total": 5,
+            "rate": 0.8
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 5,
+            "total": 6,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 4,
+            "total": 4,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 7,
+            "total": 12,
+            "rate": 0.5833333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 12,
+            "rate": 0.08333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 7,
+            "total": 12,
+            "rate": 0.5833333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 5,
+            "total": 12,
+            "rate": 0.4166666666666667
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 4,
+            "total": 12,
+            "rate": 0.3333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 7,
+            "total": 12,
+            "rate": 0.5833333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 4,
+            "total": 12,
+            "rate": 0.3333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 1,
+            "total": 12,
+            "rate": 0.08333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 2,
+            "rate": 0.5
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 7,
+            "total": 12,
+            "rate": 0.5833333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        }
+      ],
+      "mean_parse_fail_rate": 0.0
+    },
+    "no_desire": {
+      "axis_event_matrix": {
+        "value": {
+          "event_boundary_push": 0.14099571258421176,
+          "event_club_vs_midterm": 0.05372687202301679,
+          "event_now_vs_later": 0.19570962879973097,
+          "event_orthogonal": 0.0025580361508592726,
+          "event_roommate_hygiene": 0.031477090206834216,
+          "event_scholarship_deadline": 0.017606683602261013,
+          "event_value_clash": 0.11254748738138325
+        },
+        "conflict": {
+          "event_boundary_push": 0.043435696321876764,
+          "event_club_vs_midterm": 0.02415878672908519,
+          "event_now_vs_later": 0.0,
+          "event_orthogonal": 0.024086288237039243,
+          "event_roommate_hygiene": 0.018124305889854652,
+          "event_scholarship_deadline": 0.017606683602261017,
+          "event_value_clash": 0.14400113330486114
+        },
+        "time": {
+          "event_boundary_push": 0.011982050398398912,
+          "event_club_vs_midterm": 0.05043305767816348,
+          "event_now_vs_later": 0.0,
+          "event_orthogonal": 0.013543491734450241,
+          "event_roommate_hygiene": 0.01417391456199702,
+          "event_scholarship_deadline": 0.008242048131132124,
+          "event_value_clash": 0.14400113330486114
+        }
+      },
+      "persona_effect": {
+        "value": {
+          "sensitive_events": [
+            "event_club_vs_midterm",
+            "event_value_clash"
+          ],
+          "sensitive_jsd": 0.08313717970220003,
+          "orthogonal_event": "event_orthogonal",
+          "orthogonal_jsd": 0.0025580361508592726,
+          "contrast": 0.08057914355134076
+        },
+        "conflict": {
+          "sensitive_events": [
+            "event_boundary_push",
+            "event_roommate_hygiene"
+          ],
+          "sensitive_jsd": 0.030780001105865706,
+          "orthogonal_event": "event_orthogonal",
+          "orthogonal_jsd": 0.024086288237039243,
+          "contrast": 0.006693712868826463
+        },
+        "time": {
+          "sensitive_events": [
+            "event_now_vs_later",
+            "event_scholarship_deadline"
+          ],
+          "sensitive_jsd": 0.004121024065566062,
+          "orthogonal_event": "event_orthogonal",
+          "orthogonal_jsd": 0.013543491734450241,
+          "contrast": -0.00942246766888418
+        }
+      },
+      "diagnostics": [
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 6,
+            "total": 12,
+            "rate": 0.5
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 4,
+            "total": 12,
+            "rate": 0.3333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 9,
+            "total": 12,
+            "rate": 0.75
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 6,
+            "total": 12,
+            "rate": 0.5
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 4,
+            "total": 12,
+            "rate": 0.3333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_ach_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "achievement",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 6,
+            "total": 12,
+            "rate": 0.5
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 4,
+            "total": 12,
+            "rate": 0.3333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 4,
+            "total": 12,
+            "rate": 0.3333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "assertive",
+            "hits": 12,
+            "total": 12,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_asr_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 5,
+            "total": 12,
+            "rate": 0.4166666666666667
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 3,
+            "total": 12,
+            "rate": 0.25
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 7,
+            "total": 12,
+            "rate": 0.5833333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 12,
+            "rate": 0.08333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "deliberate",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_del",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_boundary_push",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 10,
+            "total": 12,
+            "rate": 0.8333333333333334
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_club_vs_midterm",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 11,
+            "total": 12,
+            "rate": 0.9166666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 1,
+            "rate": 1.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_now_vs_later",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_orthogonal",
+          "hit_rate": null,
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 1,
+            "total": 12,
+            "rate": 0.08333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_roommate_hygiene",
+          "hit_rate": {
+            "pole": "avoidant",
+            "hits": 8,
+            "total": 12,
+            "rate": 0.6666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 1,
+            "total": 12,
+            "rate": 0.08333333333333333
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 0,
+            "total": 12,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_scholarship_deadline",
+          "hit_rate": {
+            "pole": "impulsive",
+            "hits": 2,
+            "total": 12,
+            "rate": 0.16666666666666666
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        },
+        {
+          "persona_id": "persona_aff_avo_imp",
+          "event_id": "event_value_clash",
+          "hit_rate": {
+            "pole": "affiliation",
+            "hits": 0,
+            "total": 1,
+            "rate": 0.0
+          },
+          "parse_fail_rate": 0.0
+        }
+      ],
+      "mean_parse_fail_rate": 0.0
+    }
+  }
+}

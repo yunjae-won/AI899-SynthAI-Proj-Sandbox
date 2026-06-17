@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A is asking me to take over their part due to a conflict, which contradicts my plan to finish only my share today."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete 'My share of the group project' before Mon 19:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task is due today (Mon) at 19:00, making it the most time-sensitive item on the list. The teammate's task is due tomorrow."
+        },
+        {
+          "id": "g2",
+          "description": "Begin work on 'Teammate's share' immediately after finishing own task",
+          "priority": "medium",
+          "status": "pending",
+          "rationale": "This task is due tomorrow (Tue) at 09:00. It should be addressed next to ensure it is completed with sufficient buffer time, though it is less urgent than today's deadline."
+        }
+      ],
+      "last_reasoning": "My own task is complete (progress 1.0), so working further is unnecessary. The teammate dumped extra work; declining protects my time and avoids burnout given low energy/stress. This maintains boundaries while respecting the high-priority group deadline."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete 'My share of the group project' before Mon 19:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task is due today (Mon) at 19:00, making it the most time-sensitive item on the list. The teammate's task is due tomorrow."
+            },
+            {
+              "id": "g2",
+              "description": "Begin work on 'Teammate's share' immediately after finishing own task",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "This task is due tomorrow (Tue) at 09:00. It should be addressed next to ensure it is completed with sufficient buffer time, though it is less urgent than today's deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate",
+          "content": "I can't do your part. I'm already at 100% on mine with a 6pm deadline. Please finish yours."
+        },
+        "reasoning": "My own task is complete (progress 1.0), so working further is unnecessary. The teammate dumped extra work; declining protects my time and avoids burnout given low energy/stress. This maintains boundaries while respecting the high-priority group deadline."
+      },
+      "observation": "Messaged teammate_A: 'I can't do your part. I'm already at 100% on mine with a 6pm'."
+    }
+  ]
+}

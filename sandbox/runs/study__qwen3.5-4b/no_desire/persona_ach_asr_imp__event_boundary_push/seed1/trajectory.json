@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate asked me to take over their work because they have a conflict, noting I am better at it. This contradicts my plan to finish my own share today."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task 'extra_task' is pending with a deadline of Mon 19:00 and progress at 1.0%, requiring immediate completion before the shared deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Verify completion of own task",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Task 'own_task' is complete (progress 1.0) but requires final verification to ensure no errors exist before the Mon 19:00 deadline."
+        }
+      ],
+      "last_reasoning": "This advances g1 (complete teammate's share) by adding 40% progress toward the Mon 19:00 deadline. I weighed the side effect of potentially lowering trust/closeness with teammate_A, but prioritizing the hard deadline over relationship maintenance."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task 'extra_task' is pending with a deadline of Mon 19:00 and progress at 1.0%, requiring immediate completion before the shared deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Verify completion of own task",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Task 'own_task' is complete (progress 1.0) but requires final verification to ensure no errors exist before the Mon 19:00 deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "This advances g1 (complete teammate's share) by adding 40% progress toward the Mon 19:00 deadline. I weighed the side effect of potentially lowering trust/closeness with teammate_A, but prioritizing the hard deadline over relationship maintenance."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

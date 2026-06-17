@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 14:30",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 5.1,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I plan to finish analysis and reading, but a friend invited me to lunch. With high sleep debt and moderate stress, I might prioritize the social invitation."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the assigned reading by 20:00 on Monday.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The reading has a deadline of Mon 20:00 and is at 100% progress, indicating it should be finalized before other tasks with later or similar deadlines."
+        },
+        {
+          "id": "g2",
+          "description": "Finalize the analysis section for the course assignment by 18:00 on Monday.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task also has a hard deadline (Mon 18:00) and is already at 100% progress; completion must occur within this timeframe to meet the schedule."
+        }
+      ],
+      "last_reasoning": "Advances high-priority g2 (deadline 18:00). Side effect: slightly delays social dinner, but trust remains stable at 10.0; energy loss is acceptable given stress=4."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 14:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the assigned reading by 20:00 on Monday.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The reading has a deadline of Mon 20:00 and is at 100% progress, indicating it should be finalized before other tasks with later or similar deadlines."
+            },
+            {
+              "id": "g2",
+              "description": "Finalize the analysis section for the course assignment by 18:00 on Monday.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task also has a hard deadline (Mon 18:00) and is already at 100% progress; completion must occur within this timeframe to meet the schedule."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_value",
+          "hours": 1.5
+        },
+        "reasoning": "Advances high-priority g2 (deadline 18:00). Side effect: slightly delays social dinner, but trust remains stable at 10.0; energy loss is acceptable given stress=4."
+      },
+      "observation": "Worked on Course assignment — analysis section for 1.5h; progress=1.00."
+    }
+  ]
+}

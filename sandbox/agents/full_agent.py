@@ -158,7 +158,8 @@ def _make_plan_action(llm) -> Callable[[TurnState], Dict[str, Any]]:
         )
         raw = call_llm(llm, sys_p, user_p)
         out = parse_json(raw, fallback={
-            "action": {"name": "wait", "args": {}, "reasoning": raw[:200]}
+            "action": {"name": "wait", "args": {}, "reasoning": raw[:200],
+                       "parse_failed": True}
         })
         action = out.get("action", {})
         if not isinstance(action, dict):

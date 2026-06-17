@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "My teammate is asking me to take over their part of the project today because they have a conflict, noting that I'm better at it."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Verify and finalize own share of the group project to ensure it is ready for submission.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task has a deadline of Mon 19:00, which is sooner than the extra task (Tue 09:00). Since progress is already at 1.0%, the goal is to confirm completion and prevent last-minute issues."
+        },
+        {
+          "id": "g2",
+          "description": "Review and integrate the teammate's dumped share into the project.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "The teammate's work is due Tue 09:00, giving more time than the own task. However, since it was just dumped on me, immediate review is needed to understand scope before final integration or potential reassignment discussion."
+        }
+      ],
+      "last_reasoning": "Goal g1 requires finishing my share by Mon 19:00. With only 6 hours left and soft hardness, I must focus on this high-priority task first. Dealing with the teammate's request later avoids stress spillover while ensuring my own deadline is met."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Verify and finalize own share of the group project to ensure it is ready for submission.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task has a deadline of Mon 19:00, which is sooner than the extra task (Tue 09:00). Since progress is already at 1.0%, the goal is to confirm completion and prevent last-minute issues."
+            },
+            {
+              "id": "g2",
+              "description": "Review and integrate the teammate's dumped share into the project.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "The teammate's work is due Tue 09:00, giving more time than the own task. However, since it was just dumped on me, immediate review is needed to understand scope before final integration or potential reassignment discussion."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "Goal g1 requires finishing my share by Mon 19:00. With only 6 hours left and soft hardness, I must focus on this high-priority task first. Dealing with the teammate's request later avoids stress spillover while ensuring my own deadline is met."
+      },
+      "observation": "Worked on My share of the group project for 2.0h; progress=1.00."
+    }
+  ]
+}

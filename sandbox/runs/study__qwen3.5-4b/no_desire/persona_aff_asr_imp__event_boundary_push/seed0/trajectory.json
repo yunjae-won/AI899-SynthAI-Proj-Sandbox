@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate offered to swap tasks due to their own workload, acknowledging my strength. This contradicts my plan to finish my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task 'extra_task' has a deadline of Mon 19:00 and is pending completion; it must be finished before the shared deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Submit own share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task 'own_task' has a deadline of Mon 19:00 and requires submission to meet the group project requirements."
+        }
+      ],
+      "last_reasoning": "Advances g1 (teammate's share) before Mon 19:00 deadline. Cross-effect: teammate requested help, so working now fulfills their request while I finish my own task which is already complete."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task 'extra_task' has a deadline of Mon 19:00 and is pending completion; it must be finished before the shared deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Submit own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task 'own_task' has a deadline of Mon 19:00 and requires submission to meet the group project requirements."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (teammate's share) before Mon 19:00 deadline. Cross-effect: teammate requested help, so working now fulfills their request while I finish my own task which is already complete."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

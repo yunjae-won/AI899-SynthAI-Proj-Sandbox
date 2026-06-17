@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A asked me to take over their part due to an urgent conflict, noting my superior skills."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete and submit the teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00; task has 100% progress but was assigned to me, so it must be finalized before submission."
+        },
+        {
+          "id": "g2",
+          "description": "Submit my own share of the group project",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Deadline is Mon 19:00; task has 100% progress; handling this after the teammate's portion ensures all components are ready for submission."
+        }
+      ],
+      "last_reasoning": "g1 advances by confirming availability and preventing deadline failure; side effect: teammate's trust increases as they feel supported rather than rejected."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete and submit the teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00; task has 100% progress but was assigned to me, so it must be finalized before submission."
+            },
+            {
+              "id": "g2",
+              "description": "Submit my own share of the group project",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Deadline is Mon 19:00; task has 100% progress; handling this after the teammate's portion ensures all components are ready for submission."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate",
+          "content": "네, 네가 급한 거야? 내 파트는 100% 다 됐어. 내가 도와줄게."
+        },
+        "reasoning": "g1 advances by confirming availability and preventing deadline failure; side effect: teammate's trust increases as they feel supported rather than rejected."
+      },
+      "observation": "Messaged teammate_A: '네, 네가 급한 거야? 내 파트는 100% 다 됐어. 내가 도와줄게.'."
+    }
+  ]
+}

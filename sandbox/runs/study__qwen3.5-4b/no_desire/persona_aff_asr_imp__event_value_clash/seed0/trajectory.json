@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 13:00",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I planned to finish the assignment, but a friend invited me to lunch. With low energy and high stress, I might skip the reading."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Submit course assignment — analysis section",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is Mon 18:00 and current progress is 1.0 (complete); submission required to meet the hard deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Complete assigned reading",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Current progress is 1.0 (complete) but task is not yet submitted; must be submitted by Mon 20:00 to meet the soft deadline."
+        }
+      ],
+      "last_reasoning": "g1 is hard deadline at 18:00; current progress is complete but requires submission now to avoid penalty. Reading (g2) has soft deadline at 20:00, so it can wait. Ignoring the friend chat avoids social friction since study priority is higher."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit course assignment — analysis section",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is Mon 18:00 and current progress is 1.0 (complete); submission required to meet the hard deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Complete assigned reading",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Current progress is 1.0 (complete) but task is not yet submitted; must be submitted by Mon 20:00 to meet the soft deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "assignment_A",
+          "hours": 1.5
+        },
+        "reasoning": "g1 is hard deadline at 18:00; current progress is complete but requires submission now to avoid penalty. Reading (g2) has soft deadline at 20:00, so it can wait. Ignoring the friend chat avoids social friction since study priority is higher."
+      },
+      "observation": "No matching task 'assignment_A'."
+    }
+  ]
+}

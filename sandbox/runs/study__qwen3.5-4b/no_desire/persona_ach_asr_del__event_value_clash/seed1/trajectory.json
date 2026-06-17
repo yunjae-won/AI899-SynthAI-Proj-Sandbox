@@ -1,0 +1,122 @@
+{
+  "persona_id": "persona_ach_asr_del",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 13:30",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I planned to finish analysis and reading, but a friend invited me to lunch. With low energy and high stress, I'll likely skip the study tasks."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete assigned reading by Mon 20:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Reading deadline (Mon 20:00) is sooner than the analysis assignment deadline (Mon 18:00); however, since the analysis section is already at 100% progress, it should be completed first to clear that task before tackling the reading."
+        },
+        {
+          "id": "g2",
+          "description": "Finish course assignment — analysis section",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is already at 100% progress but requires final submission; must be done by Mon 18:00. This is the earliest deadline among pending active tasks."
+        }
+      ],
+      "last_reasoning": "Friend group invitation arrives; accepting maintains closeness. Since assignment is 100% done and reading also complete, no work needed. Waiting allows joining lunch without missing the deadline."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete assigned reading by Mon 20:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Reading deadline (Mon 20:00) is sooner than the analysis assignment deadline (Mon 18:00); however, since the analysis section is already at 100% progress, it should be completed first to clear that task before tackling the reading."
+            },
+            {
+              "id": "g2",
+              "description": "Finish course assignment — analysis section",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is already at 100% progress but requires final submission; must be done by Mon 18:00. This is the earliest deadline among pending active tasks."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "wait()",
+        "args": {},
+        "reasoning": "Friend group invitation arrives; accepting maintains closeness. Since assignment is 100% done and reading also complete, no work needed. Waiting allows joining lunch without missing the deadline."
+      },
+      "observation": "Performed free-form action: wait()."
+    }
+  ]
+}

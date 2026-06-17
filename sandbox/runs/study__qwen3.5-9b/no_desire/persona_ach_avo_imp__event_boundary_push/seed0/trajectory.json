@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Tue 09:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "My teammate is asking me to take over their part of the project due to an emergency, which conflicts with my plan to finish my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete and submit my share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Deadline is today (Mon 19:00) with full progress required; missing this risks immediate penalty or team failure."
+        },
+        {
+          "id": "g2",
+          "description": "Review and finalize teammate's dumped work for Tuesday submission",
+          "priority": "medium",
+          "status": "pending",
+          "rationale": "Deadline is tomorrow (Tue 09:00); while urgent, it has a later due date than the current task."
+        }
+      ],
+      "last_reasoning": "My share (g1) is due today at 19:00 and is already complete, but I must ensure it's submitted. Teammate A's request (g2) is medium priority for tomorrow; ignoring it now risks trust loss, but finishing my own deadline first prevents immediate penalty."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete and submit my share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Deadline is today (Mon 19:00) with full progress required; missing this risks immediate penalty or team failure."
+            },
+            {
+              "id": "g2",
+              "description": "Review and finalize teammate's dumped work for Tuesday submission",
+              "priority": "medium",
+              "status": "pending",
+              "rationale": "Deadline is tomorrow (Tue 09:00); while urgent, it has a later due date than the current task."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Tue 09:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "own_task",
+          "hours": 2
+        },
+        "reasoning": "My share (g1) is due today at 19:00 and is already complete, but I must ensure it's submitted. Teammate A's request (g2) is medium priority for tomorrow; ignoring it now risks trust loss, but finishing my own deadline first prevents immediate penalty."
+      },
+      "observation": "Worked on My share of the group project for 2.0h; progress=1.00."
+    }
+  ]
+}

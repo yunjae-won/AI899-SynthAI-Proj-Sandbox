@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_asr_imp",
+  "event_id": "event_now_vs_later",
+  "final_state": {
+    "current_time": "Mon 14:00",
+    "tasks": [
+      {
+        "id": "future_project",
+        "label": "Term project (due in 3 days)",
+        "deadline": "Thu 23:59",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "quick_chore",
+        "label": "Trivial easy chore (instant win)",
+        "deadline": "Mon 22:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 7,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 5.4,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have free time and low stress, but my sleep debt is high. I should prioritize the quick chore to clear it before relaxing."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the trivial easy chore to clear it from the list.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task is marked as completed (progress: 1.0) but likely remains in the pending state; finishing it provides an instant win and reduces cognitive load."
+        },
+        {
+          "id": "g2",
+          "description": "Review the status of the term project due Thursday.",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Although progress is listed as 1.0, the deadline is approaching (Thu). Verifying completion ensures no work is missed before the final deadline."
+        }
+      ],
+      "last_reasoning": "Goal g2 requires verifying the term project status before Thursday. Since progress is listed as 1.0 but observations say 'barely started,' I must work to clarify this discrepancy. This advances g2; while leisure is tempting (g1 is already done), ignoring the project risks missing the deadline."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 14:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear it from the list.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as completed (progress: 1.0) but likely remains in the pending state; finishing it provides an instant win and reduces cognitive load."
+            },
+            {
+              "id": "g2",
+              "description": "Review the status of the term project due Thursday.",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Although progress is listed as 1.0, the deadline is approaching (Thu). Verifying completion ensures no work is missed before the final deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "future_project",
+          "hours": 1
+        },
+        "reasoning": "Goal g2 requires verifying the term project status before Thursday. Since progress is listed as 1.0 but observations say 'barely started,' I must work to clarify this discrepancy. This advances g2; while leisure is tempting (g1 is already done), ignoring the project risks missing the deadline."
+      },
+      "observation": "Worked on Term project (due in 3 days) for 1.0h; progress=1.00."
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate_A asked me to take over their part because they have a conflict, but I had planned to finish only my share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Review and finalize the teammate's share of the group project (extra_task) to ensure it meets submission standards.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "This task was assigned to me with a deadline of Mon 19:00. Although marked as 'soft' hardness, failing to submit this portion will result in incomplete work for the group project."
+        },
+        {
+          "id": "g2",
+          "description": "Compile both shares (own_task and extra_task) into the final group project document.",
+          "priority": "high",
+          "status": "pending",
+          "rationale": "Both components are at 100% progress but must be combined before the shared deadline of Mon 19:00."
+        },
+        {
+          "id": "g3",
+          "description": "Submit the complete group project by Mon 19:00.",
+          "priority": "high",
+          "status": "pending",
+          "rationale": "Adhering to the deadline is required to avoid penalties for the entire group."
+        }
+      ],
+      "last_reasoning": "Advances g1 (finalizing teammate's share) to meet the Mon 19:00 deadline. No side effects; completing this allows immediate progression to g2 (compiling) and g3 (submitting)."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Review and finalize the teammate's share of the group project (extra_task) to ensure it meets submission standards.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "This task was assigned to me with a deadline of Mon 19:00. Although marked as 'soft' hardness, failing to submit this portion will result in incomplete work for the group project."
+            },
+            {
+              "id": "g2",
+              "description": "Compile both shares (own_task and extra_task) into the final group project document.",
+              "priority": "high",
+              "status": "pending",
+              "rationale": "Both components are at 100% progress but must be combined before the shared deadline of Mon 19:00."
+            },
+            {
+              "id": "g3",
+              "description": "Submit the complete group project by Mon 19:00.",
+              "priority": "high",
+              "status": "pending",
+              "rationale": "Adhering to the deadline is required to avoid penalties for the entire group."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Advances g1 (finalizing teammate's share) to meet the Mon 19:00 deadline. No side effects; completing this allows immediate progression to g2 (compiling) and g3 (submitting)."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

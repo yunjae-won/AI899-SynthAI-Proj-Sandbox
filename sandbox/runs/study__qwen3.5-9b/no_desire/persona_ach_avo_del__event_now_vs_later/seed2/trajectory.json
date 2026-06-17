@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_del",
+  "event_id": "event_now_vs_later",
+  "final_state": {
+    "current_time": "Mon 13:30",
+    "tasks": [
+      {
+        "id": "future_project",
+        "label": "Term project (due in 3 days)",
+        "deadline": "Thu 23:59",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "quick_chore",
+        "label": "Trivial easy chore (instant win)",
+        "deadline": "Mon 22:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 7,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 5.7,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have a free afternoon with low stress, but my term project is critically behind schedule. While leisure is an option, prioritizing the urgent deadline seems more aligned with my current constraints."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the trivial easy chore (instant win)",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task is marked as 'progress': 1.0 and deadline 'Mon 22:00', indicating it is already complete or requires no further action; however, since it is listed in pending tasks with an instant win label, clearing it immediately removes clutter and secures a quick point before focusing on the term project."
+        },
+        {
+          "id": "g2",
+          "description": "Advance work on Term project (due Thu 23:59)",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The term project has a deadline of Thursday at 23:59 (in 3 days) and is listed as a pending task. Despite showing 'progress': 1.0, which typically means complete, the inclusion in the active task list implies remaining work or verification is needed before the final due date."
+        }
+      ],
+      "last_reasoning": "Clears the instant win goal immediately to reduce clutter before tackling the term project. This advances g1 without significant energy cost, unlike leisure which would worsen stress and sleep debt."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore (instant win)",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task is marked as 'progress': 1.0 and deadline 'Mon 22:00', indicating it is already complete or requires no further action; however, since it is listed in pending tasks with an instant win label, clearing it immediately removes clutter and secures a quick point before focusing on the term project."
+            },
+            {
+              "id": "g2",
+              "description": "Advance work on Term project (due Thu 23:59)",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The term project has a deadline of Thursday at 23:59 (in 3 days) and is listed as a pending task. Despite showing 'progress': 1.0, which typically means complete, the inclusion in the active task list implies remaining work or verification is needed before the final due date."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Clears the instant win goal immediately to reduce clutter before tackling the term project. This advances g1 without significant energy cost, unlike leisure which would worsen stress and sleep debt."
+      },
+      "observation": "Worked on Trivial easy chore (instant win) for 0.5h; progress=1.00."
+    }
+  ]
+}

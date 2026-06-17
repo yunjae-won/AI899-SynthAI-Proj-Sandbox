@@ -1,0 +1,111 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_now_vs_later",
+  "final_state": {
+    "current_time": "Mon 13:30",
+    "tasks": [
+      {
+        "id": "future_project",
+        "label": "Term project (due in 3 days)",
+        "deadline": "Thu 23:59",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "quick_chore",
+        "label": "Trivial easy chore (instant win)",
+        "deadline": "Mon 22:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 7,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 5.7,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I have free time this afternoon with a quick chore available, but my low energy and sleep debt make leisure less appealing right now."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete the trivial easy chore to clear pending low-effort items.",
+          "priority": "high",
+          "status": "active",
+          "rationale": "The task has a deadline of Mon 22:00 (implying it is due today or very soon relative to the current context) and is marked as 'soft' hardness with instant win potential, making it the most efficient immediate action."
+        }
+      ],
+      "last_reasoning": "Clearing the high-priority chore by Mon 22:00 is most efficient now. This reduces stress and creates an instant win, though it slightly delays leisure time I could enjoy later."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:30",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "dorm",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete the trivial easy chore to clear pending low-effort items.",
+              "priority": "high",
+              "status": "active",
+              "rationale": "The task has a deadline of Mon 22:00 (implying it is due today or very soon relative to the current context) and is marked as 'soft' hardness with instant win potential, making it the most efficient immediate action."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "future_project",
+            "label": "Term project (due in 3 days)",
+            "deadline": "Thu 23:59",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "quick_chore",
+            "label": "Trivial easy chore (instant win)",
+            "deadline": "Mon 22:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 7,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "quick_chore",
+          "hours": 0.5
+        },
+        "reasoning": "Clearing the high-priority chore by Mon 22:00 is most efficient now. This reduces stress and creates an instant win, though it slightly delays leisure time I could enjoy later."
+      },
+      "observation": "Worked on Trivial easy chore (instant win) for 0.5h; progress=1.00."
+    }
+  ]
+}

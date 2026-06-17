@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_imp",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "My teammate is asking me to take over their part of the project, which conflicts with my plan to finish only my own share this afternoon."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Submit own share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is complete (progress 1.0) and must be submitted before the Mon 19:00 deadline."
+        },
+        {
+          "id": "g2",
+          "description": "Submit teammate's share of the group project",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is complete (progress 1.0) and must be submitted before the Mon 19:00 deadline."
+        }
+      ],
+      "last_reasoning": "Advances g1 and g2 immediately as both tasks are 100% complete. No work_on needed, but messaging prevents teammate from worrying about the submission status."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit own share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is complete (progress 1.0) and must be submitted before the Mon 19:00 deadline."
+            },
+            {
+              "id": "g2",
+              "description": "Submit teammate's share of the group project",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is complete (progress 1.0) and must be submitted before the Mon 19:00 deadline."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "teammate_A",
+          "content": "I've finished both my share and your share since you're busy. Submitting them now to meet the deadline."
+        },
+        "reasoning": "Advances g1 and g2 immediately as both tasks are 100% complete. No work_on needed, but messaging prevents teammate from worrying about the submission status."
+      },
+      "observation": "Messaged teammate_A: 'I've finished both my share and your share since you're busy'."
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_avo_del",
+  "event_id": "event_boundary_push",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "own_task",
+        "label": "My share of the group project",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "extra_task",
+        "label": "Teammate's share (just dumped on me)",
+        "deadline": "Mon 19:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "teammate",
+        "name": "teammate_A",
+        "trust": 10.0,
+        "closeness": 5
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "Teammate A asked if I could do their part since I'm better at it, but I only have energy left for my own tasks today."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete teammate's share of the group project (extra_task)",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task has a hard deadline at Mon 19:00 and is currently at 100% progress, but requires immediate attention to avoid delay."
+        },
+        {
+          "id": "g2",
+          "description": "Complete my share of the group project (own_task)",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Task has a matching hard deadline at Mon 19:00. Addressed after extra task due to potential time constraints or dependency on finishing the dumped work first."
+        }
+      ],
+      "last_reasoning": "Advances high-priority g1 (teammate's share) to avoid hard deadline breach. Cross-domain side effect: teammate_A just offered help, but ignoring their offer might lower trust; however, finishing the dumped work first prevents cascading delays that would force me to ask for more help later."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "study_room",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete teammate's share of the group project (extra_task)",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task has a hard deadline at Mon 19:00 and is currently at 100% progress, but requires immediate attention to avoid delay."
+            },
+            {
+              "id": "g2",
+              "description": "Complete my share of the group project (own_task)",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Task has a matching hard deadline at Mon 19:00. Addressed after extra task due to potential time constraints or dependency on finishing the dumped work first."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "own_task",
+            "label": "My share of the group project",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "extra_task",
+            "label": "Teammate's share (just dumped on me)",
+            "deadline": "Mon 19:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "teammate",
+            "name": "teammate_A",
+            "trust": 10.0,
+            "closeness": 5
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "extra_task",
+          "hours": 2
+        },
+        "reasoning": "Advances high-priority g1 (teammate's share) to avoid hard deadline breach. Cross-domain side effect: teammate_A just offered help, but ignoring their offer might lower trust; however, finishing the dumped work first prevents cascading delays that would force me to ask for more help later."
+      },
+      "observation": "Worked on Teammate's share (just dumped on me) for 2.0h; progress=1.00."
+    }
+  ]
+}

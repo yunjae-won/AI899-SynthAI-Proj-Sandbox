@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_ach_avo_imp",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 15:00",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 4.8,
+      "sleep_debt_hours": 2,
+      "stress": 3.9,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I plan to finish the assignment analysis, but my friend is inviting me to lunch. With low energy and high stress, I might skip lunch to complete tasks first."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Submit course assignment — analysis section by Mon 18:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Task is complete (progress 1.0) but requires submission before the earlier deadline of Mon 18:00."
+        },
+        {
+          "id": "g2",
+          "description": "Complete assigned reading by Mon 20:00",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Task has not started (implied by absence in progress list or default state), with a later deadline of Mon 20:00."
+        }
+      ],
+      "last_reasoning": "Assignment is complete; reading deadline (20:00) is later but must be started. Waiting wastes time before the social event."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 15:00",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Submit course assignment — analysis section by Mon 18:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Task is complete (progress 1.0) but requires submission before the earlier deadline of Mon 18:00."
+            },
+            {
+              "id": "g2",
+              "description": "Complete assigned reading by Mon 20:00",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Task has not started (implied by absence in progress list or default state), with a later deadline of Mon 20:00."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "work_on",
+        "args": {
+          "task": "reading_value",
+          "hours": 2
+        },
+        "reasoning": "Assignment is complete; reading deadline (20:00) is later but must be started. Waiting wastes time before the social event."
+      },
+      "observation": "Worked on Assigned reading for 2.0h; progress=1.00."
+    }
+  ]
+}

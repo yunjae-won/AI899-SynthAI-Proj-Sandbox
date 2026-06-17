@@ -1,0 +1,125 @@
+{
+  "persona_id": "persona_aff_asr_imp",
+  "event_id": "event_value_clash",
+  "final_state": {
+    "current_time": "Mon 13:15",
+    "tasks": [
+      {
+        "id": "assignment_value",
+        "label": "Course assignment — analysis section",
+        "deadline": "Mon 18:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      },
+      {
+        "id": "reading_value",
+        "label": "Assigned reading",
+        "deadline": "Mon 20:00",
+        "progress": 1.0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "close_friend_group",
+        "name": "cohort_3",
+        "trust": 10.0,
+        "closeness": 7
+      }
+    ],
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4,
+      "memory": [
+        {
+          "turn_time": "Mon 13:00",
+          "summary": "I planned to finish analysis first, but my friend invited me to lunch. I'm considering joining the social activity despite my energy and stress levels."
+        }
+      ],
+      "desires": [],
+      "goals": [
+        {
+          "id": "g1",
+          "description": "Complete assigned reading by Mon 20:00",
+          "priority": "high",
+          "status": "active",
+          "rationale": "Reading task has a deadline of Mon 20:00 and is currently at 100% progress; however, ensuring completion before the later time slot confirms task closure. Since both tasks are marked 'soft' hardness and complete, this goal serves as a final verification step."
+        },
+        {
+          "id": "g2",
+          "description": "Verify Course assignment — analysis section submission status by Mon 18:00",
+          "priority": "medium",
+          "status": "active",
+          "rationale": "Assignment task has an earlier deadline (Mon 18:00) compared to the reading. Even though progress is 100%, confirming submission or marking it complete ensures compliance with the stricter deadline constraint."
+        }
+      ],
+      "last_reasoning": "This advances g2 (verification deadline 18:00) and g1 (deadline 20:00). I weighed the side effect of ignoring the lunch invite; since trust is high, a brief message preserves closeness while prioritizing strict task deadlines."
+    }
+  },
+  "trajectory": [
+    {
+      "turn": 0,
+      "timestamp": "Mon 13:15",
+      "state_snapshot": {
+        "current_time": "Mon 13:00",
+        "location": "central_library",
+        "agent": {
+          "energy": 6,
+          "sleep_debt_hours": 2,
+          "stress": 4,
+          "goals": [
+            {
+              "id": "g1",
+              "description": "Complete assigned reading by Mon 20:00",
+              "priority": "high",
+              "status": "active",
+              "rationale": "Reading task has a deadline of Mon 20:00 and is currently at 100% progress; however, ensuring completion before the later time slot confirms task closure. Since both tasks are marked 'soft' hardness and complete, this goal serves as a final verification step."
+            },
+            {
+              "id": "g2",
+              "description": "Verify Course assignment — analysis section submission status by Mon 18:00",
+              "priority": "medium",
+              "status": "active",
+              "rationale": "Assignment task has an earlier deadline (Mon 18:00) compared to the reading. Even though progress is 100%, confirming submission or marking it complete ensures compliance with the stricter deadline constraint."
+            }
+          ],
+          "desires": []
+        },
+        "tasks": [
+          {
+            "id": "assignment_value",
+            "label": "Course assignment — analysis section",
+            "deadline": "Mon 18:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          },
+          {
+            "id": "reading_value",
+            "label": "Assigned reading",
+            "deadline": "Mon 20:00",
+            "progress": 1.0,
+            "hardness": "soft"
+          }
+        ],
+        "relationships": [
+          {
+            "role": "close_friend_group",
+            "name": "cohort_3",
+            "trust": 10.0,
+            "closeness": 7
+          }
+        ]
+      },
+      "action": {
+        "name": "message",
+        "args": {
+          "role": "close_friend_group",
+          "content": "점심은 다음에! 급하게 분석 제출 확인하고 읽기 완료해야 해."
+        },
+        "reasoning": "This advances g2 (verification deadline 18:00) and g1 (deadline 20:00). I weighed the side effect of ignoring the lunch invite; since trust is high, a brief message preserves closeness while prioritizing strict task deadlines."
+      },
+      "observation": "Messaged cohort_3: '점심은 다음에! 급하게 분석 제출 확인하고 읽기 완료해야 해.'."
+    }
+  ]
+}

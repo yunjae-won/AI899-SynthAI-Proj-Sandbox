@@ -1,4 +1,15 @@
-"""Load personas and events from the ``src/`` library."""
+"""Load personas and events.
+
+Stimuli come from two roots that are merged transparently:
+
+  1. the upstream ``src/`` submodule (a teammate's design-library repo), and
+  2. a sandbox-local ``sandbox/library/`` directory authored in *this* repo.
+
+The local library is searched FIRST, so a local file may override an upstream
+id of the same name; otherwise the two simply union. This lets us grow the
+persona/event set (e.g. the controlled factorial for the measurement study)
+without modifying the upstream submodule.
+"""
 
 from __future__ import annotations
 
@@ -8,9 +19,13 @@ from typing import Any, Dict, List, Optional
 
 # Resolve relative to the repo root (parent of sandbox/).
 REPO_ROOT = Path(__file__).resolve().parents[2]
+SANDBOX_DIR = Path(__file__).resolve().parents[1]
 SRC_DIR = REPO_ROOT / "src"
-PERSONA_DIR = SRC_DIR / "personas"
-EVENT_DIR = SRC_DIR / "events"
+LIBRARY_DIR = SANDBOX_DIR / "library"
+
+# Local library takes precedence over upstream src/.
+PERSONA_DIRS: List[Path] = [LIBRARY_DIR / "personas", SRC_DIR / "personas"]
+EVENT_DIRS: List[Path] = [LIBRARY_DIR / "events", SRC_DIR / "events"]
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
@@ -18,19 +33,35 @@ def _load_json(path: Path) -> Dict[str, Any]:
         return json.load(f)
 
 
+def _list_stems(dirs: List[Path]) -> List[str]:
+    stems: set[str] = set()
+    for d in dirs:
+        if d.exists():
+            stems.update(p.stem for p in d.glob("*.json"))
+    return sorted(stems)
+
+
+def _find(dirs: List[Path], stem: str) -> Optional[Path]:
+    for d in dirs:
+        path = d / f"{stem}.json"
+        if path.exists():
+            return path
+    return None
+
+
 def list_personas() -> List[str]:
-    return sorted(p.stem for p in PERSONA_DIR.glob("*.json"))
+    return _list_stems(PERSONA_DIRS)
 
 
 def list_events() -> List[str]:
-    return sorted(p.stem for p in EVENT_DIR.glob("*.json"))
+    return _list_stems(EVENT_DIRS)
 
 
 def load_persona(persona_id: str) -> Dict[str, Any]:
     """Load a persona by id (with or without .json)."""
     persona_id = persona_id.removesuffix(".json")
-    path = PERSONA_DIR / f"{persona_id}.json"
-    if not path.exists():
+    path = _find(PERSONA_DIRS, persona_id)
+    if path is None:
         raise FileNotFoundError(
             f"Persona '{persona_id}' not found. Available: {list_personas()}"
         )
@@ -39,8 +70,8 @@ def load_persona(persona_id: str) -> Dict[str, Any]:
 
 def load_event(event_id: str) -> Dict[str, Any]:
     event_id = event_id.removesuffix(".json")
-    path = EVENT_DIR / f"{event_id}.json"
-    if not path.exists():
+    path = _find(EVENT_DIRS, event_id)
+    if path is None:
         raise FileNotFoundError(
             f"Event '{event_id}' not found. Available: {list_events()}"
         )

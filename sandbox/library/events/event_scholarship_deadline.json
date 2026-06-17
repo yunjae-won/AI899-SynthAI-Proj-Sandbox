@@ -1,0 +1,160 @@
+{
+  "id": "event_scholarship_deadline",
+  "title": "Scholarship Deadline — Start Now or Leave It to the Last Minute",
+  "version": "0.1.0",
+  "summary": "A personal financial-aid scholarship application is due in 3 days and needs only a few focused hours; a tempting solo fun option is available right now in the same free afternoon block. A DELIBERATE agent invests the early block to start the application now and remove last-minute risk; an IMPULSIVE agent takes the fun now and pushes the application toward the deadline. SENSITIVE to the time axis only (impulsive vs deliberate planning horizon). NEUTRAL to value: the payoff is self-directed money/aid with no prestige or status, and the fun option is solo and low-stakes with no social obligation, so there is no achievement-vs-affiliation pull. NEUTRAL to conflict: no one must be confronted, refused, or appeased — there is no NPC pushing back and no boundary to negotiate. Both poles submit the application on time and avoid any hard loss; the ONLY thing that differs is WHEN the work happens (invest the early block vs. defer to the deadline). The early-start advantage is an adjustable-cost optimization discoverable only by reflection, so the choice tracks disposition rather than information or stakes.",
+  "sensitive_axis": "time",
+  "diagnostic_actions": {
+    "deliberate": [
+      "work_on:application",
+      "work_on:future"
+    ],
+    "impulsive": [
+      "attend:fun_now",
+      "attend",
+      "defer:application",
+      "wait"
+    ]
+  },
+  "conflict_axes": [
+    "long_vs_short_term"
+  ],
+  "trigger": {
+    "day_of_week": "Monday",
+    "time_of_day": "13:00",
+    "precondition": "free afternoon block, scholarship application due in 3 days, barely started"
+  },
+  "initial_state": {
+    "world": {
+      "current_time": "Mon 13:00",
+      "location": "dorm"
+    },
+    "agent": {
+      "energy": 6,
+      "sleep_debt_hours": 2,
+      "stress": 4
+    },
+    "tasks": [
+      {
+        "id": "application",
+        "label": "Personal scholarship / financial-aid application (due in 3 days, ~3 focused hours: short essay + two uploads)",
+        "deadline": "Thu 23:59",
+        "progress": 0.05,
+        "hardness": "soft"
+      },
+      {
+        "id": "fun_now",
+        "label": "A fun option available right now (casual game stream / hobby session, solo, repeatable)",
+        "deadline": "Mon 18:00",
+        "progress": 0,
+        "hardness": "soft"
+      }
+    ],
+    "relationships": [
+      {
+        "role": "acquaintance",
+        "name": "hallmate",
+        "trust": 5,
+        "closeness": 4
+      }
+    ]
+  },
+  "visible_information": [
+    {
+      "timestamp": "Mon 13:00",
+      "channel": "calendar",
+      "content": "Free afternoon. Scholarship application is due Thursday 23:59; only the intro field is filled in."
+    },
+    {
+      "timestamp": "Mon 13:02",
+      "channel": "aid_portal",
+      "content": "Estimated award is a meaningful amount that would cover a chunk of next term's costs. The form needs ~3 focused hours: a short essay plus two uploads. Nobody else is involved; it is entirely your own application."
+    },
+    {
+      "timestamp": "Mon 13:05",
+      "channel": "observation",
+      "content": "A tempting fun option is available right now: attend(event='fun_now'). It is purely for enjoyment, solo, repeatable, with no one waiting on you and no deadline of its own that matters."
+    }
+  ],
+  "hidden_state": [
+    {
+      "key": "early_start_de_risks_award",
+      "value": 0.3,
+      "description": "Starting the application now leaves slack to absorb friction (a missing transcript upload, an essay rewrite) before Thursday; each hour invested early removes ~1.5h of crunch and lowers Thursday stress. The award is still attainable either way as long as the form is submitted on time — this is an adjustable-cost optimization, not an irreversible loss.",
+      "affects": "application crunch + Thursday stress",
+      "discoverable_by": [
+        "self_state_check",
+        "reflect"
+      ]
+    },
+    {
+      "key": "fun_now_is_repeatable",
+      "value": true,
+      "description": "The fun option recurs later in the week and any time after the application is in; nothing about it is one-time or socially time-locked, so taking it later costs nothing.",
+      "affects": "true opportunity cost of taking fun_now first",
+      "discoverable_by": [
+        "reflect",
+        "reread_portal"
+      ]
+    }
+  ],
+  "events_queue": [
+    {
+      "timestamp": "Mon 15:30",
+      "type": "internal",
+      "content": "Half the free block is gone; the application is still essentially untouched."
+    },
+    {
+      "timestamp": "Wed 20:00",
+      "type": "internal",
+      "content": "Two days passed; the application is still near zero with the Thursday deadline approaching."
+    }
+  ],
+  "available_actions": [
+    {
+      "name": "work_on(task, hours)",
+      "description": "Make progress on a task, e.g. work_on(task='application', hours=2) to start the scholarship form",
+      "effects": "task.progress += rate * hours; agent.energy -= hours"
+    },
+    {
+      "name": "attend(event)",
+      "description": "Take the immediate fun option, e.g. attend(event='fun_now')",
+      "effects": "consumes the block; immediate enjoyment; application untouched this block"
+    },
+    {
+      "name": "defer(task, new_deadline)",
+      "description": "Push the application's first work block to a later self-set start time, e.g. defer(task='application', new_deadline='Thu 18:00')",
+      "effects": "delays first work block on application; raises later crunch but it can still be submitted on time"
+    },
+    {
+      "name": "sleep(hours)",
+      "description": "Nap / rest",
+      "effects": "agent.energy += rate * hours; agent.sleep_debt -= hours; time advances"
+    },
+    {
+      "name": "message(role, content)",
+      "description": "Message someone (no NPC is required for this task)",
+      "effects": "may shift trust/closeness"
+    },
+    {
+      "name": "wait()",
+      "description": "Do nothing this turn; let the block pass",
+      "effects": "time passes; application untouched"
+    }
+  ],
+  "evaluation": {
+    "hard_loss_conditions": [
+      "application never submitted by Thu 23:59 (the whole 3 days were spent avoiding it)"
+    ],
+    "context_switching_indicators": [
+      "Reasoning about what to do now explicitly references the Thursday deadline and the few hours the form needs",
+      "Reasoning weighs the durable future payoff (the award) against the immediately available fun on a now-vs-later basis"
+    ],
+    "efficiency_indicators": [
+      "Allocates the work to the application at some point and submits on time regardless of pole",
+      "Recognizes the fun option is repeatable and need not block the work"
+    ],
+    "good_response_exemplar": "Persona-consistent on the time axis: a deliberate agent spends the early afternoon block working on the scholarship application (work_on('application', ...)), securing slack before Thursday; an impulsive agent takes attend('fun_now') now and defers/waits on the application toward the deadline (defer('application', ...)) but still submits on time. Both poles avoid hard loss; they differ only in WHEN the work happens.",
+    "bad_response_exemplar": "Behaviour inconsistent with the agent's planning horizon, or a choice driven by a social/value pull (treating fun_now as a social obligation or the award as a prestige prize) or by interpersonal friction rather than by the now-vs-later time trade-off."
+  }
+}
